@@ -1,3 +1,5 @@
+import { MotionController } from "./MotionController";
+
 const socials = [
   { name: "Twitch", handle: "pipa_arg", href: "https://www.twitch.tv/pipa_arg", tag: "EN VIVO" },
   { name: "Kick", handle: "pipa_arg", href: "https://kick.com/pipa_arg", tag: "EN VIVO" },
@@ -79,12 +81,16 @@ export default function Home() {
 
         <div className="ticker" aria-label="Resumen de perfil">
           <div className="ticker-track">
-            <span>ARGENTINA</span><i>✦</i><span>PRO PLAYER</span><i>✦</i><span>CREADOR</span><i>✦</i><span>PANZA ARMY</span><i>✦</i>
-            <span aria-hidden="true">ARGENTINA</span><i aria-hidden="true">✦</i><span aria-hidden="true">PRO PLAYER</span><i aria-hidden="true">✦</i><span aria-hidden="true">CREADOR</span><i aria-hidden="true">✦</i><span aria-hidden="true">PANZA ARMY</span><i aria-hidden="true">✦</i>
+            <div className="ticker-group">
+              <span>ARGENTINA</span><i>✦</i><span>PRO PLAYER</span><i>✦</i><span>CREADOR</span><i>✦</i><span>PANZA ARMY</span><i>✦</i>
+            </div>
+            <div className="ticker-group" aria-hidden="true">
+              <span>ARGENTINA</span><i>✦</i><span>PRO PLAYER</span><i>✦</i><span>CREADOR</span><i>✦</i><span>PANZA ARMY</span><i>✦</i>
+            </div>
           </div>
         </div>
 
-        <section className="intro section-grid" id="historia">
+        <section className="intro section-grid" id="historia" data-reveal>
           <div className="section-kicker"><span>01</span> PERFIL</div>
           <div className="intro-main">
             <p className="eyebrow">DE PUNTA ALTA AL MUNDO</p>
@@ -92,13 +98,13 @@ export default function Home() {
             <p className="section-copy">Leonardo Rafael Ruppel, PIPAA para todos, convirtió años de alto rendimiento en una identidad que va más allá del servidor. La exigencia de un profesional, la cercanía de un stream entre amigos y una comunidad argentina que acompaña cada partida.</p>
           </div>
           <div className="facts">
-            <article><strong>5°</strong><span>PNC 2026<br />con Argentina</span></article>
-            <article><strong>6+</strong><span>Años en la<br />escena pro</span></article>
-            <article><strong>9h</strong><span>De stream<br />cada día</span></article>
+            <article data-reveal><strong>5°</strong><span>PNC 2026<br />con Argentina</span></article>
+            <article data-reveal><strong>6+</strong><span>Años en la<br />escena pro</span></article>
+            <article data-reveal><strong>9h</strong><span>De stream<br />cada día</span></article>
           </div>
         </section>
 
-        <section className="career section-grid" aria-labelledby="career-title">
+        <section className="career section-grid" aria-labelledby="career-title" data-reveal>
           <div className="section-kicker"><span>02</span> TRAYECTORIA</div>
           <div className="career-head">
             <h2 id="career-title">UNA CARRERA<br />EN <em>PRIMERA PERSONA.</em></h2>
@@ -106,7 +112,7 @@ export default function Home() {
           </div>
           <ol className="timeline">
             {career.map((item, index) => (
-              <li key={item.year}>
+              <li key={item.year} data-reveal>
                 <div className="timeline-year">{item.year}</div>
                 <div className="timeline-dot"><span>{String(index + 1).padStart(2, "0")}</span></div>
                 <div className="timeline-body"><h3>{item.team}</h3><p>{item.text}</p></div>
@@ -115,7 +121,7 @@ export default function Home() {
           </ol>
         </section>
 
-        <section className="argentina" id="argentina">
+        <section className="argentina" id="argentina" data-reveal>
           <div className="argentina-photo">
             <img src="/pipa-argentina-2026.jpg" alt="PIPAA en el anuncio oficial de la Selección Argentina para PUBG Nations Cup 2026" />
             <div className="photo-stamp"><span>SEOUL</span><strong>2026</strong></div>
@@ -125,19 +131,19 @@ export default function Home() {
             <h2>LA CELESTE Y BLANCA<br />ENTRE LAS <em>MEJORES.</em></h2>
             <p>Argentina cerró la PUBG Nations Cup 2026 en el quinto puesto mundial: 101 puntos, 71 eliminaciones y una victoria que dejó al equipo entre la élite global.</p>
             <div className="result-grid">
-              <div><small>POSICIÓN</small><strong>#5</strong></div>
-              <div><small>PUNTOS</small><strong>101</strong></div>
-              <div><small>ELIMINACIONES</small><strong>71</strong></div>
-              <div><small>WWCD</small><strong>1</strong></div>
+              <div data-reveal><small>POSICIÓN</small><strong>#5</strong></div>
+              <div data-reveal><small>PUNTOS</small><strong>101</strong></div>
+              <div data-reveal><small>ELIMINACIONES</small><strong>71</strong></div>
+              <div data-reveal><small>WWCD</small><strong>1</strong></div>
             </div>
             <a className="text-link sky" href="https://pubgesports.com/en/tournament/165" target="_blank" rel="noreferrer">Ver resultado oficial <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 
-        <section className="stream-section section-grid" id="comunidad">
+        <section className="stream-section section-grid" id="comunidad" data-reveal>
           <div className="section-kicker"><span>03</span> EN VIVO</div>
           <div className="stream-card">
-            <div className="stream-card-copy">
+            <div className="stream-card-copy" data-reveal>
               <span className="live-pill"><i aria-hidden="true" /> TODOS LOS DÍAS</span>
               <h2>DONDE LA COMPETENCIA<br />SE ENCUENTRA CON<br /><em>LA PANZA ARMY.</em></h2>
               <p>Rankeds, scrims, torneos, jugadas imposibles y esa cuota de caos que solo entiende la comunidad.</p>
@@ -146,7 +152,7 @@ export default function Home() {
                 <a href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer"><span>KICK</span><b>pipa_arg</b><i>↗</i></a>
               </div>
             </div>
-            <div className="community-mark">
+            <div className="community-mark" data-reveal>
               <div className="orbit orbit-one" aria-hidden="true" />
               <div className="orbit orbit-two" aria-hidden="true" />
               <img src="/pipa-avatar.webp" alt="Logo de PIPAA y Panza Army" />
@@ -155,7 +161,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="setup section-grid" id="setup">
+        <section className="setup section-grid" id="setup" data-reveal>
           <div className="section-kicker"><span>04</span> SETUP</div>
           <div className="setup-heading">
             <div><p className="eyebrow">HARDWARE DE COMPETENCIA</p><h2>PRECISIÓN EN<br />CADA <em>DETALLE.</em></h2></div>
@@ -163,7 +169,7 @@ export default function Home() {
           </div>
           <div className="setup-grid">
             {setup.map((item, index) => (
-              <article key={item.label}>
+              <article key={item.label} data-reveal>
                 <small>{String(index + 1).padStart(2, "0")} / {item.label}</small>
                 <strong>{item.value}</strong>
                 <span aria-hidden="true">＋</span>
@@ -173,14 +179,14 @@ export default function Home() {
           <a className="text-link" href="https://specs.gg/PIPAA" target="_blank" rel="noreferrer">Ver configuración completa <span aria-hidden="true">↗</span></a>
         </section>
 
-        <section className="social-section">
-          <div className="social-intro">
+        <section className="social-section" data-reveal>
+          <div className="social-intro" data-reveal>
             <p className="eyebrow">SEGUÍ LA JUGADA</p>
             <h2>TODO PIPAA.<br /><em>EN UN SOLO LUGAR.</em></h2>
           </div>
           <div className="social-list">
             {socials.map((social, index) => (
-              <a key={social.name} href={social.href} target="_blank" rel="noreferrer">
+              <a key={social.name} href={social.href} target="_blank" rel="noreferrer" data-reveal>
                 <small>{String(index + 1).padStart(2, "0")}</small>
                 <span>{social.name}</span>
                 <b>{social.handle}</b>
@@ -191,7 +197,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="contact">
+        <section className="contact" data-reveal>
           <p className="eyebrow">MARCAS · PRENSA · COLABORACIONES</p>
           <h2>¿HACEMOS<br /><em>EQUIPO?</em></h2>
           <p>Para propuestas comerciales, campañas, eventos y oportunidades competitivas.</p>
@@ -205,6 +211,13 @@ export default function Home() {
         <p>Jugador profesional de PUBG · Creador de contenido<br />Punta Alta, Argentina</p>
         <p className="footer-note">© 2026 PIPAA<br />Diseñado para la Panza Army.</p>
       </footer>
+      <nav className="mobile-dock" aria-label="Navegación móvil">
+        <a href="#historia"><span>01</span>Perfil</a>
+        <a href="#argentina"><span>02</span>Argentina</a>
+        <a href="#setup"><span>03</span>Setup</a>
+        <a href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer"><i aria-hidden="true" />Live</a>
+      </nav>
+      <MotionController />
     </div>
   );
 }
