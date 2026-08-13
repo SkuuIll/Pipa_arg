@@ -1,6 +1,7 @@
 import { MotionController } from "./MotionController";
 import { ExperienceLayer } from "./ExperienceLayer";
 import { LivePlayers } from "./LivePlayers";
+import { LocalTime } from "./LocalTime";
 
 const socials = [
   { name: "Twitch", handle: "pipa_arg", href: "https://www.twitch.tv/pipa_arg", tag: "EN VIVO" },
@@ -12,11 +13,39 @@ const socials = [
 ];
 
 const career = [
-  { year: "2020", team: "TEAM SINGULARITY", text: "El salto a la escena profesional de PUBG y el inicio de una carrera competitiva internacional." },
-  { year: "2024", team: "BESTIA", text: "Parte del roster fundacional de PUBG de la organización argentina." },
-  { year: "2024—25", team: "TOYO ESPORTS", text: "Una etapa clave en el circuito de Américas y la clasificación al Esports World Cup." },
-  { year: "2025", team: "+55 ESPORTS", text: "Competencia al máximo nivel regional con uno de los equipos partner de Américas." },
-  { year: "2026", team: "BESTIA + ARGENTINA", text: "Regreso a BESTIA, top 8 en PAS 1 y quinto puesto mundial con la Selección Argentina en PNC." },
+  { year: "2018—19", team: "LATIN DOMINUS · HAWKS", text: "Las primeras formaciones competitivas y el origen de un nombre que después quedaría instalado en la escena regional.", tag: "ORIGEN COMPETITIVO" },
+  { year: "2020", team: "TEAM SINGULARITY", text: "El salto a una estructura internacional y a los torneos que conectaron Latinoamérica con el circuito de Américas.", tag: "DEBUT INTERNACIONAL" },
+  { year: "2020—21", team: "LATIN DOMINUS", text: "Una segunda etapa para consolidar identidad, química y experiencia en el nuevo ecosistema continental.", tag: "CIRCUITO LATINOAMERICANO" },
+  { year: "2021—24", team: "SYNERGY ESPORTS", text: "Casi tres años de continuidad, finales continentales y una de las etapas más extensas de toda su carrera.", tag: "ETAPA MÁS EXTENSA" },
+  { year: "2024", team: "BESTIA", text: "Parte del primer roster de PUBG de la organización argentina antes de iniciar una nueva etapa regional.", tag: "ORGANIZACIÓN ARGENTINA" },
+  { year: "2024—25", team: "TOYO ESPORTS", text: "PUBG Americas Series 4 y 5, junto con una de sus campañas más fuertes dentro del archivo estadístico oficial.", tag: "PUBG AMERICAS SERIES" },
+  { year: "2025—26", team: "+55 ESPORTS", text: "Competencia en PUBG Americas Series 6 y Masters West con una formación sudamericana de experiencia internacional.", tag: "CIRCUITO DE AMÉRICAS" },
+  { year: "2026", team: "BESTIA · ARGENTINA", text: "Octavo puesto en PUBG Americas Series 1 y quinto lugar mundial con Argentina en la Nations Cup de Seúl.", tag: "TOP 5 MUNDIAL" },
+];
+
+const performance = [
+  { year: "21", event: "PCS 4", value: 249.56 },
+  { year: "22", event: "PCS 7", value: 277.77 },
+  { year: "23", event: "PAS 2", value: 234.25 },
+  { year: "24", event: "PAS 3", value: 169.54 },
+  { year: "24", event: "PAS 4", value: 200.01 },
+  { year: "25", event: "PAS 5", value: 227.57 },
+  { year: "25", event: "EWC Q", value: 187.66 },
+  { year: "25", event: "PAS 6", value: 138.24 },
+];
+
+const officialTotals = [
+  { value: "378", label: "PARTIDAS", detail: "registradas" },
+  { value: "356", label: "ELIMINACIONES", detail: "75 headshots" },
+  { value: "73.084", label: "DAÑO", detail: "acumulado" },
+  { value: "214", label: "ASISTENCIAS", detail: "en 12 torneos" },
+];
+
+const sourceLinks = [
+  { index: "01", title: "PERFIL OFICIAL", meta: "PUBG ESPORTS · PLAYER 440", href: "https://pubgesports.com/en/players/440" },
+  { index: "02", title: "POV PNC 2026", meta: "PUBG ESPORTS · KICK OFICIAL", href: "https://pubgesports.com/pt-br/news/10178" },
+  { index: "03", title: "HISTORIAL DE EQUIPOS", meta: "ESPORTS CHARTS · PIPAA", href: "https://escharts.com/players/pipaa" },
+  { index: "04", title: "PAS 1 · 2026", meta: "PUBG AMERICAS · #8 BESTIA", href: "https://liquipedia.net/pubg/PUBG_Americas_Series/2026/1" },
 ];
 
 const setup = [
@@ -38,6 +67,7 @@ export default function Home() {
         </a>
         <nav aria-label="Navegación principal">
           <a href="#historia">Historia</a>
+          <a href="#stats">Datos</a>
           <a href="#argentina">Argentina</a>
           <a href="#setup">Setup</a>
           <a href="#comunidad">Comunidad</a>
@@ -67,12 +97,14 @@ export default function Home() {
             </div>
             <div className="schedule">
               <span className="pulse" aria-hidden="true" />
-              <div><b>STREAM TODOS LOS DÍAS</b><small>15:00 — 00:00 · ARG</small></div>
+              <div className="schedule-copy"><b>STREAM TODOS LOS DÍAS</b><small>15:00 — 00:00 · ARG</small></div>
+              <span className="schedule-divider" aria-hidden="true" />
+              <LocalTime />
             </div>
           </div>
 
           <div className="hero-visual" aria-label="PIPAA, jugador profesional y creador de Panza Army">
-            <img src="/pipa-banner.png" alt="PIPAA sonriendo con la indumentaria de Panza Army" />
+            <img src="./pipa-banner.png" alt="PIPAA sonriendo con la indumentaria de Panza Army" width="2000" height="800" fetchPriority="high" />
             <div className="hero-badge">
               <small>PUBG NATIONS CUP 2026</small>
               <strong>#05</strong>
@@ -118,15 +150,82 @@ export default function Home() {
               <li key={item.year} data-reveal>
                 <div className="timeline-year">{item.year}</div>
                 <div className="timeline-dot"><span>{String(index + 1).padStart(2, "0")}</span></div>
-                <div className="timeline-body"><h3>{item.team}</h3><p>{item.text}</p></div>
+                <div className="timeline-body"><small>{item.tag}</small><h3>{item.team}</h3><p>{item.text}</p></div>
               </li>
             ))}
           </ol>
         </section>
 
+        <section className="performance section-grid" id="stats" aria-labelledby="performance-title" data-reveal>
+          <div className="section-kicker"><span>03</span> DATA LAB</div>
+          <div className="performance-heading">
+            <div>
+              <p className="eyebrow">ARCHIVO COMPETITIVO · 2021—2025</p>
+              <h2 id="performance-title">LOS NÚMEROS<br />TAMBIÉN <em>JUEGAN.</em></h2>
+            </div>
+            <p>Doce torneos registrados por PUBG Esports cuentan otra parte de la historia: volumen, consistencia y años compitiendo contra los mejores de Américas.</p>
+          </div>
+
+          <div className="official-ledger" aria-label="Totales de los registros oficiales de PUBG Esports">
+            {officialTotals.map((stat, index) => (
+              <article key={stat.label} data-reveal>
+                <small>{String(index + 1).padStart(2, "0")} / {stat.label}</small>
+                <strong className={stat.value.length > 5 ? "is-long" : undefined}>{stat.value}</strong>
+                <span>{stat.detail}</span>
+              </article>
+            ))}
+          </div>
+
+          <div className="performance-board">
+            <article className="damage-panel" data-reveal>
+              <div className="panel-heading">
+                <div><small>AVG. DAMAGE / MATCH</small><strong>RENDIMIENTO POR EVENTO</strong></div>
+                <span>MAX 300</span>
+              </div>
+              <div className="damage-chart" role="img" aria-label="Daño promedio por partida en ocho eventos oficiales entre 2021 y 2025">
+                <div className="chart-grid" aria-hidden="true"><i /><i /><i /></div>
+                {performance.map((entry, index) => (
+                  <div className="chart-column" key={`${entry.year}-${entry.event}`}>
+                    <span className="chart-value">{entry.value.toFixed(0)}</span>
+                    <div className="chart-bar">
+                      <i style={{ height: `${(entry.value / 300) * 100}%`, animationDelay: `${index * 90}ms` }} />
+                    </div>
+                    <b>{entry.event}</b>
+                    <small>20{entry.year}</small>
+                  </div>
+                ))}
+              </div>
+            </article>
+
+            <aside className="combat-profile" data-reveal>
+              <div className="panel-heading">
+                <div><small>COMBAT PROFILE</small><strong>PRECISIÓN + ALCANCE</strong></div>
+                <span>OFFICIAL</span>
+              </div>
+              <div className="combat-ring" aria-label="21 por ciento de las eliminaciones registradas fueron headshots">
+                <div><strong>21%</strong><span>HEADSHOTS</span></div>
+              </div>
+              <div className="combat-split">
+                <div><small>ELIMINACIONES</small><strong>356</strong></div>
+                <div><small>HEADSHOTS</small><strong>75</strong></div>
+              </div>
+              <div className="range-record">
+                <div><small>LONGEST KILL REGISTRADA</small><strong>617,9 M</strong></div>
+                <span><i /></span>
+              </div>
+            </aside>
+          </div>
+
+          <div className="data-note">
+            <span>FUENTE / PUBG ESPORTS</span>
+            <p>Totales calculados sobre los 12 registros publicados en el perfil oficial. No representan partidas fuera de esos eventos.</p>
+            <a href="https://pubgesports.com/en/players/440" target="_blank" rel="noreferrer">Abrir perfil oficial ↗</a>
+          </div>
+        </section>
+
         <section className="argentina" id="argentina" data-reveal>
           <div className="argentina-photo">
-            <img src="/pipa-argentina-2026.jpg" alt="PIPAA en el anuncio oficial de la Selección Argentina para PUBG Nations Cup 2026" />
+            <img src="./pipa-argentina-2026.jpg" alt="PIPAA en el anuncio oficial de la Selección Argentina para PUBG Nations Cup 2026" width="960" height="1200" loading="lazy" decoding="async" />
             <div className="photo-stamp"><span>SEOUL</span><strong>2026</strong></div>
           </div>
           <div className="argentina-copy">
@@ -139,12 +238,19 @@ export default function Home() {
               <div data-reveal><small>ELIMINACIONES</small><strong>71</strong></div>
               <div data-reveal><small>WWCD</small><strong>1</strong></div>
             </div>
+            <div className="world-stages" aria-label="Hitos competitivos destacados">
+              <div><small>2024</small><strong>PNC</strong><span>Seúl · Argentina</span></div>
+              <i aria-hidden="true" />
+              <div><small>2025</small><strong>EWC Q</strong><span>Américas · OP</span></div>
+              <i aria-hidden="true" />
+              <div><small>2026</small><strong>PNC</strong><span>Seúl · #5 mundial</span></div>
+            </div>
             <a className="text-link sky" href="https://pubgesports.com/en/tournament/165" target="_blank" rel="noreferrer">Ver resultado oficial <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 
         <section className="stream-section section-grid" id="comunidad" data-reveal>
-          <div className="section-kicker"><span>03</span> EN VIVO</div>
+          <div className="section-kicker"><span>04</span> EN VIVO</div>
           <div className="live-heading" data-reveal>
             <div>
               <p className="eyebrow">TRANSMISIÓN EN DIRECTO</p>
@@ -152,16 +258,36 @@ export default function Home() {
             </div>
             <p>El directo completo de PIPAA integrado en la web. Elegí Kick o Twitch, activá el sonido y entrá a la partida.</p>
           </div>
+          <article className="official-pov" data-reveal>
+            <div className="pov-index">POV<br /><strong>ARG</strong></div>
+            <div>
+              <p className="eyebrow">CANAL ELEGIDO POR PUBG ESPORTS</p>
+              <h3>LA PNC 2026,<br />DESDE SUS OJOS.</h3>
+            </div>
+            <p>Para la Nations Cup 2026, PUBG publicó el canal de Kick de PIPAA como su transmisión POV oficial: la partida, las comunicaciones y la presión desde el lugar del jugador.</p>
+            <a href="https://pubgesports.com/pt-br/news/10178" target="_blank" rel="noreferrer">Ver anuncio oficial <span aria-hidden="true">↗</span></a>
+          </article>
           <LivePlayers />
-          <div className="community-runner" data-reveal>
-            <img src="/pipa-avatar.webp" alt="Logo de PIPAA y Panza Army" />
-            <div><small>LA COMUNIDAD</small><strong>PANZA ARMY</strong><p>Rankeds, scrims, torneos, jugadas imposibles y esa cuota de caos que solo entiende la comunidad.</p></div>
-            <div className="runner-rings" aria-hidden="true"><i /><i /><i /></div>
-          </div>
+          <article className="community-feature" data-reveal>
+            <div className="community-feature-media">
+              <img src="./og-v2.png" alt="PIPAA, jugador profesional argentino de PUBG y creador de Panza Army" width="1731" height="909" loading="lazy" decoding="async" />
+              <span className="community-feature-scan" aria-hidden="true" />
+            </div>
+            <div className="community-feature-copy">
+              <div className="community-feature-label"><span>05</span> LA COMUNIDAD</div>
+              <img className="community-avatar" src="./pipa-avatar.webp" alt="Logo de PIPAA y Panza Army" width="350" height="349" loading="lazy" decoding="async" />
+              <div className="community-feature-title"><p className="eyebrow">MÁS QUE UN CHAT</p><h3>PANZA<br /><em>ARMY.</em></h3></div>
+              <div className="community-feature-body">
+                <p>Rankeds, scrims, torneos y ese caos que solamente entiende la comunidad. El punto de encuentro alrededor de PIPAA, dentro y fuera de cada partida.</p>
+                <div className="community-feature-tags" aria-label="Contenido de la comunidad"><span>DIRECTOS</span><span>COMPETENCIA</span><span>CLIPS</span></div>
+                <a className="text-link" href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer">Entrar al directo <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
         </section>
 
         <section className="setup section-grid" id="setup" data-reveal>
-          <div className="section-kicker"><span>04</span> SETUP</div>
+          <div className="section-kicker"><span>05</span> SETUP</div>
           <div className="setup-heading">
             <div><p className="eyebrow">HARDWARE DE COMPETENCIA</p><h2>PRECISIÓN EN<br />CADA <em>DETALLE.</em></h2></div>
             <p>El equipo con el que PIPAA entrena, compite y transmite todos los días.</p>
@@ -185,12 +311,29 @@ export default function Home() {
           </div>
           <div className="social-list">
             {socials.map((social, index) => (
-              <a key={social.name} href={social.href} target="_blank" rel="noreferrer" data-reveal>
+              <a key={social.name} href={social.href} target="_blank" rel="me noreferrer" data-reveal>
                 <small>{String(index + 1).padStart(2, "0")}</small>
                 <span>{social.name}</span>
                 <b>{social.handle}</b>
                 <i>{social.tag}</i>
                 <strong aria-hidden="true">↗</strong>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section className="archive-sources section-grid" aria-labelledby="sources-title" data-reveal>
+          <div className="section-kicker"><span>06</span> ARCHIVO</div>
+          <div className="sources-heading">
+            <div><p className="eyebrow">INVESTIGACIÓN ABIERTA</p><h2 id="sources-title">LA HISTORIA,<br /><em>CON RESPALDO.</em></h2></div>
+            <p>Resultados, estadísticas y movimientos de equipos vinculados a sus registros públicos. Una capa editorial para que la página no solo diga quién es: también muestre de dónde sale cada dato.</p>
+          </div>
+          <div className="sources-list">
+            {sourceLinks.map((source) => (
+              <a key={source.index} href={source.href} target="_blank" rel="noreferrer" data-reveal>
+                <small>{source.index}</small>
+                <div><strong>{source.title}</strong><span>{source.meta}</span></div>
+                <b aria-hidden="true">↗</b>
               </a>
             ))}
           </div>

@@ -1,0 +1,18 @@
+{
+  "name": "PIPAA — PUBG Pro Player",
+  "short_name": "PIPAA",
+  "description": "Sitio oficial de PIPAA, jugador profesional argentino de PUBG y creador de Panza Army.",
+  "lang": "es-AR",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#07050d",
+  "theme_color": "#a7ff00",
+  "icons": [
+    {
+      "src": "./pipa-avatar.webp",
+      "sizes": "350x349",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ]
+}
