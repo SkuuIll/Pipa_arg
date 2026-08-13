@@ -1,4 +1,6 @@
 import { MotionController } from "./MotionController";
+import { ExperienceLayer } from "./ExperienceLayer";
+import { LivePlayers } from "./LivePlayers";
 
 const socials = [
   { name: "Twitch", handle: "pipa_arg", href: "https://www.twitch.tv/pipa_arg", tag: "EN VIVO" },
@@ -29,6 +31,7 @@ const setup = [
 export default function Home() {
   return (
     <div className="site-shell">
+      <ExperienceLayer />
       <header className="topbar">
         <a className="brand" href="#inicio" aria-label="PIPAA — volver al inicio">
           <span>PIPA</span><i aria-hidden="true" />
@@ -142,22 +145,18 @@ export default function Home() {
 
         <section className="stream-section section-grid" id="comunidad" data-reveal>
           <div className="section-kicker"><span>03</span> EN VIVO</div>
-          <div className="stream-card">
-            <div className="stream-card-copy" data-reveal>
-              <span className="live-pill"><i aria-hidden="true" /> TODOS LOS DÍAS</span>
-              <h2>DONDE LA COMPETENCIA<br />SE ENCUENTRA CON<br /><em>LA PANZA ARMY.</em></h2>
-              <p>Rankeds, scrims, torneos, jugadas imposibles y esa cuota de caos que solo entiende la comunidad.</p>
-              <div className="platform-buttons">
-                <a href="https://www.twitch.tv/pipa_arg" target="_blank" rel="noreferrer"><span>TWITCH</span><b>pipa_arg</b><i>↗</i></a>
-                <a href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer"><span>KICK</span><b>pipa_arg</b><i>↗</i></a>
-              </div>
+          <div className="live-heading" data-reveal>
+            <div>
+              <p className="eyebrow">TRANSMISIÓN EN DIRECTO</p>
+              <h2>MIRALO DONDE<br /><em>VOS ELIJAS.</em></h2>
             </div>
-            <div className="community-mark" data-reveal>
-              <div className="orbit orbit-one" aria-hidden="true" />
-              <div className="orbit orbit-two" aria-hidden="true" />
-              <img src="/pipa-avatar.webp" alt="Logo de PIPAA y Panza Army" />
-              <span>PANZA</span><strong>ARMY</strong><small>DESDE ARGENTINA PARA EL MUNDO</small>
-            </div>
+            <p>El directo completo de PIPAA integrado en la web. Elegí Kick o Twitch, activá el sonido y entrá a la partida.</p>
+          </div>
+          <LivePlayers />
+          <div className="community-runner" data-reveal>
+            <img src="/pipa-avatar.webp" alt="Logo de PIPAA y Panza Army" />
+            <div><small>LA COMUNIDAD</small><strong>PANZA ARMY</strong><p>Rankeds, scrims, torneos, jugadas imposibles y esa cuota de caos que solo entiende la comunidad.</p></div>
+            <div className="runner-rings" aria-hidden="true"><i /><i /><i /></div>
           </div>
         </section>
 

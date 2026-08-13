@@ -5,15 +5,9 @@ import { useEffect } from "react";
 export function MotionController() {
   useEffect(() => {
     const root = document.documentElement;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
 
     root.classList.add("motion-ready");
-
-    if (reduceMotion) {
-      revealItems.forEach((item) => item.classList.add("is-visible"));
-      return () => root.classList.remove("motion-ready");
-    }
 
     revealItems.forEach((item) => {
       if (item.getBoundingClientRect().top < window.innerHeight * 0.94) {
