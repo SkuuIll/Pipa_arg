@@ -6,13 +6,13 @@ export function MotionController() {
     const root = document.documentElement;
     const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
 
-    root.classList.add("motion-ready");
-
     revealItems.forEach((item) => {
-      if (item.getBoundingClientRect().top < window.innerHeight * 0.94) {
+      if (item.getBoundingClientRect().top < window.innerHeight * 0.98) {
         item.classList.add("is-visible");
       }
     });
+
+    root.classList.add("motion-ready");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -23,7 +23,7 @@ export function MotionController() {
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -7% 0px" },
+      { threshold: 0.01, rootMargin: "0px 0px 12% 0px" },
     );
 
     revealItems.forEach((item) => {
