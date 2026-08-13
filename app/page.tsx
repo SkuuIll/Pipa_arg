@@ -73,7 +73,7 @@ export default function Home() {
           <a href="#setup">Setup</a>
           <a href="#comunidad">Comunidad</a>
         </nav>
-        <a className="nav-live" href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer">
+        <a className="nav-live" href="#comunidad">
           <span aria-hidden="true" /> Ver stream
         </a>
       </header>
@@ -91,8 +91,8 @@ export default function Home() {
               Soy PIPAA. Jugador profesional de PUBG, creador de contenido y parte de la Selección Argentina. Todos los días, la misma misión: competir, mejorar y pasarla bien con la Panza Army.
             </p>
             <div className="hero-actions">
-              <a className="button button-primary" href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer">
-                <span className="play" aria-hidden="true">▶</span> Mirá el stream
+              <a className="button button-primary" href="#comunidad">
+                <span className="play" aria-hidden="true">▶</span> Ver directo acá
               </a>
               <a className="button button-ghost" href="#historia">Conocé mi carrera <span aria-hidden="true">↓</span></a>
             </div>
@@ -140,8 +140,45 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="stream-section section-grid" id="comunidad" data-reveal>
+          <div className="section-kicker"><span>02</span> EN VIVO</div>
+          <div className="live-heading" data-reveal>
+            <div>
+              <p className="eyebrow">TRANSMISIÓN EN DIRECTO</p>
+              <h2>MIRALO DONDE<br /><em>VOS ELIJAS.</em></h2>
+            </div>
+            <p>El directo completo de PIPAA integrado en la web. Elegí Kick o Twitch, activá el sonido y entrá a la partida.</p>
+          </div>
+          <article className="official-pov" data-reveal>
+            <div className="pov-index">POV<br /><strong>ARG</strong></div>
+            <div>
+              <p className="eyebrow">CANAL ELEGIDO POR PUBG ESPORTS</p>
+              <h3>LA PNC 2026,<br />DESDE SUS OJOS.</h3>
+            </div>
+            <p>Para la Nations Cup 2026, PUBG publicó el canal de Kick de PIPAA como su transmisión POV oficial: la partida, las comunicaciones y la presión desde el lugar del jugador.</p>
+            <a href="https://pubgesports.com/pt-br/news/10178" target="_blank" rel="noreferrer">Ver anuncio oficial <span aria-hidden="true">↗</span></a>
+          </article>
+          <LivePlayers />
+          <article className="community-feature" data-reveal>
+            <div className="community-feature-media">
+              <img src="./og-v2.jpg" alt="PIPAA, jugador profesional argentino de PUBG y creador de Panza Army" width="1200" height="630" loading="lazy" decoding="async" />
+              <span className="community-feature-scan" aria-hidden="true" />
+            </div>
+            <div className="community-feature-copy">
+              <div className="community-feature-label"><span>02</span> LA COMUNIDAD</div>
+              <img className="community-avatar" src="./pipa-avatar.webp" alt="Logo de PIPAA y Panza Army" width="350" height="349" loading="lazy" decoding="async" />
+              <div className="community-feature-title"><p className="eyebrow">MÁS QUE UN CHAT</p><h3>PANZA<br /><em>ARMY.</em></h3></div>
+              <div className="community-feature-body">
+                <p>Rankeds, scrims, torneos y ese caos que solamente entiende la comunidad. El punto de encuentro alrededor de PIPAA, dentro y fuera de cada partida.</p>
+                <div className="community-feature-tags" aria-label="Contenido de la comunidad"><span>DIRECTOS</span><span>COMPETENCIA</span><span>CLIPS</span></div>
+                <a className="text-link" href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer">Entrar al directo <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+        </section>
+
         <section className="career section-grid" aria-labelledby="career-title" data-reveal>
-          <div className="section-kicker"><span>02</span> TRAYECTORIA</div>
+          <div className="section-kicker"><span>03</span> TRAYECTORIA</div>
           <div className="career-head">
             <h2 id="career-title">UNA CARRERA<br />EN <em>PRIMERA PERSONA.</em></h2>
             <p>De los primeros torneos a representar al país en Seúl. Equipos, mapas y momentos que construyeron el camino.</p>
@@ -158,7 +195,7 @@ export default function Home() {
         </section>
 
         <section className="performance section-grid" id="stats" aria-labelledby="performance-title" data-reveal>
-          <div className="section-kicker"><span>03</span> DATA LAB</div>
+          <div className="section-kicker"><span>04</span> DATA LAB</div>
           <div className="performance-heading">
             <div>
               <p className="eyebrow">ARCHIVO COMPETITIVO · 2021—2025</p>
@@ -248,43 +285,6 @@ export default function Home() {
             </div>
             <a className="text-link sky" href="https://pubgesports.com/en/tournament/165" target="_blank" rel="noreferrer">Ver resultado oficial <span aria-hidden="true">↗</span></a>
           </div>
-        </section>
-
-        <section className="stream-section section-grid" id="comunidad" data-reveal>
-          <div className="section-kicker"><span>04</span> EN VIVO</div>
-          <div className="live-heading" data-reveal>
-            <div>
-              <p className="eyebrow">TRANSMISIÓN EN DIRECTO</p>
-              <h2>MIRALO DONDE<br /><em>VOS ELIJAS.</em></h2>
-            </div>
-            <p>El directo completo de PIPAA integrado en la web. Elegí Kick o Twitch, activá el sonido y entrá a la partida.</p>
-          </div>
-          <article className="official-pov" data-reveal>
-            <div className="pov-index">POV<br /><strong>ARG</strong></div>
-            <div>
-              <p className="eyebrow">CANAL ELEGIDO POR PUBG ESPORTS</p>
-              <h3>LA PNC 2026,<br />DESDE SUS OJOS.</h3>
-            </div>
-            <p>Para la Nations Cup 2026, PUBG publicó el canal de Kick de PIPAA como su transmisión POV oficial: la partida, las comunicaciones y la presión desde el lugar del jugador.</p>
-            <a href="https://pubgesports.com/pt-br/news/10178" target="_blank" rel="noreferrer">Ver anuncio oficial <span aria-hidden="true">↗</span></a>
-          </article>
-          <LivePlayers />
-          <article className="community-feature" data-reveal>
-            <div className="community-feature-media">
-              <img src="./og-v2.jpg" alt="PIPAA, jugador profesional argentino de PUBG y creador de Panza Army" width="1200" height="630" loading="lazy" decoding="async" />
-              <span className="community-feature-scan" aria-hidden="true" />
-            </div>
-            <div className="community-feature-copy">
-              <div className="community-feature-label"><span>05</span> LA COMUNIDAD</div>
-              <img className="community-avatar" src="./pipa-avatar.webp" alt="Logo de PIPAA y Panza Army" width="350" height="349" loading="lazy" decoding="async" />
-              <div className="community-feature-title"><p className="eyebrow">MÁS QUE UN CHAT</p><h3>PANZA<br /><em>ARMY.</em></h3></div>
-              <div className="community-feature-body">
-                <p>Rankeds, scrims, torneos y ese caos que solamente entiende la comunidad. El punto de encuentro alrededor de PIPAA, dentro y fuera de cada partida.</p>
-                <div className="community-feature-tags" aria-label="Contenido de la comunidad"><span>DIRECTOS</span><span>COMPETENCIA</span><span>CLIPS</span></div>
-                <a className="text-link" href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer">Entrar al directo <span aria-hidden="true">↗</span></a>
-              </div>
-            </div>
-          </article>
         </section>
 
         <section className="setup section-grid" id="setup" data-reveal>

@@ -64,7 +64,7 @@ export function LivePlayers() {
         <div className={`player-frame ${active === "kick" ? "is-visible" : ""}`} aria-hidden={active !== "kick"}>
           {inView ? (
             <iframe
-              src="https://player.kick.com/pipa_arg?autoplay=false&muted=true"
+            src="https://player.kick.com/pipa_arg?autoplay=true&muted=true"
               title="Stream de PIPAA en Kick"
               allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
