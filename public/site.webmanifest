@@ -9,10 +9,20 @@
   "theme_color": "#a7ff00",
   "icons": [
     {
-      "src": "./pipa-avatar.webp",
-      "sizes": "350x349",
-      "type": "image/webp",
-      "purpose": "any"
+      "src": "./favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "./apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }

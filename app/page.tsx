@@ -60,6 +60,7 @@ const setup = [
 export default function Home() {
   return (
     <div className="site-shell">
+      <a className="skip-link" href="#inicio">Saltar al contenido</a>
       <ExperienceLayer />
       <header className="topbar">
         <a className="brand" href="#inicio" aria-label="PIPAA — volver al inicio">
@@ -104,7 +105,7 @@ export default function Home() {
           </div>
 
           <div className="hero-visual" aria-label="PIPAA, jugador profesional y creador de Panza Army">
-            <img src="./pipa-banner.png" alt="PIPAA sonriendo con la indumentaria de Panza Army" width="2000" height="800" fetchPriority="high" />
+            <img src="./pipa-banner.webp" alt="PIPAA sonriendo con la indumentaria de Panza Army" width="1600" height="640" fetchPriority="high" />
             <div className="hero-badge">
               <small>PUBG NATIONS CUP 2026</small>
               <strong>#05</strong>
@@ -270,7 +271,7 @@ export default function Home() {
           <LivePlayers />
           <article className="community-feature" data-reveal>
             <div className="community-feature-media">
-              <img src="./og-v2.png" alt="PIPAA, jugador profesional argentino de PUBG y creador de Panza Army" width="1731" height="909" loading="lazy" decoding="async" />
+              <img src="./og-v2.jpg" alt="PIPAA, jugador profesional argentino de PUBG y creador de Panza Army" width="1200" height="630" loading="lazy" decoding="async" />
               <span className="community-feature-scan" aria-hidden="true" />
             </div>
             <div className="community-feature-copy">
@@ -311,7 +312,7 @@ export default function Home() {
           </div>
           <div className="social-list">
             {socials.map((social, index) => (
-              <a key={social.name} href={social.href} target="_blank" rel="me noreferrer" data-reveal>
+              <a key={social.name} href={social.href} target="_blank" rel="me noreferrer" aria-label={`Perfil de PIPAA en ${social.name}`} data-reveal>
                 <small>{String(index + 1).padStart(2, "0")}</small>
                 <span>{social.name}</span>
                 <b>{social.handle}</b>
@@ -330,7 +331,7 @@ export default function Home() {
           </div>
           <div className="sources-list">
             {sourceLinks.map((source) => (
-              <a key={source.index} href={source.href} target="_blank" rel="noreferrer" data-reveal>
+              <a key={source.index} href={source.href} target="_blank" rel="noreferrer" aria-label={`Fuente: ${source.title}`} data-reveal>
                 <small>{source.index}</small>
                 <div><strong>{source.title}</strong><span>{source.meta}</span></div>
                 <b aria-hidden="true">↗</b>

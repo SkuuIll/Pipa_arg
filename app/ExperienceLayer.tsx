@@ -1,4 +1,3 @@
-"use client";
 
 import { MotionConfig, motion, useMotionValue, useScroll, useSpring } from "motion/react";
 import { useEffect } from "react";
@@ -29,7 +28,7 @@ export function ExperienceLayer() {
   }, [cursorX, cursorY]);
 
   return (
-    <MotionConfig reducedMotion="never">
+    <MotionConfig reducedMotion="user">
       <motion.div className="scroll-progress" style={{ scaleX: progress }} aria-hidden="true" />
       <motion.div className="cursor-aura" style={{ x: smoothX, y: smoothY }} aria-hidden="true" />
       <div className="ambient-world" aria-hidden="true">

@@ -14,7 +14,7 @@ const identityGraph = {
       name: "Leonardo Rafael Ruppel",
       alternateName: ["PIPAA", "Pipa_ARG"],
       description: "Jugador profesional argentino de PUBG, streamer y creador de la comunidad Panza Army.",
-      image: siteUrl ? `${siteUrl}/pipa-banner.png` : undefined,
+      image: siteUrl ? `${siteUrl}/pipa-banner.webp` : undefined,
       url: siteUrl || undefined,
       nationality: { "@type": "Country", name: "Argentina" },
       jobTitle: ["Jugador profesional de PUBG", "Streamer", "Creador de contenido"],
@@ -48,12 +48,12 @@ function seoFiles() {
       const canonical = siteUrl
         ? `<link rel="canonical" href="${siteUrl}/" />\n    <meta property="og:url" content="${siteUrl}/" />`
         : "";
-      const imageUrl = siteUrl ? `${siteUrl}/og-v2.png` : "./og-v2.png";
+      const imageUrl = siteUrl ? `${siteUrl}/og-v2.jpg` : "./og-v2.jpg";
       const structuredData = `<script type="application/ld+json">${JSON.stringify(identityGraph)}</script>`;
 
       return html
         .replace("<!-- SEO_RUNTIME -->", `${canonical}\n    ${structuredData}`)
-        .replaceAll("./og-v2.png", imageUrl);
+        .replaceAll("./og-v2.jpg", imageUrl);
     },
     closeBundle() {
       const dist = resolve("dist");

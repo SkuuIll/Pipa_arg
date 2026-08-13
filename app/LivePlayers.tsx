@@ -1,21 +1,37 @@
-"use client";
-
 import { motion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 type Platform = "kick" | "twitch";
 
 export function LivePlayers() {
   const [active, setActive] = useState<Platform>("kick");
   const [twitchSrc, setTwitchSrc] = useState("");
+  const [inView, setInView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const parent = window.location.hostname || "localhost";
     setTwitchSrc(`https://player.twitch.tv/?channel=pipa_arg&parent=${encodeURIComponent(parent)}&autoplay=false&muted=true`);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: "200px 0px" }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="live-stage">
+    <div className="live-stage" ref={containerRef}>
       <div className="live-stage-top">
         <div>
           <span className="live-pill"><i aria-hidden="true" /> PLAYER OFICIAL</span>
@@ -46,16 +62,18 @@ export function LivePlayers() {
           aria-hidden="true"
         />
         <div className={`player-frame ${active === "kick" ? "is-visible" : ""}`} aria-hidden={active !== "kick"}>
-          <iframe
-            src="https://player.kick.com/pipa_arg?autoplay=false&muted=true"
-            title="Stream de PIPAA en Kick"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowFullScreen
-            loading="lazy"
-          />
+          {inView ? (
+            <iframe
+              src="https://player.kick.com/pipa_arg?autoplay=false&muted=true"
+              title="Stream de PIPAA en Kick"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              loading="lazy"
+            />
+          ) : <div className="player-loading">Preparando Kick…</div>}
         </div>
         <div className={`player-frame ${active === "twitch" ? "is-visible" : ""}`} aria-hidden={active !== "twitch"}>
-          {twitchSrc ? (
+          {inView && twitchSrc ? (
             <iframe
               src={twitchSrc}
               title="Stream de PIPAA en Twitch"
