@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 
 export function MotionController() {
@@ -9,6 +8,7 @@ export function MotionController() {
     revealItems.forEach((item) => {
       if (item.getBoundingClientRect().top < window.innerHeight * 0.98) {
         item.classList.add("is-visible");
+        item.setAttribute("data-revealed", "true");
       }
     });
 
@@ -18,8 +18,10 @@ export function MotionController() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
+            const el = entry.target as HTMLElement;
+            el.classList.add("is-visible");
+            el.setAttribute("data-revealed", "true");
+            observer.unobserve(el);
           }
         });
       },
