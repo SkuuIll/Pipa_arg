@@ -168,7 +168,7 @@ export default function Home() {
 
       <header className={`topbar ${isScrolled ? "is-scrolled" : ""}`}>
         <a className="brand" href="#inicio" aria-label="PIPAA — volver al inicio">
-          <span>PIPAA</span><i aria-hidden="true" />
+          <img src="./pipaa-logo.svg" alt="PIPAA" className="brand-logo" width="120" height="48" />
         </a>
         <nav aria-label="Navegación principal">
           <a href="#historia" className={activeNav === "historia" ? "is-active" : ""}>Historia</a>
@@ -715,17 +715,28 @@ export default function Home() {
           <p className="eyebrow">MARCAS · PRENSA · COLABORACIONES</p>
           <h2>¿HACEMOS<br /><em>EQUIPO?</em></h2>
           <p>Para propuestas comerciales, campañas, eventos y oportunidades competitivas.</p>
-          <a className="button button-primary" href="mailto:raffitas_ruppel@hotmail.com">
-            Escribime <span aria-hidden="true">↗</span>
-          </a>
-          <p className="contact-email">raffitas_ruppel@hotmail.com</p>
+          <div className="contact-card">
+            <div className="contact-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="M22 7l-10 7L2 7" />
+              </svg>
+            </div>
+            <div className="contact-card-body">
+              <small>CONTACTO DIRECTO</small>
+              <a href="mailto:raffitas_ruppel@hotmail.com" className="contact-mail-link">raffitas_ruppel@hotmail.com</a>
+            </div>
+            <a className="button button-primary contact-card-btn" href="mailto:raffitas_ruppel@hotmail.com">
+              Escribime <span aria-hidden="true">↗</span>
+            </a>
+          </div>
           <div className="contact-outline" aria-hidden="true">PIPAA</div>
         </section>
       </main>
 
       <footer>
         <a className="brand" href="#inicio" aria-label="PIPAA — volver al inicio">
-          <span>PIPAA</span><i aria-hidden="true" />
+          <img src="./pipaa-logo.svg" alt="PIPAA" className="brand-logo" width="120" height="48" />
         </a>
         <p>PIPAA · Jugador profesional de PUBG · Streamer<br />Argentina</p>
         <p className="footer-note">© 2026 PIPAA<br />Diseñado para la Panza Army.</p>

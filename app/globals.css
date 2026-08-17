@@ -186,41 +186,19 @@ img {
   box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6);
 }
 .brand {
-  width: 104px;
-  height: 44px;
-  display: inline-grid;
-  place-items: center;
-  position: relative;
+  display: inline-flex;
+  align-items: center;
   justify-self: start;
-  font-family: var(--font-display);
-  font-size: 26px;
-  letter-spacing: 1px;
-  transform: skew(-4deg);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 .brand:hover {
-  transform: skew(-4deg) scale(1.05);
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 8px rgba(167, 255, 0, 0.4));
 }
-.brand::before {
-  content: "";
-  position: absolute;
-  inset: 4px 0 1px;
-  border: 3px solid var(--acid);
-  clip-path: polygon(0 0, 100% 0, 94% 82%, 50% 100%, 6% 82%);
-}
-.brand span {
-  position: relative;
-  z-index: 1;
-  transform: skew(4deg);
-}
-.brand i {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: var(--acid);
-  right: -12px;
-  top: 20px;
-  box-shadow: 0 0 8px var(--acid);
+.brand-logo {
+  width: auto;
+  height: 40px;
+  object-fit: contain;
 }
 .topbar nav {
   display: flex;
@@ -2517,20 +2495,64 @@ h3 em {
   position: relative;
   z-index: 2;
 }
-.contact-email {
+.contact-card {
   position: relative;
   z-index: 2;
-  margin-top: 22px;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--muted);
-  opacity: 0.7;
-  transition: opacity 0.2s ease, color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 10px;
+  padding: 22px 30px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
-.contact-email:hover {
-  opacity: 1;
+.contact-card:hover {
+  border-color: rgba(167, 255, 0, 0.3);
+  background: rgba(167, 255, 0, 0.04);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+.contact-card-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(167, 255, 0, 0.3);
+  border-radius: 50%;
   color: var(--acid);
+}
+.contact-card-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.contact-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.contact-card-body small {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--acid);
+  text-transform: uppercase;
+}
+.contact-mail-link {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+}
+.contact-mail-link:hover {
+  color: var(--acid);
+}
+.contact-card-btn {
+  flex-shrink: 0;
 }
 .contact-outline {
   position: absolute;
@@ -2746,7 +2768,7 @@ footer p {
   body { padding-bottom: 78px; }
   .topbar { height: 70px; padding-inline: 20px; }
   .topbar.is-scrolled { height: 64px; }
-  .brand { width: 88px; font-size: 21px; }
+  .brand-logo { height: 34px; }
   .nav-live { height: 35px; padding: 0 12px; font-size: 9px; }
   .hero { grid-template-columns: 1fr; min-height: 0; padding-top: 70px; }
   .hero-copy { min-height: 0; padding: 50px 20px 46px; }
@@ -2839,6 +2861,9 @@ footer p {
   .sources-list a { min-height: 110px; padding: 20px 16px; }
   .contact { min-height: 560px; padding: 85px 20px; }
   .contact h2 { font-size: clamp(64px, 18vw, 90px); }
+  .contact-card { flex-direction: column; text-align: center; padding: 24px 20px; gap: 16px; }
+  .contact-card-btn { width: 100%; }
+  .contact-mail-link { font-size: 14px; }
   footer { grid-template-columns: 1fr; gap: 22px; text-align: left; }
   .footer-note { justify-self: start; text-align: left; }
 
