@@ -4,11 +4,22 @@ import { ExperienceLayer } from "./ExperienceLayer";
 import { LivePlayers } from "./LivePlayers";
 import { LocalTime } from "./LocalTime";
 import { StatsCounter } from "./StatsCounter";
-import { getSetupIcon, RifleIcon, TrophyIcon, CrosshairIcon, ChevronDownIcon } from "./SetupIcons";
+import {
+  getSetupIcon,
+  RifleIcon,
+  TrophyIcon,
+  CrosshairIcon,
+  ChevronDownIcon,
+  DiscordIcon,
+  CopyIcon,
+  CheckIcon,
+  SparklesIcon,
+} from "./SetupIcons";
 
 const socials = [
   { name: "Twitch", handle: "pipa_arg", href: "https://www.twitch.tv/pipa_arg", tag: "EN VIVO" },
   { name: "Kick", handle: "pipa_arg", href: "https://kick.com/pipa_arg", tag: "EN VIVO" },
+  { name: "Discord", handle: "discord.gg/rgzZ3Kv", href: "https://discord.gg/rgzZ3Kv", tag: "COMUNIDAD" },
   { name: "YouTube", handle: "@PIPAArg", href: "https://www.youtube.com/@PIPAArg", tag: "VIDEOS" },
   { name: "TikTok", handle: "@pipa_arg", href: "https://www.tiktok.com/@pipa_arg", tag: "CLIPS" },
   { name: "X", handle: "@Pipa_arg", href: "https://x.com/Pipa_arg", tag: "UPDATES" },
@@ -95,39 +106,60 @@ const faqs = [
     a: "Representó a Argentina en 3 ediciones del PUBG Nations Cup (PNC 2022, PNC 2024 y PNC 2026 en Seúl, Corea del Sur), logrando el histórico 5.° puesto mundial con 101 puntos, 71 eliminaciones y 1 Chicken Dinner (WWCD).",
   },
   {
-    q: "¿Qué sensibilidad y periféricos utiliza?",
-    a: "Juega a 400 DPI con el mouse Logitech G Pro X Super Strike, sensibilidad general 50, multiplicador vertical de 1.10 y ADS de 39. En hardware utiliza un procesador Ryzen 7 7800X3D y auriculares Shure SE215 in-ear.",
+    q: "¿Qué hardware y periféricos utiliza?",
+    a: "Compite con un setup Dual PC: PC Gaming con AMD Ryzen 7 7800X3D, Mother B650M Aorus Elite AX WiFi, PNY XLR8 RTX 3070, 32GB RAM Corsair Dominator Platinum 6000MHz DDR5, Watercooling Corsair iCUE Link Titan 360 RX RGB, Fuente Aorus P850W Gold y almacenamiento SSD NVMe + HDD. Para transmisión utiliza una PC Streaming dedicada con Intel Core i7 8700, GTX 1070 Ti y 16GB RAM. En periféricos juega a 400 DPI con Logitech G Pro X y auriculares in-ear Shure SE215.",
+  },
+  {
+    q: "¿Cómo apoyar a PIPAA con su código de creador PUBG Partner?",
+    a: "Al comprar G-Coins o cualquier ítem dentro de PUBG: BATTLEGROUNDS o en accounts.krafton.com/creator-code, ingresá el código de creador PIPAA. De esa manera, un porcentaje de cada compra va directamente a apoyar su carrera competitiva y sus streams.",
   },
   {
     q: "¿Cuál es su horario de streaming y cómo sumarse a la Panza Army?",
-    a: "Transmite todos los días habitualmente entre las 15:00 y las 00:00 (hora de Argentina) en Kick y Twitch (canal pipa_arg). Las partidas comunitarias, rankeds, scrims y clips se coordinan en sus canales oficiales y Discord.",
+    a: "Transmite todos los días habitualmente entre las 15:00 y las 00:00 (hora de Argentina) en Kick y Twitch (canal pipa_arg). Las partidas comunitarias, rankeds, scrims y anuncios se coordinan en el servidor oficial de Discord (discord.gg/rgzZ3Kv).",
   },
 ];
 
 const sourceLinks = [
   { index: "01", title: "PERFIL OFICIAL", meta: "PUBG ESPORTS · PLAYER 440", href: "https://pubgesports.com/en/players/440" },
-  { index: "02", title: "POV PNC 2026", meta: "PUBG ESPORTS · KICK OFICIAL", href: "https://pubgesports.com/pt-br/news/10178" },
-  { index: "03", title: "HISTORIAL DE EQUIPOS", meta: "ESPORTS CHARTS · PIPAA", href: "https://escharts.com/players/pipaa" },
-  { index: "04", title: "PAS 1 · 2026", meta: "PUBG AMERICAS · #8 BESTIA", href: "https://liquipedia.net/pubg/PUBG_Americas_Series/2026/1" },
+  { index: "02", title: "CÓDIGO DE CREADOR", meta: "KRAFTON PARTNER · CÓDIGO PIPAA", href: "https://accounts.krafton.com/creator-code" },
+  { index: "03", title: "POV PNC 2026", meta: "PUBG ESPORTS · KICK OFICIAL", href: "https://pubgesports.com/pt-br/news/10178" },
+  { index: "04", title: "HISTORIAL DE EQUIPOS", meta: "ESPORTS CHARTS · PIPAA", href: "https://escharts.com/players/pipaa" },
+  { index: "05", title: "PAS 1 · 2026", meta: "PUBG AMERICAS · #8 BESTIA", href: "https://liquipedia.net/pubg/PUBG_Americas_Series/2026/1" },
 ];
 
-const setup = [
-  { label: "PROCESADOR", value: "Ryzen 7 7800X3D", sub: "8C/16T · 3D V-Cache" },
-  { label: "GRÁFICA", value: "PNY XLR8 RTX 3070", sub: "8GB GDDR6 · Ray Tracing" },
-  { label: "MEMORIA", value: "32GB DDR5 · 6000MHz", sub: "Dual Channel Gaming" },
-  { label: "MOUSE", value: "Logitech G Pro X Super Strike", sub: "Hero 25K · Wireless" },
-  { label: "SENSIBILIDAD", value: "400 DPI", sub: "Polling Rate 1000Hz" },
-  { label: "AUDIO", value: "Shure SE215", sub: "Sound Isolating In-Ear" },
+const setupGaming = [
+  { label: "PROCESADOR", value: "Ryzen 7 7800X3D", sub: "8C/16T · 3D V-Cache High FPS" },
+  { label: "MOTHERBOARD", value: "B650M AORUS ELITE AX", sub: "PCIe 5.0 · Wi-Fi 6E · M-ATX" },
+  { label: "PLACA DE VIDEO", value: "PNY XLR8 RTX 3070", sub: "8GB GDDR6 · Ray Tracing" },
+  { label: "MEMORIA RAM", value: "Corsair Dominator Platinum", sub: "32GB (2x16GB) 6000MHz DDR5" },
+  { label: "REFRIGERACIÓN", value: "Corsair iCUE Link Titan 360", sub: "Líquida AIO 360mm RX RGB" },
+  { label: "FUENTE DE PODER", value: "Aorus P850W", sub: "80 Plus Gold Modular" },
+  { label: "ALMACENAMIENTO", value: "1TB SSD + 120GB SSD + 2TB HDD", sub: "NVMe Ultra Speed + Archivo" },
+];
+
+const setupStreaming = [
+  { label: "PROCESADOR", value: "Intel Core i7 8700", sub: "6C/12T · Dedicated Stream Encoder" },
+  { label: "PLACA DE VIDEO", value: "NVIDIA GTX 1070 Ti", sub: "8GB GDDR5 · NVENC Streaming" },
+  { label: "MEMORIA RAM", value: "16GB (2x8GB) 3600MHz", sub: "Dual Channel High Frequency" },
+];
+
+const setupGear = [
+  { label: "MOUSE", value: "Logitech G Pro X Super Strike", sub: "Hero 25K · Wireless 1000Hz" },
+  { label: "SENSIBILIDAD", value: "400 DPI · Vert 1.10", sub: "General 50 · ADS 39" },
+  { label: "AUDIO", value: "Shure SE215", sub: "Sound Isolating In-Ear Monitores" },
 ];
 
 const tickerPhrases = [
   "ARGENTINA",
   "PRO PLAYER",
+  "PUBG PARTNER",
+  "CÓDIGO: PIPAA",
   "CREADOR",
   "PANZA ARMY",
   "PUBG ESPORTS",
   "PNC 2026",
   "TOP 5 MUNDIAL",
+  "DISCORD COMUNIDAD",
   "SELECCIÓN ARGENTINA",
 ];
 
@@ -136,6 +168,14 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [hoveredBar, setHoveredBar] = useState<number | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [activeSetupTab, setActiveSetupTab] = useState<"gaming" | "streaming" | "gear">("gaming");
+  const [copiedCode, setCopiedCode] = useState(false);
+
+  const handleCopyCode = () => {
+    navigator.clipboard.writeText("PIPAA");
+    setCopiedCode(true);
+    setTimeout(() => setCopiedCode(false), 2400);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -529,14 +569,58 @@ export default function Home() {
           <div className="section-kicker"><span>06</span> SETUP & CONFIG</div>
           <div className="setup-heading">
             <div>
-              <p className="eyebrow">HARDWARE & AJUSTES IN-GAME</p>
+              <p className="eyebrow">HARDWARE COMPETITIVO · DUAL PC</p>
               <h2>PRECISIÓN EN<br />CADA <em>DETALLE.</em></h2>
             </div>
-            <p>El hardware con el que compite y la configuración táctica in-game calibrada a 400 DPI con multiplicador vertical para máxima precisión.</p>
+            <p>Arquitectura Dual PC calibrada para máximo rendimiento en PUBG Esports: una máquina dedicada al juego competitivo y otra para encoding de transmisión en directo.</p>
           </div>
 
-          <div className="setup-grid">
-            {setup.map((item, index) => (
+          <div className="setup-tabs-wrapper" data-reveal>
+            <div className="setup-tabs" role="tablist" aria-label="Selección de equipo hardware">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeSetupTab === "gaming"}
+                onClick={() => setActiveSetupTab("gaming")}
+                className={`setup-tab-btn ${activeSetupTab === "gaming" ? "is-active" : ""}`}
+              >
+                <span>01</span>
+                <div>
+                  <strong>PC GAMING</strong>
+                  <small>COMPETICIÓN & FPS</small>
+                </div>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeSetupTab === "streaming"}
+                onClick={() => setActiveSetupTab("streaming")}
+                className={`setup-tab-btn ${activeSetupTab === "streaming" ? "is-active" : ""}`}
+              >
+                <span>02</span>
+                <div>
+                  <strong>PC STREAMING</strong>
+                  <small>ENCODING DUAL PC</small>
+                </div>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={activeSetupTab === "gear"}
+                onClick={() => setActiveSetupTab("gear")}
+                className={`setup-tab-btn ${activeSetupTab === "gear" ? "is-active" : ""}`}
+              >
+                <span>03</span>
+                <div>
+                  <strong>PERIFÉRICOS & AUDIO</strong>
+                  <small>CONTROL & PRECISIÓN</small>
+                </div>
+              </button>
+            </div>
+          </div>
+
+          <div className="setup-grid" key={activeSetupTab}>
+            {(activeSetupTab === "gaming" ? setupGaming : activeSetupTab === "streaming" ? setupStreaming : setupGear).map((item, index) => (
               <article key={item.label} data-reveal className="setup-card">
                 <div className="setup-card-header">
                   <small>{String(index + 1).padStart(2, "0")} / {item.label}</small>
@@ -601,6 +685,54 @@ export default function Home() {
 
           <LivePlayers />
 
+          {/* ── PUBG Partner & Creator Code Banner ── */}
+          <article className="creator-code-card" data-reveal>
+            <div className="creator-code-badge">
+              <SparklesIcon className="creator-sparkle-icon" />
+              <span>PUBG PARTNER · KRAFTON CREATOR CODE</span>
+            </div>
+            <div className="creator-code-content">
+              <div className="creator-code-info">
+                <h3>APOYÁ A PIPAA CON SU<br /><em>CÓDIGO DE CREADOR.</em></h3>
+                <p>
+                  Al comprar G-Coins o cualquier artículo en la tienda oficial de PUBG: BATTLEGROUNDS o en Krafton, usá el código <strong>PIPAA</strong>. Un porcentaje de tu compra apoya directamente sus directos y su carrera profesional.
+                </p>
+              </div>
+              <div className="creator-code-action-box">
+                <div className="creator-code-display">
+                  <small>CÓDIGO OFICIAL</small>
+                  <strong className="code-text">PIPAA</strong>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleCopyCode}
+                  className={`button creator-copy-btn ${copiedCode ? "is-copied" : ""}`}
+                  aria-label="Copiar código de creador PIPAA"
+                >
+                  {copiedCode ? (
+                    <>
+                      <CheckIcon className="btn-icon" />
+                      <span>¡Copiado!</span>
+                    </>
+                  ) : (
+                    <>
+                      <CopyIcon className="btn-icon" />
+                      <span>Copiar código</span>
+                    </>
+                  )}
+                </button>
+                <a
+                  href="https://accounts.krafton.com/creator-code"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="button button-primary creator-redeem-btn"
+                >
+                  Activar en Krafton ↗
+                </a>
+              </div>
+            </div>
+          </article>
+
           <article className="community-feature" data-reveal>
             <div className="community-feature-media">
               <img src="./og-v2.jpg" alt="PIPAA, jugador profesional argentino de PUBG y creador de Panza Army" width="1200" height="630" loading="lazy" decoding="async" />
@@ -619,9 +751,12 @@ export default function Home() {
                   <span>DIRECTOS</span>
                   <span>COMPETENCIA</span>
                   <span>CLIPS</span>
-                  <span>DISCORD</span>
+                  <a href="https://discord.gg/rgzZ3Kv" target="_blank" rel="noreferrer" className="tag-link">DISCORD</a>
                 </div>
                 <div className="community-actions">
+                  <a className="button button-discord" href="https://discord.gg/rgzZ3Kv" target="_blank" rel="noreferrer">
+                    <DiscordIcon className="discord-svg" /> Unirte a Discord ↗
+                  </a>
                   <a className="text-link" href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer">
                     Entrar al directo <span aria-hidden="true">↗</span>
                   </a>

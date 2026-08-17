@@ -434,6 +434,41 @@ h3 em {
   color: var(--acid);
   box-shadow: 0 0 20px rgba(167, 255, 0, 0.2);
 }
+.button-discord {
+  background: #5865f2;
+  border-color: #5865f2;
+  color: #ffffff;
+  gap: 8px;
+  box-shadow: 0 4px 20px rgba(88, 101, 242, 0.35);
+}
+.button-discord:hover,
+.button-discord:focus-visible {
+  background: #4752c4;
+  border-color: #4752c4;
+  color: #ffffff;
+  box-shadow: 0 6px 25px rgba(88, 101, 242, 0.55);
+}
+.discord-svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.tag-link {
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  background: rgba(88, 101, 242, 0.12);
+  color: #c4c9fa;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+.tag-link:hover {
+  background: #5865f2;
+  color: #ffffff;
+  border-color: #5865f2;
+}
 .play {
   font-size: 10px;
 }
@@ -2061,6 +2096,65 @@ h3 em {
 .setup-heading h2 {
   font-size: clamp(52px, 5.6vw, 90px);
 }
+/* Setup Tabs */
+.setup-tabs-wrapper {
+  grid-column: 2;
+  margin-bottom: 28px;
+}
+.setup-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.setup-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--line);
+  color: var(--white);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+.setup-tab-btn:hover {
+  background: rgba(167, 255, 0, 0.04);
+  border-color: rgba(167, 255, 0, 0.25);
+}
+.setup-tab-btn.is-active {
+  background: linear-gradient(135deg, rgba(167, 255, 0, 0.12), rgba(16, 12, 26, 0.95));
+  border-color: var(--acid);
+  box-shadow: 0 0 25px rgba(167, 255, 0, 0.15);
+}
+.setup-tab-btn span {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--acid);
+  opacity: 0.7;
+}
+.setup-tab-btn.is-active span {
+  opacity: 1;
+}
+.setup-tab-btn strong {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--white);
+}
+.setup-tab-btn small {
+  display: block;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  color: #9d94a8;
+  margin-top: 2px;
+}
+.setup-tab-btn.is-active small {
+  color: #d2c8de;
+}
 .setup-grid {
   grid-column: 2;
   display: grid;
@@ -2223,6 +2317,127 @@ h3 em {
   color: #baa4cb;
   font-size: 9px;
   line-height: 1.4;
+}
+
+/* ── Creator Code Card (PUBG Partner) ── */
+.creator-code-card {
+  grid-column: 2;
+  margin: 40px 0 20px;
+  padding: 34px 40px;
+  background: linear-gradient(135deg, rgba(28, 20, 48, 0.95), rgba(11, 8, 18, 0.98));
+  border: 1px solid rgba(167, 255, 0, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px rgba(167, 255, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+.creator-code-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--acid), #00e5ff, transparent);
+}
+.creator-code-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: rgba(167, 255, 0, 0.1);
+  border: 1px solid rgba(167, 255, 0, 0.35);
+  color: var(--acid);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  margin-bottom: 18px;
+}
+.creator-sparkle-icon {
+  width: 13px;
+  height: 13px;
+}
+.creator-code-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.creator-code-info {
+  flex: 1;
+  min-width: 280px;
+}
+.creator-code-info h3 {
+  font-size: clamp(26px, 2.5vw, 38px);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.creator-code-info h3 em {
+  color: var(--acid);
+  font-style: normal;
+}
+.creator-code-info p {
+  color: #b5adc0;
+  font-size: 13px;
+  line-height: 1.65;
+  max-width: 540px;
+  margin: 0;
+}
+.creator-code-info strong {
+  color: var(--acid);
+}
+.creator-code-action-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.creator-code-display {
+  padding: 12px 20px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px dashed rgba(167, 255, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+}
+.creator-code-display small {
+  color: #928a9c;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+.creator-code-display .code-text {
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--acid);
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+}
+.creator-copy-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--white);
+  gap: 8px;
+  padding: 14px 20px;
+  font-size: 11px;
+}
+.creator-copy-btn:hover {
+  border-color: var(--acid);
+  color: var(--acid);
+}
+.creator-copy-btn.is-copied {
+  background: rgba(167, 255, 0, 0.18);
+  border-color: var(--acid);
+  color: var(--acid);
+}
+.creator-redeem-btn {
+  padding: 14px 22px;
+  font-size: 11px;
+}
+.btn-icon {
+  width: 15px;
+  height: 15px;
 }
 
 /* ── Section: FAQ ── */
@@ -2838,12 +3053,20 @@ footer p {
   .community-feature { grid-template-columns: 1fr; }
   .community-feature-copy { min-height: 0; grid-template-columns: 80px 1fr; padding: 50px 20px 35px; gap: 20px; }
   .community-feature-body { grid-column: 1 / -1; }
+  .creator-code-card { padding: 24px 20px; margin: 30px 0 10px; }
+  .creator-code-content { flex-direction: column; align-items: stretch; gap: 20px; }
+  .creator-code-action-box { flex-direction: column; align-items: stretch; width: 100%; gap: 10px; }
+  .creator-code-display { width: 100%; }
+  .creator-copy-btn, .creator-redeem-btn { width: 100%; justify-content: center; }
+  .community-actions { flex-direction: column; align-items: stretch; gap: 14px; }
+  .button-discord { width: 100%; justify-content: center; }
   .arsenal-section { padding-top: 85px; padding-bottom: 85px; }
   .arsenal-head { margin-bottom: 40px; }
   .arsenal-grid { grid-template-columns: 1fr; }
   .setup { padding-top: 85px; padding-bottom: 85px; }
   .setup-heading { display: block; }
   .setup-heading > p { margin-top: 24px; }
+  .setup-tabs { grid-template-columns: 1fr; }
   .setup-grid { grid-template-columns: 1fr; }
   .tactical-config-board { padding: 22px; margin-top: 30px; }
   .tactical-config-head { flex-direction: column; align-items: flex-start; gap: 12px; }

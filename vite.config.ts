@@ -23,6 +23,7 @@ const identityGraph = {
       sameAs: [
         "https://www.twitch.tv/pipa_arg",
         "https://kick.com/pipa_arg",
+        "https://discord.gg/rgzZ3Kv",
         "https://www.youtube.com/@PIPAArg",
         "https://www.tiktok.com/@pipa_arg",
         "https://x.com/Pipa_arg",
