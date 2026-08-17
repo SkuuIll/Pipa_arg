@@ -142,16 +142,41 @@ export const SparklesIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
   </svg>
 );
 
+export const MonitorIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <rect x="2" y="3" width="20" height="14" rx="2" />
+    <line x1="8" y1="21" x2="16" y2="21" />
+    <line x1="12" y1="17" x2="12" y2="21" />
+  </svg>
+);
+
+export const KeyboardIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <rect x="2" y="6" width="20" height="12" rx="2" />
+    <path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M18 14h.01M10 14h4" />
+  </svg>
+);
+
+export const MicIcon: FC<SVGProps<SVGSVGElement>> = (props) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+    <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8" />
+  </svg>
+);
+
 export function getSetupIcon(label: string) {
   const norm = label.toUpperCase();
   if (norm.includes("PROCESADOR") || norm.includes("CPU")) return <CpuIcon className="setup-svg-icon" />;
-  if (norm.includes("GRÁFICA") || norm.includes("GPU") || norm.includes("PLACA")) return <GpuIcon className="setup-svg-icon" />;
+  if (norm.includes("GRÁFICA") || norm.includes("GPU") || norm.includes("PLACA DE VIDEO")) return <GpuIcon className="setup-svg-icon" />;
   if (norm.includes("MEMORIA") || norm.includes("RAM")) return <RamIcon className="setup-svg-icon" />;
-  if (norm.includes("MOTHER") || norm.includes("PLACA MADRE")) return <MotherboardIcon className="setup-svg-icon" />;
+  if (norm.includes("MOTHER") || norm.includes("PLACA MADRE") || norm.includes("SISTEMA")) return <MotherboardIcon className="setup-svg-icon" />;
   if (norm.includes("REFRIGERACI") || norm.includes("COOLER") || norm.includes("WATER")) return <CoolingIcon className="setup-svg-icon" />;
   if (norm.includes("FUENTE") || norm.includes("PSU")) return <PsuIcon className="setup-svg-icon" />;
   if (norm.includes("DISCO") || norm.includes("ALMACEN") || norm.includes("SSD") || norm.includes("HDD")) return <StorageIcon className="setup-svg-icon" />;
-  if (norm.includes("MOUSE") || norm.includes("RATÓN")) return <MouseIcon className="setup-svg-icon" />;
+  if (norm.includes("MOUSE") || norm.includes("RATÓN") || norm.includes("PAD")) return <MouseIcon className="setup-svg-icon" />;
+  if (norm.includes("MONITOR") || norm.includes("PANTALLA")) return <MonitorIcon className="setup-svg-icon" />;
+  if (norm.includes("TECLADO")) return <KeyboardIcon className="setup-svg-icon" />;
+  if (norm.includes("MICRÓFONO") || norm.includes("AUDIO / MIC")) return <MicIcon className="setup-svg-icon" />;
   if (norm.includes("SENSIBILIDAD") || norm.includes("DPI")) return <CrosshairIcon className="setup-svg-icon" />;
   if (norm.includes("AUDIO") || norm.includes("AURICULARES") || norm.includes("IN-EAR")) return <AudioIcon className="setup-svg-icon" />;
   return <CrosshairIcon className="setup-svg-icon" />;

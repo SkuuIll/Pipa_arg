@@ -3,16 +3,14 @@ import { useEffect } from "react";
 export function MotionController() {
   useEffect(() => {
     const root = document.documentElement;
-    const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
-
-    revealItems.forEach((item) => {
-      if (item.getBoundingClientRect().top < window.innerHeight * 0.98) {
-        item.classList.add("is-visible");
-        item.setAttribute("data-revealed", "true");
+    const handleElement = (el: HTMLElement) => {
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.98) {
+        el.classList.add("is-visible");
+        el.setAttribute("data-revealed", "true");
+      } else {
+        observer.observe(el);
       }
-    });
-
-    root.classList.add("motion-ready");
+    };
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -28,9 +26,25 @@ export function MotionController() {
       { threshold: 0.01, rootMargin: "0px 0px 12% 0px" },
     );
 
-    revealItems.forEach((item) => {
-      if (!item.classList.contains("is-visible")) observer.observe(item);
+    const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+    revealItems.forEach(handleElement);
+
+    root.classList.add("motion-ready");
+
+    const mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node instanceof HTMLElement) {
+            if (node.hasAttribute("data-reveal")) {
+              handleElement(node);
+            }
+            node.querySelectorAll<HTMLElement>("[data-reveal]").forEach(handleElement);
+          }
+        });
+      });
     });
+
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
 
     const heroVisual = document.querySelector<HTMLElement>(".hero-visual");
     const handlePointer = (event: PointerEvent) => {
@@ -44,6 +58,7 @@ export function MotionController() {
 
     return () => {
       observer.disconnect();
+      mutationObserver.disconnect();
       heroVisual?.removeEventListener("pointermove", handlePointer);
       root.classList.remove("motion-ready");
     };

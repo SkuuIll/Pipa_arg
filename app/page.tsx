@@ -129,10 +129,10 @@ const sourceLinks = [
 
 const setupGaming = [
   { label: "PROCESADOR", value: "Ryzen 7 7800X3D", sub: "8C/16T · 3D V-Cache High FPS" },
-  { label: "MOTHERBOARD", value: "B650M AORUS ELITE AX", sub: "PCIe 5.0 · Wi-Fi 6E · M-ATX" },
+  { label: "MOTHERBOARD", value: "B650M AORUS ELITE AX WIFI", sub: "PCIe 5.0 · Wi-Fi 6E · M-ATX" },
   { label: "PLACA DE VIDEO", value: "PNY XLR8 RTX 3070", sub: "8GB GDDR6 · Ray Tracing" },
   { label: "MEMORIA RAM", value: "Corsair Dominator Platinum", sub: "32GB (2x16GB) 6000MHz DDR5" },
-  { label: "REFRIGERACIÓN", value: "Corsair iCUE Link Titan 360", sub: "Líquida AIO 360mm RX RGB" },
+  { label: "REFRIGERACIÓN", value: "Corsair iCUE Link Titan 360 RX RGB", sub: "Líquida AIO 360mm Triple Fan" },
   { label: "FUENTE DE PODER", value: "Aorus P850W", sub: "80 Plus Gold Modular" },
   { label: "ALMACENAMIENTO", value: "1TB SSD + 120GB SSD + 2TB HDD", sub: "NVMe Ultra Speed + Archivo" },
 ];
@@ -141,12 +141,18 @@ const setupStreaming = [
   { label: "PROCESADOR", value: "Intel Core i7 8700", sub: "6C/12T · Dedicated Stream Encoder" },
   { label: "PLACA DE VIDEO", value: "NVIDIA GTX 1070 Ti", sub: "8GB GDDR5 · NVENC Streaming" },
   { label: "MEMORIA RAM", value: "16GB (2x8GB) 3600MHz", sub: "Dual Channel High Frequency" },
+  { label: "SISTEMA STREAMING", value: "Captura Dual PC OBS", sub: "Encoding dedicado sin pérdida de FPS" },
+  { label: "REFRIGERACIÓN & PSU", value: "Refrigeración & Fuente Certificada", sub: "Estabilidad 24/7 en transmisiones" },
+  { label: "ALMACENAMIENTO", value: "SSD Alta Velocidad", sub: "Buffer & Grabación de clips" },
 ];
 
 const setupGear = [
   { label: "MOUSE", value: "Logitech G Pro X Super Strike", sub: "Hero 25K · Wireless 1000Hz" },
+  { label: "AURICULARES", value: "Shure SE215", sub: "Sound Isolating In-Ear Monitores" },
   { label: "SENSIBILIDAD", value: "400 DPI · Vert 1.10", sub: "General 50 · ADS 39" },
-  { label: "AUDIO", value: "Shure SE215", sub: "Sound Isolating In-Ear Monitores" },
+  { label: "MONITOR", value: "Fast IPS 240Hz / 1ms", sub: "Tasa de refresco competitiva" },
+  { label: "TECLADO", value: "Mecánico Esports RGB", sub: "Switches ultrarrápidos" },
+  { label: "MICRÓFONO", value: "Micrófono Profesional Broadcast", sub: "Filtro antipop & brazo articulado" },
 ];
 
 const tickerPhrases = [
@@ -621,7 +627,7 @@ export default function Home() {
 
           <div className="setup-grid" key={activeSetupTab}>
             {(activeSetupTab === "gaming" ? setupGaming : activeSetupTab === "streaming" ? setupStreaming : setupGear).map((item, index) => (
-              <article key={item.label} data-reveal className="setup-card">
+              <article key={item.label} className="setup-card">
                 <div className="setup-card-header">
                   <small>{String(index + 1).padStart(2, "0")} / {item.label}</small>
                   <div className="setup-icon-wrapper">
