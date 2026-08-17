@@ -33,8 +33,9 @@ export function LivePlayers() {
   return (
     <div className="live-stage" ref={containerRef}>
       <div className="live-stage-top">
-        <div>
+        <div className="live-stage-meta">
           <span className="live-pill"><i aria-hidden="true" /> PLAYER OFICIAL</span>
+          <span className="broadcast-quality-tag">1080p60 · DIRECTO</span>
           <p>Cambiá de plataforma sin salir de la web.</p>
         </div>
         <div className="platform-switch" role="tablist" aria-label="Elegir plataforma de stream">
@@ -47,7 +48,13 @@ export function LivePlayers() {
               onClick={() => setActive(platform)}
               className={active === platform ? "is-active" : ""}
             >
-              {active === platform && <motion.span layoutId="platform-active" transition={{ type: "spring", stiffness: 430, damping: 34 }} />}
+              {active === platform && (
+                <motion.span
+                  layoutId="platform-active"
+                  className="platform-active-pill"
+                  transition={{ type: "spring", stiffness: 430, damping: 34 }}
+                />
+              )}
               <i aria-hidden="true" /> {platform}
             </button>
           ))}
@@ -64,13 +71,13 @@ export function LivePlayers() {
         <div className={`player-frame ${active === "kick" ? "is-visible" : ""}`} aria-hidden={active !== "kick"}>
           {inView ? (
             <iframe
-            src="https://player.kick.com/pipa_arg?autoplay=true&muted=true"
+              src="https://player.kick.com/pipa_arg?autoplay=true&muted=true"
               title="Stream de PIPAA en Kick"
               allow="autoplay; fullscreen; picture-in-picture"
               allowFullScreen
               loading="lazy"
             />
-          ) : <div className="player-loading">Preparando Kick…</div>}
+          ) : <div className="player-loading"><span className="pulse-spinner" /> Preparando Kick…</div>}
         </div>
         <div className={`player-frame ${active === "twitch" ? "is-visible" : ""}`} aria-hidden={active !== "twitch"}>
           {inView && twitchSrc ? (
@@ -81,15 +88,22 @@ export function LivePlayers() {
               allowFullScreen
               loading="lazy"
             />
-          ) : <div className="player-loading">Preparando Twitch…</div>}
+          ) : <div className="player-loading"><span className="pulse-spinner" /> Preparando Twitch…</div>}
         </div>
-        <div className="player-corners" aria-hidden="true"><i /><i /><i /><i /></div>
+        <div className="player-corners" aria-hidden="true">
+          <i /><i /><i /><i />
+        </div>
       </div>
 
       <div className="live-stage-bottom">
         <div><small>HORARIO ARGENTINA</small><strong>15:00 — 00:00</strong></div>
         <div><small>CANAL ACTIVO</small><strong>{active.toUpperCase()} · PIPA_ARG</strong></div>
-        <a href={active === "kick" ? "https://kick.com/pipa_arg" : "https://www.twitch.tv/pipa_arg"} target="_blank" rel="noreferrer">
+        <a
+          href={active === "kick" ? "https://kick.com/pipa_arg" : "https://www.twitch.tv/pipa_arg"}
+          target="_blank"
+          rel="noreferrer"
+          className="live-open-link"
+        >
           Abrir en {active} <span aria-hidden="true">↗</span>
         </a>
       </div>
