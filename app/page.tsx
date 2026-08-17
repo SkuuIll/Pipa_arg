@@ -757,11 +757,11 @@ export default function Home() {
                   <span>DIRECTOS</span>
                   <span>COMPETENCIA</span>
                   <span>CLIPS</span>
-                  <a href="https://discord.gg/rgzZ3Kv" target="_blank" rel="noreferrer" className="tag-link">DISCORD</a>
+                  <span>DISCORD</span>
                 </div>
                 <div className="community-actions">
-                  <a className="button button-discord" href="https://discord.gg/rgzZ3Kv" target="_blank" rel="noreferrer">
-                    <DiscordIcon className="discord-svg" /> Unirte a Discord ↗
+                  <a className="community-action-discord" href="https://discord.gg/rgzZ3Kv" target="_blank" rel="noreferrer">
+                    <DiscordIcon className="discord-svg" /> Unirse al Discord <span aria-hidden="true">↗</span>
                   </a>
                   <a className="text-link" href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer">
                     Entrar al directo <span aria-hidden="true">↗</span>
