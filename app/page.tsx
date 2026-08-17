@@ -29,7 +29,7 @@ const career = [
 const pncHistory = [
   { year: "2022", edition: "PNC BANGKOK", desc: "Debut de PIPAA representando a Argentina en el certamen de naciones más prestigioso de PUBG Esports.", tag: "DEBUT SELECCIÓN" },
   { year: "2024", edition: "PNC SEÚL", desc: "Segunda convocatoria internacional para medirse contra las 16 mejores selecciones del planeta en Corea del Sur.", tag: "COREA DEL SUR" },
-  { year: "2026", edition: "PNC SEÚL · #5", desc: "Campana histórica: 101 puntos, 71 eliminaciones, 1 victoria WWCD y consagración en el Top 5 Mundial.", tag: "TOP 5 MUNDIAL" },
+  { year: "2026", edition: "PNC SEÚL · #5", desc: "Campaña histórica: 101 puntos, 71 eliminaciones, 1 victoria WWCD y consagración en el Top 5 Mundial.", tag: "TOP 5 MUNDIAL" },
 ];
 
 const performance = [
@@ -141,7 +141,7 @@ export default function Home() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
 
-      const sections = ["inicio", "historia", "argentina", "stats", "trayectoria", "arsenal", "setup", "comunidad", "faq"];
+      const sections = ["inicio", "historia", "argentina", "stats", "trayectoria", "arsenal", "setup", "comunidad", "redes", "faq", "archivo", "contacto"];
       const scrollPos = window.scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -301,7 +301,7 @@ export default function Home() {
               decoding="async"
             />
             <div className="photo-stamp">
-              <span>SEOUL</span>
+              <span>SEÚL</span>
               <strong>2026</strong>
             </div>
           </div>
