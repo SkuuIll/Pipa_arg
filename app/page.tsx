@@ -625,9 +625,9 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="setup-grid" key={activeSetupTab}>
+          <div className="setup-grid">
             {(activeSetupTab === "gaming" ? setupGaming : activeSetupTab === "streaming" ? setupStreaming : setupGear).map((item, index) => (
-              <article key={item.label} className="setup-card">
+              <article key={`${activeSetupTab}-${item.label}-${index}`} className="setup-card">
                 <div className="setup-card-header">
                   <small>{String(index + 1).padStart(2, "0")} / {item.label}</small>
                   <div className="setup-icon-wrapper">
