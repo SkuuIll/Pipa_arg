@@ -2517,6 +2517,21 @@ h3 em {
   position: relative;
   z-index: 2;
 }
+.contact-email {
+  position: relative;
+  z-index: 2;
+  margin-top: 22px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  opacity: 0.7;
+  transition: opacity 0.2s ease, color 0.2s ease;
+}
+.contact-email:hover {
+  opacity: 1;
+  color: var(--acid);
+}
 .contact-outline {
   position: absolute;
   right: -1vw;

@@ -715,9 +715,10 @@ export default function Home() {
           <p className="eyebrow">MARCAS · PRENSA · COLABORACIONES</p>
           <h2>¿HACEMOS<br /><em>EQUIPO?</em></h2>
           <p>Para propuestas comerciales, campañas, eventos y oportunidades competitivas.</p>
-          <a className="button button-primary" href="https://x.com/Pipa_arg" target="_blank" rel="noreferrer">
-            Hablemos <span aria-hidden="true">↗</span>
+          <a className="button button-primary" href="mailto:raffitas_ruppel@hotmail.com">
+            Escribime <span aria-hidden="true">↗</span>
           </a>
+          <p className="contact-email">raffitas_ruppel@hotmail.com</p>
           <div className="contact-outline" aria-hidden="true">PIPAA</div>
         </section>
       </main>
