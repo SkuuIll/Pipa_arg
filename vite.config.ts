@@ -57,20 +57,34 @@ function seoFiles() {
     },
     closeBundle() {
       const dist = resolve("dist");
+      const url = siteUrl || "https://skuuill.github.io/Pipa_arg/";
       const sitemapPath = resolve(dist, "sitemap.xml");
-      const sitemapLine = siteUrl ? `\nSitemap: ${siteUrl}/sitemap.xml` : "";
-      writeFileSync(resolve(dist, "robots.txt"), `User-agent: *\nAllow: /${sitemapLine}\n`, "utf8");
+      const today = new Date().toISOString().slice(0, 10);
 
-      if (siteUrl) {
-        const today = new Date().toISOString().slice(0, 10);
-        writeFileSync(
-          sitemapPath,
-          `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${siteUrl}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>\n`,
-          "utf8",
-        );
-      } else {
-        rmSync(sitemapPath, { force: true });
-      }
+      const robotsContent = [
+        "User-agent: *",
+        "Allow: /",
+        "",
+        "User-agent: Googlebot",
+        "Allow: /",
+        "",
+        "User-agent: Googlebot-Image",
+        "Allow: /",
+        "",
+        "User-agent: Bingbot",
+        "Allow: /",
+        "",
+        `Sitemap: ${url}/sitemap.xml`,
+        "",
+      ].join("\n");
+
+      writeFileSync(resolve(dist, "robots.txt"), robotsContent, "utf8");
+
+      writeFileSync(
+        sitemapPath,
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${url}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>\n`,
+        "utf8",
+      );
     },
   };
 }
