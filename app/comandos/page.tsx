@@ -47,6 +47,7 @@ import {
   TrendingUp,
   Tag,
 } from "lucide-react";
+
 import "./comandos.css";
 
 interface ChatMessage {
@@ -357,12 +358,13 @@ export default function ComandosPage() {
 
   return (
     <div className="cmd-shell">
+
       {/* ── Topbar ── */}
       <header className="cmd-topbar">
         <div className="cmd-brand-group">
           <a href="../" className="cmd-back-link">
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Volver a la Landing</span>
+            <span>Volver al inicio</span>
           </a>
           <a href="../#inicio">
             <img src="../pipaa-logo.svg" alt="PIPAA" width="100" height="40" />
@@ -374,8 +376,9 @@ export default function ComandosPage() {
         </div>
       </header>
 
+      <div className="store-art"><img src="../panza-army-3d.png" alt="Panza Army: letras 3D de metal y luz lima" width="1536" height="1024" /><div><p className="eyebrow">EL CHAT TAMBIÉN JUEGA</p><h1>Tu próximo movimiento.<br /><em>Su peor sorpresa.</em></h1><a className="button button-primary" href="#catalogo">Explorar comandos ↓</a></div></div>
       {/* ── Selector de Modo Principal: TIENDA vs CHAT ── */}
-      <nav className="cmd-mode-tabs" aria-label="Navegación de Comandos">
+      <nav id="catalogo" className="cmd-mode-tabs" aria-label="Navegación de Comandos">
         <button
           type="button"
           className={`cmd-mode-tab-btn ${activeTab === "tienda" ? "is-active" : ""}`}
@@ -406,9 +409,9 @@ export default function ComandosPage() {
             <div className="cmd-hero-badge">
               <span>CATÁLOGO COMERCIAL DE TROLEO EN VIVO · DIXPER & WEEZYX</span>
             </div>
-            <h1>
+            <h2>
               TIENDA DE <span className="acid">COMANDOS TROLL</span>
-            </h1>
+            </h2>
             <p className="subtitle">
               PIPAA vende comandos interactivos para que los espectadores saboteen físicamente su PC en plena partida de PUBG.
               Acá tenés toda la información de los comandos, <strong>precios transparentes en Pesos Argentinos (ARS) y Dólares (USD)</strong> y el paso a paso exacto para comprarlos con <strong>Mercado Pago, tarjetas locales o PayPal</strong>.
@@ -987,9 +990,9 @@ export default function ComandosPage() {
             <div className="cmd-hero-badge">
               <span>MANUAL DE COMANDOS DEL CHAT & SOUNDBOARD</span>
             </div>
-            <h1>
+            <h2>
               SIMULADOR DE <span className="acid">CHAT & LORE</span>
-            </h1>
+            </h2>
             <p className="subtitle">
               Los comandos gratuitos de Nightbot y StreamElements que rigen la cultura del canal: bromas del chat, contador de eructos, descansos al squad y soundboard retro.
             </p>

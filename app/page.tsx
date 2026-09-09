@@ -17,6 +17,8 @@ import {
 } from "./SetupIcons";
 import { YouTubeFeed } from "./YouTubeFeed";
 import { TiltCard3D } from "./TiltCard3D";
+import { Hero } from "./components/Hero";
+
 import {
   ShoppingCart,
   Tv,
@@ -29,6 +31,7 @@ import {
   Gamepad2,
   Sparkles,
   Play,
+  User,
 } from "lucide-react";
 
 const socials = [
@@ -174,6 +177,7 @@ const tickerPhrases = [
 
 export default function Home() {
   const [activeNav, setActiveNav] = useState("inicio");
+  const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [activeSetupTab, setActiveSetupTab] = useState<"gaming" | "streaming" | "gear">("gaming");
@@ -211,6 +215,7 @@ export default function Home() {
 
   return (
     <div className="site-shell">
+
       <a className="skip-link" href="#inicio">Saltar al contenido</a>
       <ExperienceLayer />
 
@@ -218,7 +223,8 @@ export default function Home() {
         <a className="brand" href="#inicio" aria-label="PIPAA — volver al inicio">
           <img src="./pipaa-logo.svg" alt="PIPAA" className="brand-logo" width="120" height="48" />
         </a>
-        <nav aria-label="Navegación principal">
+        <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? "Cerrar ✕" : "Menú ☰"}</button>
+        <nav id="main-navigation" className={menuOpen ? "menu-open" : ""} aria-label="Navegación principal" onClick={() => setMenuOpen(false)} onKeyDown={(event) => { if (event.key === "Escape") setMenuOpen(false); }}>
           <a href="#historia" className={activeNav === "historia" ? "is-active" : ""}>El Fenómeno</a>
           <a href="#argentina" className={activeNav === "argentina" ? "is-active" : ""}>Argentina</a>
           <a href="#stats" className={activeNav === "stats" ? "is-active" : ""}>Stream Lab</a>
@@ -241,100 +247,7 @@ export default function Home() {
 
       <main>
         {/* ── Hero ── */}
-        <section className="hero-immersive" id="inicio">
-          {/* Background Layer: Grid + Gradient */}
-          <div className="hero-bg-grid" aria-hidden="true" />
-          <div className="hero-bg-glow" aria-hidden="true" />
-
-          {/* Layer 1: Giant "PIPAA" text behind everything */}
-          <div className="hero-giant-text" aria-hidden="true">
-            <span>PIPAA</span>
-          </div>
-
-          {/* Layer 2: Character image emerging over the text */}
-          <div className="hero-character" aria-label="PIPAA, streamer y líder de la Panza Army">
-            <img
-              src="./hero-pipaa-3d.jpg"
-              alt="PIPAA sonriendo con remera Panza Army, letras gigantes PIPAA detrás y iluminación neón verde"
-              width="1600"
-              height="900"
-              fetchPriority="high"
-              className="hero-character-img"
-            />
-            <div className="hero-character-gradient" aria-hidden="true" />
-          </div>
-
-          {/* Layer 3: Copy content on top */}
-          <div className="hero-content-layer">
-            <div className="hero-copy">
-              <p className="eyebrow">
-                <span>ARG</span> STREAMER N°1 DE PUBG · PANZA ARMY
-              </p>
-              <h1>
-                <span>MUCHA</span>
-                <span className="accent-word">PANZA.</span>
-                <span>PURO STREAM.</span>
-              </h1>
-              <p className="hero-lede">
-                Ex Top 5 del mundo. Streamer a tiempo completo. Todos los días más de 9 horas en vivo en Kick y Twitch con la Panza Army: rankeds, comandos troll, risas sin filtro y el mejor gunplay de la región.
-              </p>
-              <div className="hero-actions">
-                <a className="button button-primary" href="#comunidad">
-                  <Play style={{ width: "14px", height: "14px", fill: "currentColor" }} />
-                  <span>Ver directo en vivo</span>
-                </a>
-                <a className="button button-ghost" href="./comandos/">
-                  <ShoppingCart style={{ width: "14px", height: "14px" }} />
-                  <span>Tienda Troll</span>
-                </a>
-              </div>
-              <div className="schedule">
-                <span className="pulse" aria-hidden="true" />
-                <div className="schedule-copy">
-                  <b>STREAM TODOS LOS DÍAS</b>
-                  <small>15:00 — 00:00 · ARG</small>
-                </div>
-                <span className="schedule-divider" aria-hidden="true" />
-                <LocalTime />
-              </div>
-            </div>
-          </div>
-
-          {/* Layer 4: Floating badge */}
-          <div className="hero-floating-badge">
-            <div className="hero-badge shimmer-badge">
-              <div className="badge-glow-edge" aria-hidden="true" />
-              <small>TOP 5 MUNDIAL · PNC SEÚL</small>
-              <strong>+9H</strong>
-              <span>LIVE TODOS LOS DÍAS</span>
-            </div>
-          </div>
-
-          {/* Bottom accent line */}
-          <div className="hero-bottom-accent" aria-hidden="true" />
-        </section>
-
-        {/* ── Ticker Marquee ── */}
-        <div className="ticker" aria-label="Resumen de perfil y comunidad">
-          <div className="ticker-track">
-            <div className="ticker-group">
-              {[...tickerPhrases, ...tickerPhrases, ...tickerPhrases].map((phrase, idx) => (
-                <span key={`t1-${idx}`}>
-                  <b>{phrase}</b>
-                  <i aria-hidden="true">·</i>
-                </span>
-              ))}
-            </div>
-            <div className="ticker-group" aria-hidden="true">
-              {[...tickerPhrases, ...tickerPhrases, ...tickerPhrases].map((phrase, idx) => (
-                <span key={`t2-${idx}`}>
-                  <b>{phrase}</b>
-                  <i aria-hidden="true">·</i>
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
+        <Hero />
 
         {/* ── 01. Perfil / El Fenómeno Panza Army ── */}
         <section className="intro section-grid" id="historia" data-reveal>
@@ -805,7 +718,7 @@ export default function Home() {
           <article className="community-feature" data-reveal>
             <div className="community-feature-media">
               <TiltCard3D maxTilt={7} glare={true} style={{ width: "100%", height: "100%" }}>
-                <img src="./og-v2.jpg" alt="PIPAA, referente de la Panza Army" width="1200" height="630" loading="lazy" decoding="async" />
+                <img src="./panza-army-3d.png" alt="Panza Army en letras metálicas tridimensionales con iluminación lima" width="1536" height="1024" loading="lazy" decoding="async" />
                 <span className="community-feature-scan" aria-hidden="true" />
               </TiltCard3D>
             </div>
@@ -991,23 +904,30 @@ export default function Home() {
       </footer>
 
       <nav className="mobile-dock" aria-label="Navegación móvil">
-        <a href="#historia" className={activeNav === "historia" ? "is-active" : ""}>
-          <span>01</span>Perfil
+        <a href="#historia" className={`dock-item ${activeNav === "historia" || activeNav === "inicio" ? "is-active" : ""}`}>
+          <User className="dock-icon" />
+          <span className="dock-label">Perfil</span>
         </a>
-        <a href="#argentina" className={activeNav === "argentina" ? "is-active" : ""}>
-          <span>02</span>Argentina
+        <a href="#argentina" className={`dock-item ${activeNav === "argentina" ? "is-active" : ""}`}>
+          <Trophy className="dock-icon" />
+          <span className="dock-label">Arg</span>
         </a>
-        <a href="#stats" className={activeNav === "stats" ? "is-active" : ""}>
-          <span>03</span>Stream
+        <a href="#comunidad" className={`dock-item ${activeNav === "comunidad" || activeNav === "stats" ? "is-active" : ""}`}>
+          <Tv className="dock-icon" />
+          <span className="dock-label">Stream</span>
         </a>
-        <a href="#setup" className={activeNav === "setup" ? "is-active" : ""}>
-          <span>04</span>Setup
+        <a href="#setup" className={`dock-item ${activeNav === "setup" ? "is-active" : ""}`}>
+          <Gamepad2 className="dock-icon" />
+          <span className="dock-label">Setup</span>
         </a>
-        <a href="./comandos/">
-          <span>05</span>Troll
+        <a href="./comandos/" className="dock-item dock-item-troll">
+          <ShoppingCart className="dock-icon" />
+          <span className="dock-label">Troll</span>
         </a>
-        <a href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer">
-          <i aria-hidden="true" />Live
+        <a href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer" className="dock-item dock-item-live" aria-label="Ver directo en Kick">
+          <span className="dock-live-ping" aria-hidden="true" />
+          <Radio className="dock-icon" />
+          <span className="dock-label">Live</span>
         </a>
       </nav>
 
