@@ -2149,14 +2149,14 @@ h3 em {
   border-bottom: 1px solid rgba(255, 255, 255, 0.19);
   margin-bottom: 28px;
 }
-.result-grid div {
+.result-grid > div {
   padding: 22px 18px;
   border-right: 1px solid rgba(255, 255, 255, 0.19);
 }
-.result-grid div:first-child {
+.result-grid > div:first-child {
   padding-left: 0;
 }
-.result-grid div:last-child {
+.result-grid > div:last-child {
   border-right: 0;
 }
 .result-grid small {
@@ -3126,7 +3126,7 @@ footer p {
 }
 .motion-ready .timeline li[data-reveal]:nth-child(2),
 .motion-ready .facts article[data-reveal]:nth-child(2),
-.motion-ready .result-grid div[data-reveal]:nth-child(2),
+.motion-ready .result-grid > div[data-reveal]:nth-child(2),
 .motion-ready .setup-grid article[data-reveal]:nth-child(2),
 .motion-ready .arsenal-grid article[data-reveal]:nth-child(2),
 .motion-ready .social-list a[data-reveal]:nth-child(2) {
@@ -3134,14 +3134,14 @@ footer p {
 }
 .motion-ready .timeline li[data-reveal]:nth-child(3),
 .motion-ready .facts article[data-reveal]:nth-child(3),
-.motion-ready .result-grid div[data-reveal]:nth-child(3),
+.motion-ready .result-grid > div[data-reveal]:nth-child(3),
 .motion-ready .setup-grid article[data-reveal]:nth-child(3),
 .motion-ready .arsenal-grid article[data-reveal]:nth-child(3),
 .motion-ready .social-list a[data-reveal]:nth-child(3) {
   transition-delay: 0.16s;
 }
 .motion-ready .timeline li[data-reveal]:nth-child(4),
-.motion-ready .result-grid div[data-reveal]:nth-child(4),
+.motion-ready .result-grid > div[data-reveal]:nth-child(4),
 .motion-ready .setup-grid article[data-reveal]:nth-child(4),
 .motion-ready .social-list a[data-reveal]:nth-child(4) {
   transition-delay: 0.24s;
@@ -3267,8 +3267,8 @@ footer p {
   .argentina { grid-template-columns: 48% 52%; }
   .argentina-copy { padding-inline: 42px; }
   .result-grid { grid-template-columns: repeat(2, 1fr); }
-  .result-grid div:nth-child(2) { border-right: 0; }
-  .result-grid div:nth-child(-n+2) { border-bottom: 1px solid rgba(255, 255, 255, 0.19); }
+  .result-grid > div:nth-child(2) { border-right: 0; }
+  .result-grid > div:nth-child(-n+2) { border-bottom: 1px solid rgba(255, 255, 255, 0.19); }
   .live-heading { flex-direction: column; align-items: flex-start; }
   .arsenal-head { flex-direction: column; align-items: flex-start; }
   .arsenal-grid { grid-template-columns: 1fr 1fr; }
@@ -3524,7 +3524,7 @@ footer p {
   .damage-chart { min-height: 310px; }
   .combat-ring { width: 180px; height: 180px; }
   .combat-ring strong { font-size: 52px; }
-  .result-grid div { padding: 16px 10px; }
+  .result-grid > div { padding: 16px 10px; }
   .player-shell { height: 280px; min-height: 280px; }
   .community-feature-copy { padding: 45px 16px 30px; grid-template-columns: 68px 1fr; gap: 16px; }
   .community-avatar { width: 68px; height: 68px; }
@@ -4250,18 +4250,7 @@ footer p {
   .motion-ready [data-reveal] { opacity: 1 !important; transform: none !important; }
   .hero-copy > *, .hero-copy h1 span, .hero-visual, .topbar, .mobile-dock { opacity: 1 !important; transform: none; clip-path: none; }
   .mobile-dock { transform: translateX(-50%); }
-  html.motion-enabled .ticker-track { animation: ticker-slide 20s linear infinite !important; }
-  html.motion-enabled .hero-visual img { animation: hero-zoom 14s 1s ease-in-out infinite alternate !important; }
-  html.motion-enabled .hero-badge { animation: badge-float 4.2s 1.2s ease-in-out infinite !important; }
-  html.motion-enabled .hero-visual::after { animation: accent-slide 3.4s 1s ease-in-out infinite !important; }
-  html.motion-enabled .schedule .pulse, html.motion-enabled .nav-live span, html.motion-enabled .dock-live-ping { animation: live-blink 1.4s ease-in-out infinite !important; }
-  html.motion-enabled .community-avatar { animation: mascot-float 5s ease-in-out infinite !important; }
-  html.motion-enabled .community-feature-scan { animation: community-scan 7s ease-in-out infinite !important; }
-  html.motion-enabled .contact-outline { animation: outline-drift 9s ease-in-out infinite alternate !important; }
-  html.motion-enabled.motion-ready [data-reveal]:not(.is-visible) { opacity: 1 !important; transform: translate3d(0, 46px, 0) !important; }
-  html.motion-enabled.motion-ready [data-reveal].is-visible { opacity: 1 !important; transform: translate3d(0, 0, 0) !important; transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important; }
-  html.motion-enabled.motion-ready section[data-reveal]:not(.is-visible),
-  html.motion-enabled.motion-ready section[data-reveal].is-visible { opacity: 1 !important; transform: none !important; }
+
 }
 
 /* ── Custom Cursor ── */
