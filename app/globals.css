@@ -54,6 +54,7 @@ button, a {
 img {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 ::selection {
   background: var(--acid);
@@ -90,7 +91,11 @@ img {
   background: radial-gradient(circle at 80% 5%, rgba(65, 23, 130, 0.25), transparent 30%), var(--ink);
   position: relative;
   isolation: isolate;
-  overflow-x: clip;
+  overflow-x: hidden;
+}
+
+html {
+  overflow-x: hidden;
 }
 .site-shell > main,
 .site-shell > footer {
@@ -271,6 +276,248 @@ img {
 }
 
 /* ── Hero Section ── */
+/* ═══════════════════════════════════════════════════════════════
+   HERO IMMERSIVE — Layered depth with character emerging
+   ═══════════════════════════════════════════════════════════════ */
+.hero-immersive {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  background: var(--ink);
+}
+
+/* Background grid pattern */
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.08;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at 30% 50%, black 20%, transparent 70%);
+}
+
+/* Purple / green ambient glow */
+.hero-bg-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 700px 600px at 75% 45%, rgba(109, 53, 219, 0.22), transparent),
+    radial-gradient(circle 400px at 85% 80%, rgba(167, 255, 0, 0.08), transparent);
+  pointer-events: none;
+}
+
+/* Giant "PIPAA" text behind the character */
+.hero-giant-text {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-giant-text span {
+  font-family: var(--font-display);
+  font-size: clamp(180px, 22vw, 420px);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(109, 53, 219, 0.35);
+  text-shadow:
+    0 0 80px rgba(109, 53, 219, 0.2),
+    0 0 160px rgba(109, 53, 219, 0.08);
+  user-select: none;
+  white-space: nowrap;
+  animation: hero-text-reveal 1.2s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes hero-text-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(30px);
+    filter: blur(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Character photo — covers right portion, bleeds into the scene */
+.hero-character {
+  position: absolute;
+  z-index: 2;
+  right: -5%;
+  bottom: 0;
+  width: 65%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.hero-character-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 55% center;
+  filter: saturate(1.05) contrast(1.08);
+  animation: hero-char-in 1s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes hero-char-in {
+  from {
+    opacity: 0;
+    transform: translateX(60px) scale(1.04);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Gradient that blends the character into the dark background on the left */
+.hero-character-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, var(--ink) 0%, rgba(7, 5, 13, 0.85) 18%, transparent 45%),
+    linear-gradient(to top, var(--ink) 0%, transparent 25%),
+    linear-gradient(to bottom, var(--ink) 0%, transparent 15%);
+  pointer-events: none;
+}
+
+/* Content layer sits on top of everything */
+.hero-content-layer {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 100px);
+}
+
+.hero-immersive .hero-copy {
+  padding: 160px 0 100px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 620px;
+}
+.hero-immersive .hero-copy > .eyebrow {
+  animation: hero-up 0.75s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-immersive .hero-copy h1 span {
+  animation: hero-line 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-immersive .hero-copy h1 span:nth-child(1) { animation-delay: 0.28s; }
+.hero-immersive .hero-copy h1 span:nth-child(2) { animation-delay: 0.37s; }
+.hero-immersive .hero-copy h1 span:nth-child(3) { animation-delay: 0.46s; }
+.hero-immersive .hero-lede {
+  animation: hero-up 0.8s 0.58s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-immersive .hero-actions {
+  animation: hero-up 0.8s 0.68s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-immersive .schedule {
+  animation: hero-up 0.8s 0.78s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Floating badge — bottom-right area */
+.hero-floating-badge {
+  position: absolute;
+  z-index: 6;
+  right: clamp(24px, 6vw, 120px);
+  bottom: clamp(60px, 8vh, 120px);
+  animation: badge-float 4.2s 1.2s ease-in-out infinite;
+}
+.hero-floating-badge .hero-badge {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  animation: none;
+}
+.badge-glow-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--acid), transparent);
+  box-shadow: 0 0 12px var(--acid);
+}
+
+/* Bottom accent line */
+.hero-bottom-accent {
+  position: absolute;
+  z-index: 7;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--acid), var(--violet), var(--acid));
+  opacity: 0.7;
+}
+
+/* ── Responsive Hero ── */
+@media (max-width: 1024px) {
+  .hero-character {
+    width: 80%;
+    right: -10%;
+  }
+  .hero-immersive .hero-copy {
+    max-width: 520px;
+  }
+  .hero-floating-badge {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-immersive {
+    min-height: auto;
+    padding-top: 70px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-character {
+    position: relative;
+    width: 100%;
+    right: 0;
+    height: 380px;
+    order: -1;
+  }
+  .hero-character-gradient {
+    background:
+      linear-gradient(to top, var(--ink) 8%, transparent 50%),
+      linear-gradient(to bottom, var(--ink) 0%, transparent 20%);
+  }
+  .hero-content-layer {
+    margin-top: -60px;
+  }
+  .hero-immersive .hero-copy {
+    padding: 0 0 60px;
+    max-width: 100%;
+  }
+  .hero-giant-text span {
+    font-size: 100px;
+  }
+}
+
+/* ── Old hero kept as fallback for class="hero" (unused but safe) ── */
 .hero {
   min-height: 900px;
   padding-top: 82px;
@@ -1191,6 +1438,11 @@ h3 em {
   box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5), 0 0 32px rgba(109, 53, 219, 0.35);
   animation: mascot-float 5s ease-in-out infinite;
 }
+.community-feature-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 .community-feature-copy .eyebrow {
   margin-bottom: 13px;
   font-size: 8px;
@@ -1700,6 +1952,16 @@ h3 em {
   font-weight: 900;
   letter-spacing: 0.17em;
 }
+.combat-ring-crosshair {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle 2px at center, var(--acid) 100%, transparent 0),
+    linear-gradient(to bottom, transparent calc(50% - 0.5px), rgba(167, 255, 0, 0.12) 50%, transparent calc(50% + 0.5px)),
+    linear-gradient(to right, transparent calc(50% - 0.5px), rgba(167, 255, 0, 0.12) 50%, transparent calc(50% + 0.5px));
+}
 .combat-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1856,6 +2118,14 @@ h3 em {
 .eyebrow.sky,
 .text-link.sky {
   color: var(--sky);
+}
+.eyebrow.red,
+.text-link.red {
+  color: #ff3737;
+}
+.eyebrow.red span {
+  background: #ff3737;
+  color: var(--white);
 }
 .argentina-copy h2 {
   font-size: clamp(54px, 6.3vw, 104px);
@@ -2213,6 +2483,18 @@ h3 em {
 }
 .setup-card:hover::after {
   transform: translateX(0);
+}
+.setup-card-border-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  box-shadow: inset 0 0 15px rgba(167, 255, 0, 0.1);
+}
+.setup-card:hover .setup-card-border-glow {
+  opacity: 1;
 }
 .setup-card-header {
   display: flex;
@@ -3608,6 +3890,302 @@ footer p {
   width: 100%;
   height: 100%;
   border: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3D DEPTH & PERSPECTIVE ENHANCEMENTS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* 3D tilt wrappers */
+.tilt-3d-wrapper {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* 3D Depth Layers inside tilt cards */
+.depth-layer-base {
+  transform: translateZ(0px);
+}
+
+.depth-layer-1 {
+  transform: translateZ(20px);
+  transform-style: preserve-3d;
+}
+
+.depth-layer-2 {
+  transform: translateZ(40px);
+  transform-style: preserve-3d;
+}
+
+.depth-layer-3 {
+  transform: translateZ(60px);
+  transform-style: preserve-3d;
+}
+
+/* Hero visual 3D Frame */
+.hero-visual-3d-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  perspective: 1200px;
+}
+
+.hero-visual-3d-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(109, 53, 219, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-visual-3d-card:hover {
+  border-color: rgba(167, 255, 0, 0.4);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.85), 0 0 50px rgba(167, 255, 0, 0.25);
+}
+
+.hero-badge-3d {
+  position: absolute;
+  z-index: 15;
+  left: 7%;
+  bottom: 7%;
+  transform: translateZ(45px);
+  transition: transform 0.25s ease;
+}
+
+/* Argentina 3D Photo Container */
+.argentina-photo-3d-container {
+  width: 100%;
+  transform-style: preserve-3d;
+}
+
+.argentina-photo-3d-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid rgba(117, 185, 255, 0.3);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), 0 0 35px rgba(117, 185, 255, 0.2);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.argentina-photo-3d-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.argentina-photo-3d-card:hover {
+  border-color: rgba(117, 185, 255, 0.6);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.85), 0 0 50px rgba(117, 185, 255, 0.35);
+}
+
+.photo-stamp-3d {
+  transform: translateZ(35px);
+  z-index: 12;
+}
+
+/* 3D Weapons & Setup Card Styling */
+.weapon-card-3d-wrapper,
+.setup-card-3d-wrapper {
+  height: 100%;
+  display: flex;
+}
+
+.weapon-card-3d-wrapper .weapon-card,
+.setup-card-3d-wrapper .setup-card {
+  width: 100%;
+  height: 100%;
+}
+
+/* Stream & Combat Lab Styles (Section 03) */
+.stream-lab-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stream-lab-card {
+  background: var(--panel-glass);
+  border: 1px solid var(--line);
+  padding: 24px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 4px;
+}
+
+.stream-lab-card:hover {
+  border-color: var(--acid);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(167, 255, 0, 0.15);
+}
+
+.stream-lab-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(167, 255, 0, 0.12);
+  color: var(--acid);
+  margin-bottom: 16px;
+}
+
+.stream-lab-card.sky-accent .stream-lab-card-icon {
+  background: rgba(117, 185, 255, 0.12);
+  color: var(--sky);
+}
+
+.stream-lab-card.gold-accent .stream-lab-card-icon {
+  background: rgba(255, 208, 67, 0.12);
+  color: var(--gold);
+}
+
+.stream-lab-card.violet-accent .stream-lab-card-icon {
+  background: rgba(109, 53, 219, 0.18);
+  color: #c084fc;
+}
+
+.stream-lab-value {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  line-height: 0.95;
+  color: #fff;
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+
+.stream-lab-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.stream-lab-sub {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.3;
+}
+
+.stream-lab-highlight-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 20px;
+}
+
+.stream-lab-banner-card {
+  background: linear-gradient(135deg, rgba(21, 16, 34, 0.95), rgba(14, 9, 24, 0.95));
+  border: 1px solid rgba(167, 255, 0, 0.3);
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 4px;
+}
+
+.stream-lab-banner-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(167, 255, 0, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.stream-lab-banner-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: var(--acid);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.stream-lab-banner-card h3 {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  line-height: 1.05;
+  letter-spacing: 0.03em;
+  margin: 0 0 12px;
+  color: #fff;
+}
+
+.stream-lab-banner-card h3 em {
+  font-style: normal;
+  color: var(--acid);
+}
+
+.stream-lab-banner-card p {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0 0 20px;
+}
+
+.stream-schedule-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.stream-schedule-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.stream-schedule-pill svg {
+  width: 14px;
+  height: 14px;
+  color: var(--acid);
+}
+
+@media (max-width: 1024px) {
+  .stream-lab-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stream-lab-highlight-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .stream-lab-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .yt-feed-grid {
+    grid-template-columns: 1fr;
+  }
+  .stream-lab-banner-card {
+    padding: 20px;
+  }
+  .stream-lab-banner-card h3 {
+    font-size: 1.8rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

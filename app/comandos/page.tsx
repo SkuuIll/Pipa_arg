@@ -43,6 +43,7 @@ import {
   Play,
   RotateCcw,
   ArrowRight,
+  ArrowLeft,
   TrendingUp,
   Tag,
 } from "lucide-react";
@@ -360,7 +361,8 @@ export default function ComandosPage() {
       <header className="cmd-topbar">
         <div className="cmd-brand-group">
           <a href="../" className="cmd-back-link">
-            ← Volver a la Landing
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Volver a la Landing</span>
           </a>
           <a href="../#inicio">
             <img src="../pipaa-logo.svg" alt="PIPAA" width="100" height="40" />

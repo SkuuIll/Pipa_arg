@@ -1451,8 +1451,10 @@
   .cmd-hero {
     padding: 40px 16px 20px;
   }
-  .cmd-grid {
+  .cmd-grid, .cmd-crates-grid, .cmd-faq-grid, .tw-rewards-grid {
     grid-template-columns: 1fr;
+  }
+  .cmd-grid {
     padding: 0 16px;
   }
   .cmd-sim-feed {

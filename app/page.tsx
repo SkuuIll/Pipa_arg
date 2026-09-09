@@ -16,7 +16,20 @@ import {
   SparklesIcon,
 } from "./SetupIcons";
 import { YouTubeFeed } from "./YouTubeFeed";
-import { ShoppingCart } from "lucide-react";
+import { TiltCard3D } from "./TiltCard3D";
+import {
+  ShoppingCart,
+  Tv,
+  Radio,
+  Flame,
+  Trophy,
+  Crosshair,
+  Zap,
+  Clock,
+  Gamepad2,
+  Sparkles,
+  Play,
+} from "lucide-react";
 
 const socials = [
   { name: "Twitch", handle: "pipa_arg", href: "https://www.twitch.tv/pipa_arg", tag: "EN VIVO" },
@@ -36,7 +49,7 @@ const career = [
   { year: "2024", team: "BESTIA", text: "Parte del primer roster de PUBG de la organización argentina antes de iniciar una nueva etapa regional.", tag: "ORGANIZACIÓN ARGENTINA" },
   { year: "2024—25", team: "TOYO ESPORTS", text: "PUBG Americas Series 4 y 5, junto con una de sus campañas más fuertes dentro del archivo estadístico oficial.", tag: "PUBG AMERICAS SERIES" },
   { year: "2025—26", team: "+55 ESPORTS", text: "Competencia en PUBG Americas Series 6 y Masters West con una formación sudamericana de experiencia internacional.", tag: "CIRCUITO DE AMÉRICAS" },
-  { year: "2026", team: "BESTIA · ARGENTINA", text: "Octavo puesto en PUBG Americas Series 1 y quinto lugar mundial con Argentina en la Nations Cup de Seúl.", tag: "TOP 5 MUNDIAL" },
+  { year: "2026", team: "BESTIA · SELECCIÓN ARGENTINA", text: "Quinto lugar mundial con Argentina en la Nations Cup de Seúl y consolidación total como el streamer referente de PUBG.", tag: "TOP 5 MUNDIAL & STREAM" },
 ];
 
 const pncHistory = [
@@ -45,30 +58,12 @@ const pncHistory = [
   { year: "2026", edition: "PNC SEÚL · #5", desc: "Campaña histórica: 101 puntos, 71 eliminaciones, 1 victoria WWCD y consagración en el Top 5 Mundial.", tag: "TOP 5 MUNDIAL" },
 ];
 
-const performance = [
-  { year: "21", event: "PCS 4", value: 249.56, detail: "PCS 4 Americas · Latin Dominus" },
-  { year: "22", event: "PCS 7", value: 277.77, detail: "PCS 7 Americas · Synergy Esports" },
-  { year: "23", event: "PAS 2", value: 234.25, detail: "PUBG Americas Series 2 · Synergy" },
-  { year: "24", event: "PAS 3", value: 169.54, detail: "PUBG Americas Series 3 · Bestia" },
-  { year: "24", event: "PAS 4", value: 200.01, detail: "PUBG Americas Series 4 · Toyo Esports" },
-  { year: "25", event: "PAS 5", value: 227.57, detail: "PUBG Americas Series 5 · Toyo Esports" },
-  { year: "25", event: "EWC Q", value: 187.66, detail: "Esports World Cup Qualifier · +55" },
-  { year: "25", event: "PAS 6", value: 138.24, detail: "PUBG Americas Series 6 · +55 Esports" },
-];
-
-const officialTotals = [
-  { value: "378", label: "PARTIDAS", detail: "registradas" },
-  { value: "356", label: "ELIMINACIONES", detail: "75 headshots" },
-  { value: "73.084", label: "DAÑO", detail: "acumulado" },
-  { value: "214", label: "ASISTENCIAS", detail: "en 12 torneos" },
-];
-
 const weaponsArsenal = [
   {
     name: "BERYL M762",
     category: "ASSAULT RIFLE · 7.62MM",
     role: "Arma Insignia Principal",
-    desc: "Su fusil de asalto preferido para duelos competitivos. Alto daño por disparo complementado con su multiplicador vertical 1.10 para un control de retroceso quirúrgico a media distancia.",
+    desc: "Su fusil de asalto preferido para duelos competitivos y streams. Alto daño por disparo complementado con su multiplicador vertical 1.10 para un control de retroceso quirúrgico a media distancia.",
     highlight: "Máximo DPS en duelos 1v1",
   },
   {
@@ -100,24 +95,28 @@ const inGameSettings = [
 
 const faqs = [
   {
-    q: "¿Quién es PIPAA?",
-    a: "PIPAA (Pipa_ARG) es un jugador profesional argentino de PUBG: BATTLEGROUNDS y streamer, referente de la comunidad Panza Army y representante de la Selección Argentina en la PUBG Nations Cup.",
+    q: "¿Quién es PIPAA y de qué se trata la Panza Army?",
+    a: "PIPAA (Pipa_ARG) es el streamer número 1 de PUBG en Argentina y ex jugador profesional Top 5 del mundo en PNC Seúl. La Panza Army es su comunidad oficial: un espacio sin filtro donde se transmiten más de 9 horas diarias de rankeds, partidas con la gente, risas, comandos troll y el mejor shooter táctico.",
+  },
+  {
+    q: "¿Qué son los Comandos Troll y cómo sabotearlo en vivo?",
+    a: "En sus transmisiones podés comprar comandos y cartas de Dixper desde $150 ARS para afectarle el juego en tiempo real: invertirle las teclas WASD, obligarlo a tirar granadas a sus pies, bloquearle la mira o hacerle spawn de ruidos y jumpscares. Podés ver la lista completa con precios y links en la sección Tienda Troll.",
+  },
+  {
+    q: "¿Cuál es su horario de streaming diario?",
+    a: "PIPAA transmite todos los días de 15:00 a 00:00 (hora de Argentina) en simultáneo por Kick y Twitch (canal pipa_arg). Las convocatorias a partidas personalizadas y avisos de stream se realizan por su servidor de Discord oficial.",
   },
   {
     q: "¿En qué torneos representó a la Selección Argentina?",
     a: "Representó a Argentina en 3 ediciones del PUBG Nations Cup (PNC 2022, PNC 2024 y PNC 2026 en Seúl, Corea del Sur), logrando el histórico 5.° puesto mundial con 101 puntos, 71 eliminaciones y 1 Chicken Dinner (WWCD).",
   },
   {
-    q: "¿Qué hardware y periféricos utiliza?",
-    a: "Compite con un setup Dual PC: PC Gaming con AMD Ryzen 7 7800X3D, Mother B650M Aorus Elite AX WiFi, PNY XLR8 RTX 3070, 32GB RAM Corsair Dominator Platinum 6000MHz DDR5, Watercooling Corsair iCUE Link Titan 360 RX RGB, Fuente Aorus P850W Gold y almacenamiento SSD NVMe + HDD. Para transmisión utiliza una PC Streaming dedicada con Intel Core i7 8700, GTX 1070 Ti y 16GB RAM. En periféricos juega a 400 DPI con Logitech G Pro X y auriculares in-ear Shure SE215.",
+    q: "¿Qué hardware y periféricos utiliza para transmitir y jugar?",
+    a: "Utiliza una configuración Dual PC: PC Gaming con AMD Ryzen 7 7800X3D, Mother B650M Aorus Elite AX WiFi, PNY XLR8 RTX 3070 y 32GB RAM DDR5 a 6000MHz. Para emisión utiliza una PC Streaming dedicada con Intel Core i7 8700 y GTX 1070 Ti. Juega a 400 DPI con Logitech G Pro X y auriculares in-ear Shure SE215.",
   },
   {
     q: "¿Cómo apoyar a PIPAA con su código de creador PUBG Partner?",
-    a: "Al comprar G-Coins o cualquier ítem dentro de PUBG: BATTLEGROUNDS o en accounts.krafton.com/creator-code, ingresá el código de creador PIPAA. De esa manera, un porcentaje de cada compra va directamente a apoyar su carrera competitiva y sus streams.",
-  },
-  {
-    q: "¿Cuál es su horario de streaming y cómo sumarse a la Panza Army?",
-    a: "Transmite todos los días habitualmente entre las 15:00 y las 00:00 (hora de Argentina) en Kick y Twitch (canal pipa_arg). Las partidas comunitarias, rankeds, scrims y anuncios se coordinan en el servidor oficial de Discord (discord.gg/rgzZ3Kv).",
+    a: "Al comprar G-Coins o cualquier ítem dentro de PUBG: BATTLEGROUNDS o en accounts.krafton.com/creator-code, ingresá el código de creador PIPAA. De esa manera, un porcentaje de cada compra va directamente a apoyar sus streams diarios.",
   },
 ];
 
@@ -158,25 +157,24 @@ const setupGear = [
 ];
 
 const tickerPhrases = [
-  "ARGENTINA",
-  "PRO PLAYER",
+  "PANZA ARMY",
+  "STREAM EN VIVO",
+  "KICK & TWITCH",
+  "COMANDOS TROLL",
+  "TIENDA TROLL",
   "PUBG PARTNER",
   "CÓDIGO: PIPAA",
-  "CREADOR",
-  "PANZA ARMY",
-  "COMANDOS TROLL",
-  "PANZABOT",
-  "PUBG ESPORTS",
-  "PNC 2026",
   "TOP 5 MUNDIAL",
-  "DISCORD COMUNIDAD",
   "SELECCIÓN ARGENTINA",
+  "DIXPER & PANZABOT",
+  "DUAL PC 240HZ",
+  "RANKEDS & SCRIMS",
+  "DISCORD COMUNIDAD",
 ];
 
 export default function Home() {
   const [activeNav, setActiveNav] = useState("inicio");
   const [isScrolled, setIsScrolled] = useState(false);
-  const [hoveredBar, setHoveredBar] = useState<number | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [activeSetupTab, setActiveSetupTab] = useState<"gaming" | "streaming" | "gear">("gaming");
   const [copiedCode, setCopiedCode] = useState(false);
@@ -221,9 +219,9 @@ export default function Home() {
           <img src="./pipaa-logo.svg" alt="PIPAA" className="brand-logo" width="120" height="48" />
         </a>
         <nav aria-label="Navegación principal">
-          <a href="#historia" className={activeNav === "historia" ? "is-active" : ""}>Historia</a>
+          <a href="#historia" className={activeNav === "historia" ? "is-active" : ""}>El Fenómeno</a>
           <a href="#argentina" className={activeNav === "argentina" ? "is-active" : ""}>Argentina</a>
-          <a href="#stats" className={activeNav === "stats" ? "is-active" : ""}>Datos</a>
+          <a href="#stats" className={activeNav === "stats" ? "is-active" : ""}>Stream Lab</a>
           <a href="#trayectoria" className={activeNav === "trayectoria" ? "is-active" : ""}>Trayectoria</a>
           <a href="#arsenal" className={activeNav === "arsenal" ? "is-active" : ""}>Arsenal</a>
           <a href="#setup" className={activeNav === "setup" ? "is-active" : ""}>Setup</a>
@@ -243,61 +241,81 @@ export default function Home() {
 
       <main>
         {/* ── Hero ── */}
-        <section className="hero" id="inicio">
-          <div className="hero-copy">
-            <p className="eyebrow">
-              <span>ARG</span> PUBG PRO PLAYER · STREAMER
-            </p>
-            <h1>
-              <span>NO ES SOLO</span>
-              <span className="accent-word">JUGAR.</span>
-              <span>ES COMPETIR.</span>
-            </h1>
-            <p className="hero-lede">
-              Soy PIPAA. Jugador profesional de PUBG, representante de la Selección Argentina y streamer. Todos los días la misma misión: competir, mejorar y compartir cada partida junto a la Panza Army.
-            </p>
-            <div className="hero-actions">
-              <a className="button button-primary" href="#comunidad">
-                <span className="play" aria-hidden="true">▶</span> Ver directo acá
-              </a>
-              <a className="button button-ghost" href="#historia">
-                Conocé mi carrera <span aria-hidden="true">↓</span>
-              </a>
-            </div>
-            <div className="schedule">
-              <span className="pulse" aria-hidden="true" />
-              <div className="schedule-copy">
-                <b>STREAM TODOS LOS DÍAS</b>
-                <small>15:00 — 00:00 · ARG</small>
+        <section className="hero-immersive" id="inicio">
+          {/* Background Layer: Grid + Gradient */}
+          <div className="hero-bg-grid" aria-hidden="true" />
+          <div className="hero-bg-glow" aria-hidden="true" />
+
+          {/* Layer 1: Giant "PIPAA" text behind everything */}
+          <div className="hero-giant-text" aria-hidden="true">
+            <span>PIPAA</span>
+          </div>
+
+          {/* Layer 2: Character image emerging over the text */}
+          <div className="hero-character" aria-label="PIPAA, streamer y líder de la Panza Army">
+            <img
+              src="./hero-pipaa-3d.jpg"
+              alt="PIPAA sonriendo con remera Panza Army, letras gigantes PIPAA detrás y iluminación neón verde"
+              width="1600"
+              height="900"
+              fetchPriority="high"
+              className="hero-character-img"
+            />
+            <div className="hero-character-gradient" aria-hidden="true" />
+          </div>
+
+          {/* Layer 3: Copy content on top */}
+          <div className="hero-content-layer">
+            <div className="hero-copy">
+              <p className="eyebrow">
+                <span>ARG</span> STREAMER N°1 DE PUBG · PANZA ARMY
+              </p>
+              <h1>
+                <span>MUCHA</span>
+                <span className="accent-word">PANZA.</span>
+                <span>PURO STREAM.</span>
+              </h1>
+              <p className="hero-lede">
+                Ex Top 5 del mundo. Streamer a tiempo completo. Todos los días más de 9 horas en vivo en Kick y Twitch con la Panza Army: rankeds, comandos troll, risas sin filtro y el mejor gunplay de la región.
+              </p>
+              <div className="hero-actions">
+                <a className="button button-primary" href="#comunidad">
+                  <Play style={{ width: "14px", height: "14px", fill: "currentColor" }} />
+                  <span>Ver directo en vivo</span>
+                </a>
+                <a className="button button-ghost" href="./comandos/">
+                  <ShoppingCart style={{ width: "14px", height: "14px" }} />
+                  <span>Tienda Troll</span>
+                </a>
               </div>
-              <span className="schedule-divider" aria-hidden="true" />
-              <LocalTime />
+              <div className="schedule">
+                <span className="pulse" aria-hidden="true" />
+                <div className="schedule-copy">
+                  <b>STREAM TODOS LOS DÍAS</b>
+                  <small>15:00 — 00:00 · ARG</small>
+                </div>
+                <span className="schedule-divider" aria-hidden="true" />
+                <LocalTime />
+              </div>
             </div>
           </div>
 
-          <div className="hero-visual" aria-label="PIPAA, jugador profesional y creador de Panza Army">
-            <div className="hero-visual-frame">
-              <img
-                src="./pipa-banner.webp"
-                alt="PIPAA sonriendo con la indumentaria de Panza Army"
-                width="1600"
-                height="640"
-                fetchPriority="high"
-              />
-              <div className="hero-visual-glow" aria-hidden="true" />
-            </div>
+          {/* Layer 4: Floating badge */}
+          <div className="hero-floating-badge">
             <div className="hero-badge shimmer-badge">
               <div className="badge-glow-edge" aria-hidden="true" />
-              <small>PUBG NATIONS CUP 2026</small>
-              <strong>#05</strong>
-              <span>DEL MUNDO</span>
+              <small>TOP 5 MUNDIAL · PNC SEÚL</small>
+              <strong>+9H</strong>
+              <span>LIVE TODOS LOS DÍAS</span>
             </div>
-            <div className="vertical-type" aria-hidden="true">PIPAA</div>
           </div>
+
+          {/* Bottom accent line */}
+          <div className="hero-bottom-accent" aria-hidden="true" />
         </section>
 
         {/* ── Ticker Marquee ── */}
-        <div className="ticker" aria-label="Resumen de perfil">
+        <div className="ticker" aria-label="Resumen de perfil y comunidad">
           <div className="ticker-track">
             <div className="ticker-group">
               {[...tickerPhrases, ...tickerPhrases, ...tickerPhrases].map((phrase, idx) => (
@@ -318,61 +336,63 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── 01. Perfil / Historia ── */}
+        {/* ── 01. Perfil / El Fenómeno Panza Army ── */}
         <section className="intro section-grid" id="historia" data-reveal>
-          <div className="section-kicker"><span>01</span> PERFIL</div>
+          <div className="section-kicker"><span>01</span> EL FENÓMENO</div>
           <div className="intro-main">
-            <p className="eyebrow">DE PUNTA ALTA AL MUNDO</p>
-            <h2>CREADOR POR PASIÓN.<br /><em>COMPETIDOR</em> POR NATURALEZA.</h2>
+            <p className="eyebrow">DE PUNTA ALTA AL STREAMING LATINOAMERICANO</p>
+            <h2>MUCHA PANZA.<br /><em>COMUNIDAD INCONDICIONAL.</em></h2>
             <p className="section-copy">
-              Más de 7 años de alto rendimiento competitivo en la escena sudamericana e internacional. Con pasos por escuadras como Synergy, Team Singularity, BESTIA, Toyo y +55, combinando la disciplina del máximo nivel con las transmisiones diarias junto a la Panza Army.
+              Más de 7 años de trayectoria en el máximo nivel combinados con el show diario más genuino y entretenido de PUBG. En el directo de PIPAA no hay poses: jugadas de calibre internacional, eructos legendarios, viewers saboteándole la partida con comandos troll y la Panza Army bancando cada rotación desde la tarde hasta la medianoche.
             </p>
           </div>
           <div className="facts">
             <article data-reveal>
-              <strong>5°</strong>
-              <span>PNC 2026 Seúl<br />con Argentina</span>
+              <strong>+9h</strong>
+              <span>De stream diario<br />en Kick y Twitch</span>
+            </article>
+            <article data-reveal>
+              <strong>#5</strong>
+              <span>Top 5 Mundial PNC<br />Seúl con Argentina</span>
             </article>
             <article data-reveal>
               <strong>7+</strong>
-              <span>Años en la<br />escena pro</span>
-            </article>
-            <article data-reveal>
-              <strong>9h</strong>
-              <span>De stream<br />cada día</span>
+              <span>Años de trayectoria<br />y puro gunplay</span>
             </article>
           </div>
         </section>
 
-        {/* ── 02. Selección Argentina ── */}
+        {/* ── 02. Selección Argentina & Hazaña Mundial ── */}
         <section className="argentina" id="argentina" data-reveal>
-          <div className="argentina-photo">
-            <img
-              src="./pipa-argentina-2026.jpg"
-              alt="PIPAA en el anuncio oficial de la Selección Argentina para PUBG Nations Cup 2026"
-              width="960"
-              height="1200"
-              loading="lazy"
-              decoding="async"
-            />
-            <div className="photo-stamp">
-              <span>SEÚL</span>
-              <strong>2026</strong>
-            </div>
+          <div className="argentina-photo-3d-container">
+            <TiltCard3D maxTilt={12} glare={true} className="argentina-photo-3d-card">
+              <img
+                src="./pipaa-portrait-glow.jpg"
+                alt="PIPAA con jersey de su equipo esports, letras PIPAA detrás con neón verde y partículas flotantes"
+                width="960"
+                height="1280"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="photo-stamp photo-stamp-3d depth-layer-2">
+                <span>TOP 5</span>
+                <strong>#5</strong>
+              </div>
+            </TiltCard3D>
           </div>
           <div className="argentina-copy">
-            <p className="eyebrow sky">SELECCIÓN ARGENTINA · PNC 2026</p>
-            <h2>LA CELESTE Y BLANCA<br />ENTRE LAS <em>MEJORES.</em></h2>
+            <p className="eyebrow sky">EL PRO PLAYER QUE CONQUISTÓ EL STREAMING · TOP 5 MUNDIAL</p>
+            <h2>LA BANDERA ARGENTINA<br />EN LA <em>CIMA GLOBAL.</em></h2>
             <p>
-              Argentina cerró la PUBG Nations Cup 2026 en el quinto puesto mundial: 101 puntos, 71 eliminaciones y una victoria que dejó al equipo entre la élite global. Representó al país en las ediciones 2022, 2024 y 2026 de la Nations Cup.
+              Antes de consolidar la comunidad más fiel y divertida del shooter, PIPAA demostró su categoría en el escenario más exigente del planeta: la PUBG Nations Cup en Seúl, Corea del Sur. Llevó a la Selección Argentina al 5.° puesto mundial con 101 puntos, 71 eliminaciones y un Chicken Dinner épico compitiendo de igual a igual contra las potencias de Asia y Europa.
             </p>
             <div className="result-grid">
               <div data-reveal>
-                <small>POSICIÓN</small>
+                <small>POSICIÓN GLOBAL</small>
                 <strong>#5</strong>
               </div>
               <div data-reveal>
-                <small>PUNTOS</small>
+                <small>PUNTOS TOTALES</small>
                 <StatsCounter value="101" />
               </div>
               <div data-reveal>
@@ -408,117 +428,147 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 03. Data Lab ── */}
+        {/* ── 03. Stream & Combat Lab ── */}
         <section className="performance section-grid" id="stats" aria-labelledby="performance-title" data-reveal>
-          <div className="section-kicker"><span>03</span> DATA LAB</div>
+          <div className="section-kicker"><span>03</span> STREAM LAB</div>
           <div className="performance-heading">
             <div>
-              <p className="eyebrow">ARCHIVO COMPETITIVO · 2021—2026</p>
-              <h2 id="performance-title">LOS NÚMEROS<br />TAMBIÉN <em>JUEGAN.</em></h2>
+              <p className="eyebrow">MÉTRICAS EN VIVO & BALÍSTICA · COMUNIDAD PANZA ARMY</p>
+              <h2 id="performance-title">EL SHOW DIARIO<br />EN <em>NÚMEROS.</em></h2>
             </div>
-            <p>Doce torneos registrados por PUBG Esports cuentan otra parte de la historia: volumen, consistencia y años compitiendo contra los mejores de Américas.</p>
+            <p>Detrás de las risas, los eructos y los comandos troll hay dedicación absoluta: maratones de 9 horas diarias, precisión balística de élite y una comunidad que no se pierde ni un solo minuto de transmisión.</p>
           </div>
 
-          <div className="official-ledger" aria-label="Totales de los registros oficiales de PUBG Esports">
-            {officialTotals.map((stat, index) => (
-              <article key={stat.label} data-reveal className="ledger-card">
-                <div className="ledger-corner" aria-hidden="true" />
-                <small>{String(index + 1).padStart(2, "0")} / {stat.label}</small>
-                <StatsCounter
-                  value={stat.value}
-                  className={stat.value.length > 5 ? "is-long" : undefined}
-                />
-                <span>{stat.detail}</span>
+          <div className="stream-lab-metrics-grid" aria-label="Métricas del streaming y rendimiento de PIPAA">
+            <TiltCard3D maxTilt={9} scale={1.03} glare={true}>
+              <article className="stream-lab-card" data-reveal>
+                <div className="stream-lab-card-icon">
+                  <Tv style={{ width: "22px", height: "22px" }} />
+                </div>
+                <div className="stream-lab-value">+9H</div>
+                <div className="stream-lab-label">STREAM DIARIO</div>
+                <div className="stream-lab-sub">En vivo todos los días en Kick y Twitch de 15:00 a 00:00 (ARG).</div>
               </article>
-            ))}
+            </TiltCard3D>
+
+            <TiltCard3D maxTilt={9} scale={1.03} glare={true}>
+              <article className="stream-lab-card sky-accent" data-reveal>
+                <div className="stream-lab-card-icon">
+                  <Crosshair style={{ width: "22px", height: "22px" }} />
+                </div>
+                <div className="stream-lab-value">617,9 M</div>
+                <div className="stream-lab-label">LONGEST KILL</div>
+                <div className="stream-lab-sub">Headshot a distancia máxima registrado en vivo con francotirador.</div>
+              </article>
+            </TiltCard3D>
+
+            <TiltCard3D maxTilt={9} scale={1.03} glare={true}>
+              <article className="stream-lab-card gold-accent" data-reveal>
+                <div className="stream-lab-card-icon">
+                  <Flame style={{ width: "22px", height: "22px" }} />
+                </div>
+                <div className="stream-lab-value">+3.500</div>
+                <div className="stream-lab-label">HORAS DE TRANSMISIÓN</div>
+                <div className="stream-lab-sub">Años de constancia, Chicken Dinners y momentos memorables junto al squad.</div>
+              </article>
+            </TiltCard3D>
+
+            <TiltCard3D maxTilt={9} scale={1.03} glare={true}>
+              <article className="stream-lab-card violet-accent" data-reveal>
+                <div className="stream-lab-card-icon">
+                  <Trophy style={{ width: "22px", height: "22px" }} />
+                </div>
+                <div className="stream-lab-value">#5 GLOBAL</div>
+                <div className="stream-lab-label">TOP 5 MUNDIAL PNC</div>
+                <div className="stream-lab-sub">Hazaña histórica representando a Argentina en Seúl, Corea del Sur.</div>
+              </article>
+            </TiltCard3D>
           </div>
 
-          <div className="performance-board">
-            <article className="damage-panel" data-reveal>
-              <div className="panel-heading">
+          <div className="stream-lab-highlight-grid">
+            <TiltCard3D maxTilt={6} scale={1.01} glare={true}>
+              <article className="stream-lab-banner-card" data-reveal>
                 <div>
-                  <small>AVG. DAMAGE / MATCH</small>
-                  <strong>RENDIMIENTO POR EVENTO</strong>
+                  <div className="stream-lab-banner-tag">
+                    <Radio style={{ width: "14px", height: "14px" }} />
+                    <span>TRANSMISIÓN DUAL PC EN DIRECTO</span>
+                  </div>
+                  <h3>ENTRETENIMIENTO PURO<br /><em>Y MÁXIMO GUNPLAY.</em></h3>
+                  <p>
+                    Cada tarde arranca la rutina: calentar la puntería en rankeds, coordinar con el Discord de la Panza Army y activar los comandos troll para que el chat controle el destino de la partida mediante Dixper y Panzabot.
+                  </p>
+                  <div className="stream-schedule-pills">
+                    <span className="stream-schedule-pill">
+                      <Clock style={{ width: "13px", height: "13px" }} /> 15:00 a 00:00 ARG
+                    </span>
+                    <span className="stream-schedule-pill">
+                      <Zap style={{ width: "13px", height: "13px" }} /> Dual PC Encoding
+                    </span>
+                    <span className="stream-schedule-pill">
+                      <Gamepad2 style={{ width: "13px", height: "13px" }} /> Rankeds & Scrims
+                    </span>
+                    <span className="stream-schedule-pill">
+                      <Sparkles style={{ width: "13px", height: "13px" }} /> Dixper & Comandos
+                    </span>
+                  </div>
                 </div>
-                <span className="panel-meta-tag">MAX 300 DMG</span>
-              </div>
-
-              <div
-                className="damage-chart"
-                role="img"
-                aria-label="Daño promedio por partida en ocho eventos oficiales entre 2021 y 2025"
-              >
-                <div className="chart-grid" aria-hidden="true">
-                  <i />
-                  <i />
-                  <i />
-                </div>
-                {performance.map((entry, index) => (
-                  <div
-                    className={`chart-column ${hoveredBar === index ? "is-hovered" : ""}`}
-                    key={`${entry.year}-${entry.event}`}
-                    onMouseEnter={() => setHoveredBar(index)}
-                    onMouseLeave={() => setHoveredBar(null)}
+                <div style={{ marginTop: "24px" }}>
+                  <a
+                    href="./comandos/"
+                    className="button button-primary"
+                    style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}
                   >
-                    {hoveredBar === index && (
-                      <div className="chart-tooltip">
-                        <strong>{entry.value.toFixed(1)} DMG</strong>
-                        <span>{entry.detail}</span>
-                      </div>
-                    )}
-                    <span className="chart-value">{entry.value.toFixed(0)}</span>
-                    <div className="chart-bar">
-                      <i style={{ height: `${(entry.value / 300) * 100}%`, animationDelay: `${index * 90}ms` }} />
-                    </div>
-                    <b>{entry.event}</b>
-                    <small>20{entry.year}</small>
-                  </div>
-                ))}
-              </div>
-            </article>
+                    <span>Ver Tienda de Comandos Troll</span>
+                    <ShoppingCart style={{ width: "15px", height: "15px" }} />
+                  </a>
+                </div>
+              </article>
+            </TiltCard3D>
 
-            <aside className="combat-profile" data-reveal>
-              <div className="panel-heading">
-                <div>
-                  <small>COMBAT PROFILE</small>
-                  <strong>PRECISIÓN + ALCANCE</strong>
-                </div>
-                <span className="panel-meta-tag">OFFICIAL</span>
-              </div>
-              <div className="combat-ring-wrapper">
-                <div className="combat-ring" aria-label="21 por ciento de las eliminaciones registradas fueron headshots">
+            <TiltCard3D maxTilt={6} scale={1.01} glare={true}>
+              <aside className="combat-profile" data-reveal style={{ height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                <div className="panel-heading">
                   <div>
-                    <strong>21%</strong>
-                    <span>HEADSHOTS</span>
+                    <small>COMBAT PROFILE · GUNPLAY</small>
+                    <strong>PRECISIÓN EN VIVO</strong>
+                  </div>
+                  <span className="panel-meta-tag">AIM PRO</span>
+                </div>
+                <div className="combat-ring-wrapper">
+                  <div className="combat-ring" aria-label="21 por ciento de disparos directos a la cabeza">
+                    <div>
+                      <strong>21%</strong>
+                      <span>HEADSHOTS</span>
+                    </div>
+                  </div>
+                  <div className="combat-ring-crosshair" aria-hidden="true" />
+                </div>
+                <div className="combat-split">
+                  <div>
+                    <small>ESTILO DE JUEGO</small>
+                    <strong style={{ fontSize: "1.4rem", fontFamily: "var(--font-display)", color: "#fff" }}>AGRESIVO</strong>
+                  </div>
+                  <div>
+                    <small>ARMA INSIGNIA</small>
+                    <strong style={{ fontSize: "1.4rem", fontFamily: "var(--font-display)", color: "var(--acid)" }}>BERYL M762</strong>
                   </div>
                 </div>
-                <div className="combat-ring-crosshair" aria-hidden="true" />
-              </div>
-              <div className="combat-split">
-                <div>
-                  <small>ELIMINACIONES</small>
-                  <StatsCounter value="356" />
+                <div className="range-record">
+                  <div>
+                    <small>RECORD DE IMPACTO A DISTANCIA</small>
+                    <strong>617,9 M</strong>
+                  </div>
+                  <span><i /></span>
                 </div>
-                <div>
-                  <small>HEADSHOTS</small>
-                  <StatsCounter value="75" />
-                </div>
-              </div>
-              <div className="range-record">
-                <div>
-                  <small>LONGEST KILL REGISTRADA</small>
-                  <strong>617,9 M</strong>
-                </div>
-                <span><i /></span>
-              </div>
-            </aside>
+              </aside>
+            </TiltCard3D>
           </div>
 
-          <div className="data-note">
-            <span>FUENTE / PUBG ESPORTS</span>
-            <p>Totales calculados sobre los 12 registros publicados en el perfil oficial. No representan partidas fuera de esos eventos.</p>
-            <a href="https://pubgesports.com/en/players/440" target="_blank" rel="noreferrer">
-              Abrir perfil oficial ↗
+          <div className="data-note" style={{ marginTop: "20px" }}>
+            <span>CONEXIÓN CON LA COMUNIDAD</span>
+            <p>Transmisiones en simultáneo con chat unificado, recompensas de canal por puntos y sorteos mensuales para suscriptores en Kick y Twitch.</p>
+            <a href="#comunidad">
+              Ir al reproductor en vivo ↓
             </a>
           </div>
         </section>
@@ -528,7 +578,7 @@ export default function Home() {
           <div className="section-kicker"><span>04</span> TRAYECTORIA</div>
           <div className="career-head">
             <h2 id="career-title">UNA CARRERA<br />EN <em>PRIMERA PERSONA.</em></h2>
-            <p>De los primeros torneos a representar al país en Seúl. Equipos, mapas y momentos que construyeron el camino de uno de los jugadores más longevos y respetados de América.</p>
+            <p>De las primeras scrims continentales a representar al país en Seúl y construir la comunidad de streaming más fiel de PUBG en Argentina.</p>
           </div>
           <ol className="timeline">
             {career.map((item, index) => (
@@ -560,21 +610,23 @@ export default function Home() {
 
           <div className="arsenal-grid">
             {weaponsArsenal.map((weapon) => (
-              <article key={weapon.name} className="weapon-card" data-reveal>
-                <div className="weapon-card-header">
-                  <span className="weapon-category">{weapon.category}</span>
-                  <div className="weapon-icon-box">
-                    <RifleIcon className="setup-svg-icon" />
+              <TiltCard3D key={weapon.name} maxTilt={8} scale={1.02} glare={true} className="weapon-card-3d-wrapper" data-reveal>
+                <article className="weapon-card">
+                  <div className="weapon-card-header">
+                    <span className="weapon-category">{weapon.category}</span>
+                    <div className="weapon-icon-box">
+                      <RifleIcon className="setup-svg-icon" />
+                    </div>
                   </div>
-                </div>
-                <h3>{weapon.name}</h3>
-                <span className="weapon-role">{weapon.role}</span>
-                <p>{weapon.desc}</p>
-                <div className="weapon-highlight">
-                  <CrosshairIcon className="mini-icon" />
-                  <span>{weapon.highlight}</span>
-                </div>
-              </article>
+                  <h3>{weapon.name}</h3>
+                  <span className="weapon-role">{weapon.role}</span>
+                  <p>{weapon.desc}</p>
+                  <div className="weapon-highlight">
+                    <CrosshairIcon className="mini-icon" />
+                    <span>{weapon.highlight}</span>
+                  </div>
+                </article>
+              </TiltCard3D>
             ))}
           </div>
         </section>
@@ -587,7 +639,7 @@ export default function Home() {
               <p className="eyebrow">HARDWARE COMPETITIVO · DUAL PC</p>
               <h2>PRECISIÓN EN<br />CADA <em>DETALLE.</em></h2>
             </div>
-            <p>Arquitectura Dual PC calibrada para máximo rendimiento en PUBG Esports: una máquina dedicada al juego competitivo y otra para encoding de transmisión en directo.</p>
+            <p>Arquitectura Dual PC calibrada para máximo rendimiento en PUBG y streaming: una máquina dedicada a los 240 FPS del juego y otra para el encoding sin pérdida de calidad.</p>
           </div>
 
           <div className="setup-tabs-wrapper" data-reveal>
@@ -636,19 +688,21 @@ export default function Home() {
 
           <div className="setup-grid">
             {(activeSetupTab === "gaming" ? setupGaming : activeSetupTab === "streaming" ? setupStreaming : setupGear).map((item, index) => (
-              <article key={`${activeSetupTab}-${item.label}-${index}`} className="setup-card">
-                <div className="setup-card-header">
-                  <small>{String(index + 1).padStart(2, "0")} / {item.label}</small>
-                  <div className="setup-icon-wrapper">
-                    {getSetupIcon(item.label)}
+              <TiltCard3D key={`${activeSetupTab}-${item.label}-${index}`} maxTilt={8} scale={1.02} glare={true} className="setup-card-3d-wrapper">
+                <article className="setup-card">
+                  <div className="setup-card-header">
+                    <small>{String(index + 1).padStart(2, "0")} / {item.label}</small>
+                    <div className="setup-icon-wrapper">
+                      {getSetupIcon(item.label)}
+                    </div>
                   </div>
-                </div>
-                <div className="setup-card-body">
-                  <strong>{item.value}</strong>
-                  {item.sub && <span className="setup-sub">{item.sub}</span>}
-                </div>
-                <div className="setup-card-border-glow" aria-hidden="true" />
-              </article>
+                  <div className="setup-card-body">
+                    <strong>{item.value}</strong>
+                    {item.sub && <span className="setup-sub">{item.sub}</span>}
+                  </div>
+                  <div className="setup-card-border-glow" aria-hidden="true" />
+                </article>
+              </TiltCard3D>
             ))}
           </div>
 
@@ -710,7 +764,7 @@ export default function Home() {
               <div className="creator-code-info">
                 <h3>APOYÁ A PIPAA CON SU<br /><em>CÓDIGO DE CREADOR.</em></h3>
                 <p>
-                  Al comprar G-Coins o cualquier artículo en la tienda oficial de PUBG: BATTLEGROUNDS o en Krafton, usá el código <strong>PIPAA</strong>. Un porcentaje de tu compra apoya directamente sus directos y su carrera profesional.
+                  Al comprar G-Coins o cualquier artículo en la tienda oficial de PUBG: BATTLEGROUNDS o en Krafton, usá el código <strong>PIPAA</strong>. Un porcentaje de tu compra apoya directamente sus directos diarios.
                 </p>
               </div>
               <div className="creator-code-action-box">
@@ -750,8 +804,10 @@ export default function Home() {
 
           <article className="community-feature" data-reveal>
             <div className="community-feature-media">
-              <img src="./og-v2.jpg" alt="PIPAA, jugador profesional argentino de PUBG y creador de Panza Army" width="1200" height="630" loading="lazy" decoding="async" />
-              <span className="community-feature-scan" aria-hidden="true" />
+              <TiltCard3D maxTilt={7} glare={true} style={{ width: "100%", height: "100%" }}>
+                <img src="./og-v2.jpg" alt="PIPAA, referente de la Panza Army" width="1200" height="630" loading="lazy" decoding="async" />
+                <span className="community-feature-scan" aria-hidden="true" />
+              </TiltCard3D>
             </div>
             <div className="community-feature-copy">
               <div className="community-feature-label"><span>07</span> LA COMUNIDAD</div>
@@ -784,30 +840,32 @@ export default function Home() {
           </article>
 
           {/* ── Card Destacada Tienda de Comandos Troll ── */}
-          <article className="creator-code-card" data-reveal style={{ borderColor: "rgba(167, 255, 0, 0.4)", background: "linear-gradient(135deg, rgba(21, 16, 34, 0.95), rgba(7, 5, 13, 0.95))" }}>
-            <div className="creator-code-badge" style={{ borderColor: "rgba(167, 255, 0, 0.5)", color: "#a7ff00", background: "rgba(167, 255, 0, 0.12)" }}>
-              <SparklesIcon className="creator-sparkle-icon" />
-              <span>TIENDA OFICIAL · COMANDOS TROLL & DIXPER</span>
-            </div>
-            <div className="creator-code-content">
-              <div className="creator-code-info">
-                <h3>TIENDA DE<br /><em>COMANDOS TROLL.</em></h3>
-                <p>
-                  Saboteá a PIPAA en vivo en PUBG desde <strong>$150 ARS</strong> o con <strong>Cajas Dixper</strong>: invertile el teclado WASD, forzale disparos involuntarios, mandale audios sin censura o ejecutá al squad con fuego amigo. Precios transparentes y guía de compra paso a paso.
-                </p>
+          <TiltCard3D maxTilt={6} scale={1.01} glare={true}>
+            <article className="creator-code-card" data-reveal style={{ borderColor: "rgba(167, 255, 0, 0.4)", background: "linear-gradient(135deg, rgba(21, 16, 34, 0.95), rgba(7, 5, 13, 0.95))" }}>
+              <div className="creator-code-badge" style={{ borderColor: "rgba(167, 255, 0, 0.5)", color: "#a7ff00", background: "rgba(167, 255, 0, 0.12)" }}>
+                <SparklesIcon className="creator-sparkle-icon" />
+                <span>TIENDA OFICIAL · COMANDOS TROLL & DIXPER</span>
               </div>
-              <div className="creator-code-action-box">
-                <a
-                  href="./comandos/"
-                  className="button button-primary creator-redeem-btn"
-                  style={{ width: "100%", textAlign: "center", justifyContent: "center", gap: "8px", display: "inline-flex", alignItems: "center" }}
-                >
-                  <span>Ver Tienda de Comandos</span>
-                  <ShoppingCart style={{ width: "16px", height: "16px" }} />
-                </a>
+              <div className="creator-code-content">
+                <div className="creator-code-info">
+                  <h3>TIENDA DE<br /><em>COMANDOS TROLL.</em></h3>
+                  <p>
+                    Saboteá a PIPAA en vivo en PUBG desde <strong>$150 ARS</strong> o con <strong>Cajas Dixper</strong>: invertile el teclado WASD, forzale disparos involuntarios, mandale audios sin censura o ejecutá al squad con fuego amigo. Precios transparentes y links directos.
+                  </p>
+                </div>
+                <div className="creator-code-action-box">
+                  <a
+                    href="./comandos/"
+                    className="button button-primary creator-redeem-btn"
+                    style={{ width: "100%", textAlign: "center", justifyContent: "center", gap: "8px", display: "inline-flex", alignItems: "center" }}
+                  >
+                    <span>Ver Tienda de Comandos</span>
+                    <ShoppingCart style={{ width: "16px", height: "16px" }} />
+                  </a>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </TiltCard3D>
         </section>
 
         {/* ── 08. Videos de YouTube ── */}
@@ -824,7 +882,7 @@ export default function Home() {
           <YouTubeFeed />
         </section>
 
-        {/* ── 08. Redes Oficiales ── */}
+        {/* ── 09. Redes Oficiales ── */}
         <section className="social-section" id="redes" data-reveal>
           <div className="social-intro" data-reveal>
             <p className="eyebrow">SEGUÍ LA JUGADA</p>
@@ -843,15 +901,15 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 09. Preguntas Frecuentes / FAQ ── */}
+        {/* ── 10. Preguntas Frecuentes / FAQ ── */}
         <section className="faq-section section-grid" id="faq" data-reveal>
-          <div className="section-kicker"><span>09</span> FAQ</div>
+          <div className="section-kicker"><span>10</span> FAQ</div>
           <div className="faq-heading">
             <div>
               <p className="eyebrow">TODO SOBRE PIPAA</p>
               <h2>PREGUNTAS<br /><em>FRECUENTES.</em></h2>
             </div>
-            <p>Detalles sobre su trayectoria, configuración competitiva, streams diarios y cómo sumarte a la comunidad Panza Army.</p>
+            <p>Detalles sobre sus streams diarios, comandos troll, configuración competitiva y cómo sumarte a la comunidad Panza Army.</p>
           </div>
 
           <div className="faq-list" data-reveal>
@@ -876,9 +934,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 10. Archivo de Fuentes ── */}
+        {/* ── 11. Archivo de Fuentes ── */}
         <section className="archive-sources section-grid" id="archivo" aria-labelledby="sources-title" data-reveal>
-          <div className="section-kicker"><span>10</span> ARCHIVO</div>
+          <div className="section-kicker"><span>11</span> ARCHIVO</div>
           <div className="sources-heading">
             <div>
               <p className="eyebrow">INVESTIGACIÓN ABIERTA</p>
@@ -900,11 +958,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 11. Contacto Comercial ── */}
+        {/* ── 12. Contacto Comercial ── */}
         <section className="contact" id="contacto" data-reveal>
           <p className="eyebrow">MARCAS · PRENSA · COLABORACIONES</p>
           <h2>¿HACEMOS<br /><em>EQUIPO?</em></h2>
-          <p>Para propuestas comerciales, campañas, eventos y oportunidades competitivas.</p>
+          <p>Para propuestas comerciales, campañas de streaming, eventos y colaboraciones con PIPAA y la Panza Army.</p>
           <div className="contact-card">
             <div className="contact-card-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -928,7 +986,7 @@ export default function Home() {
         <a className="brand" href="#inicio" aria-label="PIPAA — volver al inicio">
           <img src="./pipaa-logo.svg" alt="PIPAA" className="brand-logo" width="120" height="48" />
         </a>
-        <p>PIPAA · Jugador profesional de PUBG · Streamer<br />Argentina</p>
+        <p>PIPAA · Streamer n°1 de PUBG · Líder Panza Army<br />Argentina</p>
         <p className="footer-note">© 2026 PIPAA<br />Diseñado para la Panza Army.</p>
       </footer>
 
@@ -939,8 +997,8 @@ export default function Home() {
         <a href="#argentina" className={activeNav === "argentina" ? "is-active" : ""}>
           <span>02</span>Argentina
         </a>
-        <a href="#arsenal" className={activeNav === "arsenal" ? "is-active" : ""}>
-          <span>03</span>Arsenal
+        <a href="#stats" className={activeNav === "stats" ? "is-active" : ""}>
+          <span>03</span>Stream
         </a>
         <a href="#setup" className={activeNav === "setup" ? "is-active" : ""}>
           <span>04</span>Setup
