@@ -15,6 +15,8 @@ import {
   CheckIcon,
   SparklesIcon,
 } from "./SetupIcons";
+import { YouTubeFeed } from "./YouTubeFeed";
+import { ShoppingCart } from "lucide-react";
 
 const socials = [
   { name: "Twitch", handle: "pipa_arg", href: "https://www.twitch.tv/pipa_arg", tag: "EN VIVO" },
@@ -162,6 +164,8 @@ const tickerPhrases = [
   "CÓDIGO: PIPAA",
   "CREADOR",
   "PANZA ARMY",
+  "COMANDOS TROLL",
+  "PANZABOT",
   "PUBG ESPORTS",
   "PNC 2026",
   "TOP 5 MUNDIAL",
@@ -187,7 +191,7 @@ export default function Home() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 40);
 
-      const sections = ["inicio", "historia", "argentina", "stats", "trayectoria", "arsenal", "setup", "comunidad", "redes", "faq", "archivo", "contacto"];
+      const sections = ["inicio", "historia", "argentina", "stats", "trayectoria", "arsenal", "setup", "comunidad", "videos", "redes", "faq", "archivo", "contacto"];
       const scrollPos = window.scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -224,6 +228,11 @@ export default function Home() {
           <a href="#arsenal" className={activeNav === "arsenal" ? "is-active" : ""}>Arsenal</a>
           <a href="#setup" className={activeNav === "setup" ? "is-active" : ""}>Setup</a>
           <a href="#comunidad" className={activeNav === "comunidad" ? "is-active" : ""}>En Vivo</a>
+          <a href="#videos" className={activeNav === "videos" ? "is-active" : ""}>Videos</a>
+          <a href="./comandos/" style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
+            <ShoppingCart style={{ width: "13px", height: "13px" }} />
+            <span>Tienda Troll</span>
+          </a>
           <a href="#faq" className={activeNav === "faq" ? "is-active" : ""}>FAQ</a>
         </nav>
         <a className="nav-live" href="#comunidad">
@@ -773,6 +782,46 @@ export default function Home() {
               </div>
             </div>
           </article>
+
+          {/* ── Card Destacada Tienda de Comandos Troll ── */}
+          <article className="creator-code-card" data-reveal style={{ borderColor: "rgba(167, 255, 0, 0.4)", background: "linear-gradient(135deg, rgba(21, 16, 34, 0.95), rgba(7, 5, 13, 0.95))" }}>
+            <div className="creator-code-badge" style={{ borderColor: "rgba(167, 255, 0, 0.5)", color: "#a7ff00", background: "rgba(167, 255, 0, 0.12)" }}>
+              <SparklesIcon className="creator-sparkle-icon" />
+              <span>TIENDA OFICIAL · COMANDOS TROLL & DIXPER</span>
+            </div>
+            <div className="creator-code-content">
+              <div className="creator-code-info">
+                <h3>TIENDA DE<br /><em>COMANDOS TROLL.</em></h3>
+                <p>
+                  Saboteá a PIPAA en vivo en PUBG desde <strong>$150 ARS</strong> o con <strong>Cajas Dixper</strong>: invertile el teclado WASD, forzale disparos involuntarios, mandale audios sin censura o ejecutá al squad con fuego amigo. Precios transparentes y guía de compra paso a paso.
+                </p>
+              </div>
+              <div className="creator-code-action-box">
+                <a
+                  href="./comandos/"
+                  className="button button-primary creator-redeem-btn"
+                  style={{ width: "100%", textAlign: "center", justifyContent: "center", gap: "8px", display: "inline-flex", alignItems: "center" }}
+                >
+                  <span>Ver Tienda de Comandos</span>
+                  <ShoppingCart style={{ width: "16px", height: "16px" }} />
+                </a>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        {/* ── 08. Videos de YouTube ── */}
+        <section className="yt-feed-section" id="videos" data-reveal>
+          <div className="yt-feed-heading">
+            <div>
+              <p className="eyebrow red">CANAL OFICIAL DE YOUTUBE · @PIPAArg</p>
+              <h2>ÚLTIMOS VIDEOS<br /><em>SUBIDOS A YOUTUBE.</em></h2>
+            </div>
+            <p>
+              Los últimos videos editados y partidas destacadas subidos al canal oficial de YouTube @PIPAArg. Kills insanas, desafíos de escopeta, momentos con el chico Azzul y lo mejor de la Panza Army.
+            </p>
+          </div>
+          <YouTubeFeed />
         </section>
 
         {/* ── 08. Redes Oficiales ── */}
@@ -895,6 +944,9 @@ export default function Home() {
         </a>
         <a href="#setup" className={activeNav === "setup" ? "is-active" : ""}>
           <span>04</span>Setup
+        </a>
+        <a href="./comandos/">
+          <span>05</span>Troll
         </a>
         <a href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer">
           <i aria-hidden="true" />Live

@@ -58,7 +58,7 @@ function seoFiles() {
     },
     closeBundle() {
       const dist = resolve("dist");
-      const url = siteUrl || "https://skuuill.github.io/Pipa_arg/";
+      const url = (siteUrl || "https://skuuill.github.io/Pipa_arg").replace(/\/$/, "");
       const sitemapPath = resolve(dist, "sitemap.xml");
       const today = new Date().toISOString().slice(0, 10);
 
@@ -83,7 +83,7 @@ function seoFiles() {
 
       writeFileSync(
         sitemapPath,
-        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${url}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>\n`,
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${url}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n  <url>\n    <loc>${url}/comandos/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n</urlset>\n`,
         "utf8",
       );
     },
@@ -106,5 +106,11 @@ export default defineConfig({
   },
   build: {
     outDir: "dist",
+    rollupOptions: {
+      input: {
+        main: resolve("index.html"),
+        comandos: resolve("comandos/index.html"),
+      },
+    },
   },
 });

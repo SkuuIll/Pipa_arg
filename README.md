@@ -46,10 +46,15 @@ Después de publicar por primera vez:
 
 ## Estructura principal
 
-- `index.html`: metadatos y punto de entrada estático.
-- `src/main.tsx`: montaje de React en el navegador.
+- `index.html`: metadatos y punto de entrada estático de la portada.
+- `src/main.tsx`: montaje de React para la portada.
 - `app/page.tsx`: contenido de la landing.
-- `app/globals.css`: dirección visual y responsive.
+- `app/globals.css`: dirección visual y responsive global.
+- `comandos/index.html`: punto de entrada estático del subdirectorio de comandos.
+- `src/comandos.tsx`: montaje de React para la central de comandos.
+- `app/comandos/page.tsx`: simulador de chat interactivo, soundboard y catálogo de comandos troll.
+- `app/comandos/commandsData.ts`: base de datos de comandos reales de Nightbot, StreamElements y Dixper.
+- `app/comandos/comandos.css`: estilos de la terminal de chat y las tarjetas explicativas.
 - `public/`: imágenes y tarjeta social.
 
 El proyecto está preparado específicamente para GitHub Pages y dominio personalizado.
