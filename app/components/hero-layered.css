@@ -1,0 +1,45 @@
+/* The scene, moving typography and frontal portrait are independent layers. */
+.hero-layered {
+  background:radial-gradient(ellipse at 73% 45%,#422073 0%,#1a0c30 33%,#07050d 72%);
+}
+.hero-type-scene { position:absolute; inset:90px 0 0; z-index:1; overflow:hidden; pointer-events:none; mask-image:linear-gradient(90deg,transparent,#000 38%,#000 95%,transparent); }
+.hero-type-perspective { position:absolute; top:18%; width:100%; transform:perspective(1100px) rotateY(-12deg) rotateZ(-7deg); }
+.hero-type-track { display:flex; width:max-content; animation:hero-type-drift 32s linear infinite; will-change:transform; }
+.hero-type-group { display:flex; align-items:center; gap:100px; padding-right:100px; flex-shrink:0; }
+.hero-type-word { display:block; font-family:var(--font-display); font-size:clamp(180px,23vw,360px); font-weight:900; line-height:1.2; letter-spacing:.015em; white-space:nowrap; color:#ae78f8; -webkit-text-stroke:1px #d9b8ff;
+ text-shadow:1px 1px #6d35db,2px 2px #6530bd,3px 3px #602bad,4px 4px #5926a0,5px 5px #532293,6px 6px #4d1d86,7px 7px #471a7b,8px 8px #411671,9px 9px #3c1467,10px 10px #36115d,11px 11px #301052,12px 12px #a7ff00,15px 18px 2px #160a25,24px 30px 22px #050309,0 0 48px #6d35db55;
+}
+.hero-type-outline { color:#51218d; -webkit-text-stroke:1px #a987dd; }
+.hero-portrait-stage { position:absolute; z-index:2; top:102px; bottom:0; left:44%; right:1%; display:flex; justify-content:center; align-items:flex-end; pointer-events:none; }
+.hero-portrait-cutout {
+ display:block; height:100%; width:auto; max-width:none; aspect-ratio:2/3; object-fit:contain; object-position:bottom;
+ /* Inset contour follows the generated RGB portrait without altering the source. */
+ clip-path:polygon(48% 4.5%,42% 5.1%,37% 7%,34% 10%,32% 13%,31.7% 16%,32.5% 20%,33.3% 23%,33.4% 26%,35% 30%,38% 33%,40.5% 34.5%,40.5% 37.6%,37% 39.4%,31% 40.8%,25% 42.4%,18% 44.3%,12% 46.7%,8.5% 49%,6.5% 53%,4% 59%,2.8% 65%,2% 72%,3% 80%,5% 85%,8.4% 89%,14.7% 91%,13.5% 94%,14% 97%,16% 100%,85.5% 100%,85.5% 96%,84.7% 93%,85.5% 90.8%,91.5% 89%,94.3% 86%,95.5% 82%,96.5% 76%,96.7% 70%,96.2% 65%,94.5% 59%,92.7% 53%,90.5% 49%,87% 46.8%,82% 44.8%,75% 42.7%,68% 40.8%,62.8% 39.2%,60.5% 37.7%,60.5% 34%,63% 31%,65% 27%,65.5% 24%,65% 21%,65.8% 18%,65.3% 14%,64% 11%,61% 8%,57% 6%,52% 4.7%);
+}
+.hero-scene-fade { position:absolute; inset:0; z-index:3; pointer-events:none; background:linear-gradient(90deg,#07050d 0%,#07050dcc 28%,transparent 51%),linear-gradient(0deg,#07050d 0%,transparent 21%); }
+.hero-layered .hero-floating-badge { z-index:6; bottom:70px; }
+.hero-motion-toggle { position:absolute; z-index:7; right:5.5%; bottom:22px; display:flex; align-items:center; gap:7px; padding:8px 11px; border:1px solid #926fc84d; border-radius:4px; background:#0e0918cc; color:var(--muted); font-size:10px; }
+.hero-layered.is-paused .hero-type-track { animation-play-state:paused; }
+@keyframes hero-type-drift { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+@media(max-width:1150px) and (min-width:769px) {
+ .hero-portrait-stage { left:43%; right:-12%; }
+ .hero-type-word { font-size:250px; }
+ .hero-layered .hero-copy { max-width:480px; }
+}
+@media(max-width:768px) {
+ .hero-layered { padding-top:445px; min-height:0; display:block; }
+ .hero-layered .hero-copy { padding:0 0 46px; }
+ .hero-layered .hero-content-layer { margin-top:0; }
+ .hero-portrait-stage { top:82px; bottom:auto; height:390px; left:0; right:0; }
+ .hero-type-scene { inset:100px 0 auto; height:350px; mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+ .hero-type-perspective { top:16%; transform:perspective(800px) rotateY(-10deg) rotateZ(-8deg); }
+ .hero-type-word { font-size:165px; }
+ .hero-type-group { gap:45px; padding-right:45px; }
+ .hero-type-track { animation-duration:24s; }
+ .hero-scene-fade { inset:350px 0 auto; height:130px; background:linear-gradient(0deg,#07050d,transparent); }
+ .hero-motion-toggle { top:78px; bottom:auto; right:16px; padding:7px; font-size:9px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .hero-type-track { animation:none; will-change:auto; transform:translateX(0); }
+ .hero-motion-toggle { display:none; }
+}

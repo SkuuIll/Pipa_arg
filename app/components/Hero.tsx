@@ -1,4 +1,5 @@
-import { ShoppingCart, Play } from "lucide-react";
+import { useState } from "react";
+import { ShoppingCart, Play, Pause } from "lucide-react";
 import { LocalTime } from "../LocalTime";
 
 const tickerPhrases = [
@@ -14,30 +15,45 @@ const tickerPhrases = [
 ];
 
 export function Hero() {
+  const [motionPaused, setMotionPaused] = useState(false);
   return (
     <>
-      <section className="hero-immersive" id="inicio">
+      <section className={`hero-immersive hero-layered${motionPaused ? " is-paused" : ""}`} id="inicio">
         {/* Background Layer: Grid + Gradient */}
         <div className="hero-bg-grid" aria-hidden="true" />
         <div className="hero-bg-glow" aria-hidden="true" />
 
-        {/* Layer 1: Giant "PIPAA" text behind everything */}
-        <div className="hero-giant-text" aria-hidden="true">
-          <span>PIPAA</span>
+        {/* Independently animated lettering always stays behind the portrait. */}
+        <div className="hero-type-scene" aria-hidden="true">
+          <div className="hero-type-perspective">
+            <div className="hero-type-track">
+              {[0, 1].map((group) => (
+                <div className="hero-type-group" key={group}>
+                  <span className="hero-type-word">PIPAA</span>
+                  <span className="hero-type-word hero-type-outline">PANZA ARMY</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* Layer 2: Character image emerging over the text */}
-        <div className="hero-character" aria-label="PIPAA, streamer y líder de la Panza Army">
+        {/* The silhouette mask removes the generator's opaque backdrop. */}
+        <div className="hero-portrait-stage">
           <img
-            src="./hero-pipaa-v2.png"
-            alt="PIPAA sonriendo con remera Panza Army, letras gigantes PIPAA detrás y iluminación neón verde"
-            width="1536"
-            height="1024"
+            src="./pipaa-front-cutout.png"
+            alt="PIPAA de frente, mirando a cámara, con brazos cruzados y buzo Panza Army"
+            width="1024"
+            height="1536"
             fetchPriority="high"
-            className="hero-character-img"
+            className="hero-portrait-cutout"
           />
-          <div className="hero-character-gradient" aria-hidden="true" />
         </div>
+        <div className="hero-scene-fade" aria-hidden="true" />
+
+        <button className="hero-motion-toggle" type="button" aria-pressed={motionPaused} onClick={() => setMotionPaused(!motionPaused)}>
+          {motionPaused ? <Play size={13} aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}
+          <span>{motionPaused ? "Activar animación" : "Pausar animación"}</span>
+        </button>
 
         {/* Layer 3: Copy content on top */}
         <div className="hero-content-layer">
