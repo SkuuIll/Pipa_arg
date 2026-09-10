@@ -935,9 +935,6 @@ h3 em {
   font-size: 16px;
   opacity: 0.7;
 }
-.ticker:hover .ticker-track {
-  animation-play-state: paused;
-}
 
 /* ── Section Grid & Common Structure ── */
 .section-grid {

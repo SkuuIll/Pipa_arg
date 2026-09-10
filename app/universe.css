@@ -107,3 +107,27 @@
  .universe-atmosphere > i { animation:ambient-drift 45s ease-in-out infinite alternate!important; }
  .universe-grid,.hero-layered .hero-bg-grid { animation:grid-drift 60s linear infinite!important; }
 }
+
+/* Seamless ribbon: equal halves, no hover pause, constant pixel speed. */
+.ticker { width:100%; margin-left:0; box-shadow:0 8px 30px #6d35db33; border-block:1px solid #be91ff44; }
+.ticker .ticker-track { gap:0; animation:ticker-slide var(--ticker-duration,32s) linear infinite; }
+.ticker .ticker-group { gap:0; min-width:100vw; justify-content:space-around; }
+.ticker::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(90deg,#3c168055,transparent 7%,transparent 93%,#3c168055); }
+/* Restrained motion accents preserve the reading surface. */
+.universe-signal i { opacity:.2; }
+.portal-orbit { animation:portal-turn 28s ease-in-out infinite alternate; }
+@keyframes portal-turn { from { transform:rotateX(70deg) rotateY(-18deg) rotateZ(-12deg); } to { transform:rotateX(55deg) rotateY(25deg) rotateZ(30deg); } }
+.topbar nav a { position:relative; }
+.topbar nav a::after { content:""; position:absolute; bottom:-8px; left:0; right:0; height:2px; background:var(--acid); transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+.topbar nav a:is(:hover,:focus-visible,.is-active)::after { transform:scaleX(1); }
+.button svg { transition:transform .25s ease; }
+.button:is(:hover,:focus-visible) svg { transform:translateX(3px); }
+.stream-lab-card,.setup-grid article,.cmd-store-product-card { transition:border-color .25s ease,box-shadow .25s ease,translate .25s ease; }
+.stream-lab-card:focus-within,.setup-grid article:focus-within,.cmd-store-product-card:focus-within { border-color:#b789f2; box-shadow:0 12px 32px #6d35db20; }
+@media(hover:hover) and (pointer:fine) {
+ .stream-lab-card:hover,.setup-grid article:hover,.cmd-store-product-card:hover { translate:0 -4px; border-color:#b789f2; box-shadow:0 12px 32px #6d35db20; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .ticker .ticker-track { animation:ticker-slide calc(var(--ticker-duration,32s) * 2) linear infinite!important; }
+ .stream-lab-card,.setup-grid article,.cmd-store-product-card { translate:none!important; }
+}

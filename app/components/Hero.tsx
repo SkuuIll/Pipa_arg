@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { ShoppingCart, Play } from "lucide-react";
 import { LocalTime } from "../LocalTime";
 
@@ -14,6 +15,18 @@ const tickerPhrases = [
 ];
 
 export function Hero() {
+  const tickerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const track = tickerRef.current;
+    const group = track?.firstElementChild;
+    if (!track || !group) return;
+    // Constant reading speed, including after fonts load or the viewport changes.
+    const measure = () => track.style.setProperty("--ticker-duration", `${group.getBoundingClientRect().width / 70}s`);
+    const observer = new ResizeObserver(measure);
+    observer.observe(group);
+    measure();
+    return () => observer.disconnect();
+  }, []);
   return (
     <>
       <section className="hero-immersive hero-layered" id="inicio" data-scene="violet">
@@ -102,9 +115,9 @@ export function Hero() {
 
       {/* ── Ticker Marquee ── */}
       <div className="ticker" aria-label="Resumen de perfil y comunidad">
-        <div className="ticker-track">
+        <div className="ticker-track" ref={tickerRef}>
           <div className="ticker-group">
-            {[...tickerPhrases, ...tickerPhrases, ...tickerPhrases].map((phrase, idx) => (
+            {tickerPhrases.map((phrase, idx) => (
               <span key={`t1-${idx}`}>
                 <b>{phrase}</b>
                 <i aria-hidden="true">·</i>
@@ -112,7 +125,7 @@ export function Hero() {
             ))}
           </div>
           <div className="ticker-group" aria-hidden="true">
-            {[...tickerPhrases, ...tickerPhrases, ...tickerPhrases].map((phrase, idx) => (
+            {tickerPhrases.map((phrase, idx) => (
               <span key={`t2-${idx}`}>
                 <b>{phrase}</b>
                 <i aria-hidden="true">·</i>

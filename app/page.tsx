@@ -279,12 +279,13 @@ export default function Home() {
         {/* ── 02. Selección Argentina & Hazaña Mundial ── */}
         <section className="argentina" id="argentina" data-reveal>
           <div className="argentina-photo-3d-container">
-            <TiltCard3D maxTilt={12} glare={true} className="argentina-photo-3d-card">
+            <TiltCard3D maxTilt={12} glare={true} className="argentina-photo-3d-card argentina-official-portrait">
+              <div className="argentina-portrait-type" aria-hidden="true">PIPAA<span>ARGENTINA</span></div>
               <img
-                src="./pipaa-portrait-glow.jpg"
-                alt="PIPAA con jersey de su equipo esports, letras PIPAA detrás con neón verde y partículas flotantes"
-                width="960"
-                height="1280"
+                src="./pipaa-argentina-pnc-2026.png"
+                alt="Foto oficial de PIPAA con la camiseta celeste y blanca de Argentina en la PUBG Nations Cup 2026"
+                width="896"
+                height="1200"
                 loading="lazy"
                 decoding="async"
               />
@@ -293,6 +294,7 @@ export default function Home() {
                 <strong>#5</strong>
               </div>
             </TiltCard3D>
+            <a className="argentina-photo-source" href="https://pubgesports.com/en/teams/762" target="_blank" rel="noreferrer">Foto oficial · PUBG Esports / PNC 2026 ↗</a>
           </div>
           <div className="argentina-copy">
             <p className="eyebrow sky">EL PRO PLAYER QUE CONQUISTÓ EL STREAMING · TOP 5 MUNDIAL</p>
@@ -874,27 +876,29 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 12. Contacto Comercial ── */}
-        <section className="contact" id="contacto" data-reveal>
-          <p className="eyebrow">MARCAS · PRENSA · COLABORACIONES</p>
-          <h2>¿HACEMOS<br /><em>EQUIPO?</em></h2>
-          <p>Para propuestas comerciales, campañas de streaming, eventos y colaboraciones con PIPAA y la Panza Army.</p>
-          <div className="contact-card">
-            <div className="contact-card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="4" width="20" height="16" rx="2" />
-                <path d="M22 7l-10 7L2 7" />
-              </svg>
-            </div>
-            <div className="contact-card-body">
-              <small>CONTACTO DIRECTO</small>
-              <a href="mailto:raffitas_ruppel@hotmail.com" className="contact-mail-link">raffitas_ruppel@hotmail.com</a>
-            </div>
-            <a className="button button-primary contact-card-btn" href="mailto:raffitas_ruppel@hotmail.com">
-              Escribime <span aria-hidden="true">↗</span>
+        {/* Community invitation */}
+        <section className="contact discord-invite" id="discord" aria-labelledby="discord-title" data-reveal>
+          <p className="eyebrow">DISCORD OFICIAL · PANZA ARMY</p>
+          <h2 id="discord-title">TU LUGAR EN<br /><em>LA PANZA ARMY.</em></h2>
+          <p>La comunidad sigue cuando termina el stream. Sumate al Discord para charlar, compartir clips y encontrar gente para la próxima partida.</p>
+          <a className="button button-primary discord-invite-button" href="https://discord.gg/rgzZ3Kv" target="_blank" rel="noreferrer">
+            <DiscordIcon /> Unirme al Discord <span aria-hidden="true">↗</span>
+          </a>
+          <div className="contact-outline" aria-hidden="true">PANZA ARMY</div>
+        </section>
+
+        <section className="business-contact" id="contacto" aria-labelledby="business-title" data-reveal>
+          <div>
+            <p className="eyebrow">CONTACTO COMERCIAL</p>
+            <h2 id="business-title">PUBLICIDAD Y COLABORACIONES</h2>
+            <p>Para marcas, campañas de streaming, eventos y propuestas comerciales con PIPAA.</p>
+          </div>
+          <div className="business-contact-action">
+            <a className="contact-mail-link" href="mailto:raffitas_ruppel@hotmail.com">raffitas_ruppel@hotmail.com</a>
+            <a className="button button-ghost" href="mailto:raffitas_ruppel@hotmail.com?subject=Propuesta%20comercial%20para%20PIPAA">
+              Enviar propuesta <span aria-hidden="true">↗</span>
             </a>
           </div>
-          <div className="contact-outline" aria-hidden="true">PIPAA</div>
         </section>
       </main>
 
