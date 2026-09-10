@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { MotionController } from "./MotionController";
-import { ExperienceLayer } from "./ExperienceLayer";
+import { ExperienceLayer, ChapterPortal } from "./ExperienceLayer";
 import { LivePlayers } from "./LivePlayers";
 import { LocalTime } from "./LocalTime";
 import { StatsCounter } from "./StatsCounter";
@@ -248,6 +248,7 @@ export default function Home() {
       <main>
         {/* ── Hero ── */}
         <Hero />
+        <ChapterPortal word="PANZA ARMY" label="01 / ENTRASTE AL UNIVERSO" />
 
         {/* ── 01. Perfil / El Fenómeno Panza Army ── */}
         <section className="intro section-grid" id="historia" data-reveal>
@@ -511,6 +512,7 @@ export default function Home() {
         </section>
 
         {/* ── 05. Arsenal ── */}
+        <ChapterPortal word="LOCK & LOAD" label="02 / PRECISIÓN BAJO PRESIÓN" scene="lime" />
         <section className="arsenal-section section-grid" id="arsenal" data-reveal>
           <div className="section-kicker"><span>05</span> ARSENAL</div>
           <div className="arsenal-head">
@@ -643,6 +645,7 @@ export default function Home() {
         </section>
 
         {/* ── 07. En Vivo & Comunidad Panza Army ── */}
+        <ChapterPortal word="ESTÁS DENTRO" label="03 / EL CHAT TOMA EL CONTROL" />
         <section className="stream-section section-grid" id="comunidad" data-reveal>
           <div className="section-kicker"><span>07</span> EN VIVO</div>
           <div className="live-heading" data-reveal>

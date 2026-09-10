@@ -4,6 +4,8 @@ import ComandosPage from "../app/comandos/page";
 import "../app/globals.css";
 import "../app/redesign.css";
 
+import "../app/universe.css";
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ComandosPage />

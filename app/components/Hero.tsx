@@ -18,7 +18,7 @@ export function Hero() {
   const [motionPaused, setMotionPaused] = useState(false);
   return (
     <>
-      <section className={`hero-immersive hero-layered${motionPaused ? " is-paused" : ""}`} id="inicio">
+      <section className={`hero-immersive hero-layered${motionPaused ? " is-paused" : ""}`} id="inicio" data-scene="violet">
         {/* Background Layer: Grid + Gradient */}
         <div className="hero-bg-grid" aria-hidden="true" />
         <div className="hero-bg-glow" aria-hidden="true" />
@@ -36,6 +36,8 @@ export function Hero() {
             </div>
           </div>
         </div>
+
+        <div className="hero-orbital" aria-hidden="true"><i /><i /><i /><span>PLAYER 01 / PIPAA</span></div>
 
         {/* The silhouette mask removes the generator's opaque backdrop. */}
         <div className="hero-portrait-stage">

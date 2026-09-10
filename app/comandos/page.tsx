@@ -49,6 +49,8 @@ import {
 } from "lucide-react";
 
 import "./comandos.css";
+import { ExperienceLayer } from "../ExperienceLayer";
+import { SabotagePreview } from "./SabotagePreview";
 
 interface ChatMessage {
   id: string;
@@ -358,6 +360,7 @@ export default function ComandosPage() {
 
   return (
     <div className="cmd-shell">
+      <ExperienceLayer />
 
       {/* ── Topbar ── */}
       <header className="cmd-topbar">
@@ -848,6 +851,8 @@ export default function ComandosPage() {
                       {cmd.triggerGuide}
                     </div>
                   )}
+
+                  <SabotagePreview command={cmd} />
 
                   {/* Medios de Pago Aceptados */}
                   {cmd.paymentMethods && (
