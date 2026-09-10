@@ -11,6 +11,7 @@
 .experience-controls button:hover { background:#6d35db33; }
 .experience-controls button[aria-pressed="true"] { background:#a7ff00; color:#07050d; }
 .experience-controls button:disabled { opacity:.5; cursor:default!important; }
+.experience-motion-note { align-self:center; padding:0 8px; color:#dccbed; font:500 10px var(--font-body); }
 .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 /* Mouse parallax, scroll depth and slow orbit each keep separate transforms. */
 .hero-layered { --hero-x:0; --hero-y:0; --hero-scroll:0; }
@@ -102,7 +103,9 @@
  .hero-layered .hero-portrait-stage,.hero-layered .hero-type-scene,.hero-layered .hero-orbital { transform:none; transition:none; }
  .hero-layered .hero-type-perspective { animation:none; }
  .portal-word { transform:none; will-change:auto; }
- .chaos-overlay { display:none; }
+ .chaos-overlay { animation:none!important; transition:none; }
+ .chaos-overlay i { display:none; }
+ .universe-chaos .hero-type-word { animation:none; }
  .sabotage-world,.sabotage-weapon { transition:none; }
  .effect-mirror.is-playing .sabotage-world { transform:none; }
  .effect-mirror.is-playing .sabotage-target { left:65%; }

@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { Pause, Play, Zap } from "lucide-react";
 
 export function ExperienceLayer() {
-  const [chaos, setChaos] = useState(false);
+  const [chaos, setChaos] = useState(() => {
+    try { return localStorage.getItem("pipa-chaos") === "true"; } catch { return false; }
+  });
   const [paused, setPaused] = useState(() => {
     try { return localStorage.getItem("pipa-effects-paused") === "true"; } catch { return false; }
   });
@@ -18,9 +20,12 @@ export function ExperienceLayer() {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.toggle("universe-chaos", chaos && !reduced && !paused);
+    root.classList.toggle("universe-chaos", chaos);
     root.classList.toggle("experience-paused", paused || reduced);
-    try { localStorage.setItem("pipa-effects-paused", String(paused)); } catch { /* Storage is optional. */ }
+    try {
+      localStorage.setItem("pipa-effects-paused", String(paused));
+      localStorage.setItem("pipa-chaos", String(chaos));
+    } catch { /* Storage is optional. */ }
     return () => { root.classList.remove("universe-chaos", "experience-paused"); };
   }, [chaos, paused, reduced]);
 
@@ -80,13 +85,13 @@ export function ExperienceLayer() {
     <div className="universe-atmosphere" aria-hidden="true"><i /><i /><div className="universe-grid" /></div>
     <div className="chaos-overlay" aria-hidden="true"><span>SEÑAL INTERVENIDA / PANZA ARMY</span><i /><i /><i /></div>
     <div className="experience-controls" role="group" aria-label="Efectos visuales">
-      <button type="button" className="chaos-switch" aria-pressed={chaos} disabled={reduced} onClick={() => { setChaos(!chaos); if (!chaos) setPaused(false); }}>
+      <button type="button" className="chaos-switch" aria-pressed={chaos} onClick={() => { setChaos(!chaos); if (!chaos) setPaused(false); }}>
         <Zap size={14} aria-hidden="true" /> {chaos ? "Caos activado" : "Modo caos"}
       </button>
-      <button type="button" disabled={reduced} aria-pressed={paused || reduced} aria-label={reduced ? "Movimiento reducido activo" : paused ? "Activar efectos visuales" : "Pausar efectos visuales"} onClick={() => setPaused(!paused)}>
+      {reduced ? <span className="experience-motion-note">Sin animaciones</span> : <button type="button" aria-pressed={paused} aria-label={paused ? "Activar efectos visuales" : "Pausar efectos visuales"} onClick={() => setPaused(!paused)}>
         {paused || reduced ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}
-      </button>
-      <span className="sr-only" role="status">{reduced ? "Efectos reducidos según tu dispositivo" : chaos && !paused ? "Modo caos activado" : paused ? "Efectos pausados" : "Modo inmersivo"}</span>
+      </button>}
+      <span className="sr-only" role="status">{chaos ? "Modo caos activado. " : "Modo inmersivo. "}{reduced ? "Sin animaciones según la preferencia de tu dispositivo." : paused ? "Animaciones pausadas." : "Animaciones activas."}</span>
     </div>
   </>;
 }
