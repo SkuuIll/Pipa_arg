@@ -2,16 +2,10 @@
 :root { --journey:0; --scene-glow:109,53,219; }
 :root[data-universe-scene="lime"] { --scene-glow:113,157,35; }
 .universe-progress { position:fixed; inset:0 0 auto; height:3px; z-index:150; transform:scaleX(var(--journey)); transform-origin:left; background:linear-gradient(90deg,#6d35db,#a7ff00); pointer-events:none; }
-.universe-atmosphere { position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; opacity:.6; }
-.universe-atmosphere > i { position:absolute; width:70vw; height:70vw; border-radius:50%; background:radial-gradient(circle,rgba(var(--scene-glow),.25),transparent 65%); top:-20%; right:-25%; transition:background 1.5s ease; }
-.universe-atmosphere > i:nth-child(2) { top:50%; right:auto; left:-30%; background:radial-gradient(circle,#6d35db22,transparent 65%); }
-.universe-grid { position:absolute; inset:0; background-image:linear-gradient(#bba0f008 1px,transparent 1px),linear-gradient(90deg,#bba0f008 1px,transparent 1px); background-size:70px 70px; mask-image:linear-gradient(transparent,#000,transparent); }
-.experience-controls { position:fixed; z-index:115; right:20px; bottom:20px; display:flex; padding:5px; gap:4px; background:#0c0719ed; border:1px solid #9563dd66; border-radius:9px; box-shadow:0 8px 30px #0006; backdrop-filter:blur(12px); }
-.experience-controls button { display:flex; align-items:center; justify-content:center; gap:8px; min-height:34px; padding:8px 12px; color:#dccbed; background:transparent; border:0; border-radius:5px; font:700 10px var(--font-body); text-transform:uppercase; letter-spacing:.06em; }
-.experience-controls button:hover { background:#6d35db33; }
-.experience-controls button[aria-pressed="true"] { background:#a7ff00; color:#07050d; }
-.experience-controls button:disabled { opacity:.5; cursor:default!important; }
-.experience-motion-note { align-self:center; padding:0 8px; color:#dccbed; font:500 10px var(--font-body); }
+.universe-atmosphere { position:fixed; inset:0; z-index:2; overflow:hidden; pointer-events:none; opacity:.45; }
+.universe-atmosphere > i { position:absolute; width:70vw; height:70vw; border-radius:50%; background:radial-gradient(circle,rgba(var(--scene-glow),.25),transparent 65%); top:-20%; right:-25%; transition:background 1.5s ease; animation:ambient-drift 18s ease-in-out infinite alternate; }
+.universe-atmosphere > i:nth-child(2) { top:50%; right:auto; left:-30%; background:radial-gradient(circle,#6d35db44,transparent 65%); animation-delay:-9s; animation-direction:alternate-reverse; }
+.universe-grid { position:absolute; inset:0; background-image:linear-gradient(#bba0f008 1px,transparent 1px),linear-gradient(90deg,#bba0f008 1px,transparent 1px); background-size:70px 70px; mask-image:linear-gradient(transparent,#000,transparent); animation:grid-drift 16s linear infinite; }
 .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 /* Mouse parallax, scroll depth and slow orbit each keep separate transforms. */
 .hero-layered { --hero-x:0; --hero-y:0; --hero-scroll:0; }
@@ -24,9 +18,6 @@
 .hero-orbital i:nth-child(2) { width:95%; border-color:#a7ff0033; transform:rotateY(68deg) rotate(20deg); animation:ring-orbit 22s linear infinite; }
 .hero-orbital i:nth-child(3) { width:63%; border-style:dashed; opacity:.4; transform:rotateX(40deg) rotateY(-32deg); }
 .hero-orbital span { position:absolute; right:12%; top:7%; font:700 9px monospace; letter-spacing:.2em; color:#b393d4; }
-.hero-layered .hero-motion-toggle { right:auto; left:5.5%; bottom:16px; }
-.hero-layered.is-paused .hero-type-perspective,.hero-layered.is-paused .hero-orbital i,.hero-layered.is-paused .hero-type-track { animation-play-state:paused; }
-.hero-layered.is-paused .hero-portrait-stage,.hero-layered.is-paused .hero-type-scene,.hero-layered.is-paused .hero-orbital { transform:none; }
 @keyframes type-orbit { from { transform:perspective(1100px) rotateY(-16deg) rotateZ(-8deg); } to { transform:perspective(1100px) rotateY(9deg) rotateZ(3deg); } }
 @keyframes ring-orbit { from { transform:rotateY(68deg) rotate(0deg); } to { transform:rotateY(68deg) rotate(360deg); } }
 /* Chapter interludes carry the transition; the readable content stays stationary. */
@@ -40,19 +31,18 @@
 .portal-orbit { position:absolute; width:600px; height:600px; border:1px solid #b28be52e; border-radius:50%; transform:rotateX(70deg) rotateY(20deg); box-shadow:0 0 0 45px #8f52d708,0 0 0 100px #8f52d708; }
 .chapter-portal::before,.chapter-portal::after { content:""; position:absolute; z-index:2; top:0; bottom:0; width:14%; pointer-events:none; background:linear-gradient(90deg,#090510,transparent); left:0; }
 .chapter-portal::after { left:auto; right:0; transform:rotate(180deg); }
-/* Opt-in chaos: contained chromatic distortion and slow neon pulses. */
-.chaos-overlay { position:fixed; z-index:105; inset:0; pointer-events:none; opacity:0; transition:opacity .5s; border:2px solid #a7ff0022; box-shadow:inset 0 0 100px #6d35db22; overflow:hidden; }
-.chaos-overlay > span { position:absolute; top:90px; left:20px; padding:6px 10px; border-left:2px solid #a7ff00; background:#120b20aa; color:#a7ff00; font:700 8px monospace; letter-spacing:.16em; }
-.chaos-overlay i { position:absolute; left:-10%; width:120%; height:1px; background:linear-gradient(90deg,transparent,#a7ff0066,transparent); top:25%; }
-.chaos-overlay i:nth-of-type(2) { top:63%; background:linear-gradient(90deg,transparent,#b179ff88,transparent); }
-.chaos-overlay i:nth-of-type(3) { top:85%; opacity:.4; }
-.universe-chaos .chaos-overlay { opacity:1; animation:chaos-breathe 5s ease-in-out infinite; }
-.universe-chaos .hero-type-word { animation:type-glitch 6s steps(1,end) infinite; }
-.universe-chaos .hero-type-track { animation-duration:15s; }
-.universe-chaos .portal-word { color:#b379f522; }
-.universe-chaos .hero-orbital { filter:drop-shadow(0 0 16px #a7ff0066); }
-.universe-chaos .chaos-overlay i { animation:signal-drift 9s ease-in-out infinite alternate; }
-@keyframes chaos-breathe { 0%,100% { box-shadow:inset 0 0 80px #6d35db22; } 50% { box-shadow:inset 0 0 130px #7d3bdc55; } }
+/* Ambient signals run automatically on both static entry points. */
+.universe-signal { position:fixed; z-index:105; inset:0; pointer-events:none; opacity:1; border:2px solid #a7ff0022; box-shadow:inset 0 0 100px #6d35db22; overflow:hidden; }
+.universe-signal i { position:absolute; left:-10%; width:120%; height:1px; background:linear-gradient(90deg,transparent,#a7ff0066,transparent); top:25%; }
+.universe-signal i:nth-of-type(2) { top:63%; background:linear-gradient(90deg,transparent,#b179ff88,transparent); }
+.universe-signal i:nth-of-type(3) { top:85%; opacity:.4; }
+.universe-signal { opacity:1; animation:signal-breathe 5s ease-in-out infinite; }
+.hero-type-word { animation:type-glitch 6s steps(1,end) infinite; }
+.hero-layered .hero-type-track { animation-duration:20s; }
+.portal-word { color:#b379f522; }
+.hero-orbital { filter:drop-shadow(0 0 16px #a7ff0066); }
+.universe-signal i { animation:signal-drift 9s ease-in-out infinite alternate; }
+@keyframes signal-breathe { 0%,100% { box-shadow:inset 0 0 80px #6d35db22; } 50% { box-shadow:inset 0 0 130px #7d3bdc55; } }
 @keyframes signal-drift { to { transform:translateY(90px); } }
 @keyframes type-glitch { 0%,88%,94%,100% { filter:none; } 89%,93% { filter:drop-shadow(5px 0 #a7ff00) drop-shadow(-5px 0 #e855ff); } }
 /* Interactive product effects are confined to this small game-like viewport. */
@@ -81,31 +71,21 @@
 .effect-audio.is-playing .sabotage-world { opacity:.2; }
 @keyframes sabotage-impact { 20% { transform:translate(-5px,2px) rotate(-2deg); } 60% { transform:translate(5px,-2px) rotate(2deg); } }
 @keyframes wave-signal { to { height:90%; background:#b87eff; } }
-.experience-paused *, .experience-paused *::before, .experience-paused *::after { animation-play-state:paused!important; }
-.experience-paused .hero-portrait-stage,.experience-paused .hero-type-scene,.experience-paused .hero-orbital { transform:none!important; }
-.experience-paused .tilt-3d-wrapper { transform:none!important; }
-.experience-paused .sabotage-world { transform:none!important; transition:none!important; }
-@media(min-width:1600px) { .hero-layered .hero-motion-toggle { left:calc((100vw - 1440px)/2 + 80px); } }
 @media(max-width:768px) {
- .experience-controls { bottom:88px; right:12px; padding:3px; }
- .experience-controls button { font-size:9px; min-height:32px; padding:7px 9px; }
  .hero-orbital { top:95px; bottom:auto; height:350px; width:100%; }
  .hero-orbital span { display:none; }
- .hero-layered .hero-motion-toggle { left:16px; right:auto; top:82px; bottom:auto; }
  .hero-layered .hero-type-scene { transform:none; }
  .chapter-portal { height:220px; gap:20px; }
  .portal-word { font-size:95px; }
  .portal-caption,.portal-coordinate { font-size:8px; letter-spacing:.13em; }
- .chaos-overlay > span { top:74px; left:10px; font-size:7px; }
- .cmd-shell .experience-controls { bottom:14px; }
 }
 @media(prefers-reduced-motion:reduce) {
  .hero-layered .hero-portrait-stage,.hero-layered .hero-type-scene,.hero-layered .hero-orbital { transform:none; transition:none; }
  .hero-layered .hero-type-perspective { animation:none; }
  .portal-word { transform:none; will-change:auto; }
- .chaos-overlay { animation:none!important; transition:none; }
- .chaos-overlay i { display:none; }
- .universe-chaos .hero-type-word { animation:none; }
+ .universe-signal { animation:none!important; transition:none; }
+ .universe-signal i { display:none; }
+ .hero-type-word { animation:none; }
  .sabotage-world,.sabotage-weapon { transition:none; }
  .effect-mirror.is-playing .sabotage-world { transform:none; }
  .effect-mirror.is-playing .sabotage-target { left:65%; }
@@ -115,5 +95,15 @@
 }
 /* A scroll chapter changes the ambient color without moving the content grid. */
 .site-shell main > .section-grid { background-image:radial-gradient(ellipse at 95% 15%,rgba(var(--scene-glow),.10),transparent 60%); }
-.experience-paused [data-reveal] { opacity:1!important; transform:none!important; transition:none!important; }
-.experience-paused .sabotage-weapon { transition:none!important; }
+
+/* These background layers move without mouse input or stored preferences. */
+@keyframes ambient-drift { from { transform:translate3d(-8%, -5%, 0) scale(.9); } to { transform:translate3d(12%, 12%, 0) scale(1.15); } }
+@keyframes grid-drift { to { background-position:70px 70px; } }
+.hero-layered .hero-bg-glow { display:block; animation:ambient-drift 14s ease-in-out infinite alternate; }
+.hero-layered .hero-bg-grid { animation:grid-drift 16s linear infinite; }
+/* Keep continuous backgrounds gentle when the device requests less motion. */
+@media(prefers-reduced-motion:reduce) {
+ .hero-layered .hero-type-track { animation:hero-type-drift 80s linear infinite!important; }
+ .universe-atmosphere > i { animation:ambient-drift 45s ease-in-out infinite alternate!important; }
+ .universe-grid,.hero-layered .hero-bg-grid { animation:grid-drift 60s linear infinite!important; }
+}

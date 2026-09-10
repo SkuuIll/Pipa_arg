@@ -59,4 +59,4 @@ Después de publicar por primera vez:
 
 El proyecto está preparado específicamente para GitHub Pages y dominio personalizado.
 
-El modo caos, el paralaje y las demostraciones de comandos se ejecutan en el navegador con los archivos de `dist/`. El modo elegido se conserva entre la portada y `/comandos/` cuando el navegador permite almacenamiento local. Con movimiento reducido, el modo caos conserva el estilo neón sin animaciones y muestra «Sin animaciones» junto al botón.
+Los efectos de fondo y el texto 3D se activan automáticamente en ambas páginas, sin botones ni preferencias de pausa guardadas. Se ejecutan íntegramente en el navegador desde `dist/`; no requieren servidor adicional. Con movimiento reducido, los fondos se desplazan más lentamente.

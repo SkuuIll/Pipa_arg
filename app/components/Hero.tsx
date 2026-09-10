@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { ShoppingCart, Play, Pause } from "lucide-react";
+import { ShoppingCart, Play } from "lucide-react";
 import { LocalTime } from "../LocalTime";
 
 const tickerPhrases = [
@@ -15,10 +14,9 @@ const tickerPhrases = [
 ];
 
 export function Hero() {
-  const [motionPaused, setMotionPaused] = useState(false);
   return (
     <>
-      <section className={`hero-immersive hero-layered${motionPaused ? " is-paused" : ""}`} id="inicio" data-scene="violet">
+      <section className="hero-immersive hero-layered" id="inicio" data-scene="violet">
         {/* Background Layer: Grid + Gradient */}
         <div className="hero-bg-grid" aria-hidden="true" />
         <div className="hero-bg-glow" aria-hidden="true" />
@@ -51,11 +49,6 @@ export function Hero() {
           />
         </div>
         <div className="hero-scene-fade" aria-hidden="true" />
-
-        <button className="hero-motion-toggle" type="button" aria-pressed={motionPaused} onClick={() => setMotionPaused(!motionPaused)}>
-          {motionPaused ? <Play size={13} aria-hidden="true" /> : <Pause size={13} aria-hidden="true" />}
-          <span>{motionPaused ? "Activar animación" : "Pausar animación"}</span>
-        </button>
 
         {/* Layer 3: Copy content on top */}
         <div className="hero-content-layer">

@@ -28,7 +28,7 @@ export function TiltCard3D({
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
-      if (!cardRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.classList.contains("experience-paused")) return;
+      if (!cardRef.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       const rect = cardRef.current.getBoundingClientRect();
       const width = rect.width;
       const height = rect.height;
