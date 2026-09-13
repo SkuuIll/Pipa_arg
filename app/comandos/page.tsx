@@ -379,7 +379,7 @@ export default function ComandosPage() {
         </div>
       </header>
 
-      <div className="store-art"><img src="../panza-army-3d.png" alt="Panza Army: letras 3D de metal y luz lima" width="1536" height="1024" /><div><p className="eyebrow">EL CHAT TAMBIÉN JUEGA</p><h1>Tu próximo movimiento.<br /><em>Su peor sorpresa.</em></h1><a className="button button-primary" href="#catalogo">Explorar comandos ↓</a></div></div>
+      <div className="store-art"><img src="../panza-army-studio.webp" srcSet="../panza-army-studio-small.webp 768w, ../panza-army-studio.webp 1536w" sizes="(max-width: 768px) calc(100vw - 32px), 620px" alt="Panza Army: letras 3D de metal y luz lima" width="1536" height="1024" /><div><p className="eyebrow">EL CHAT TAMBIÉN JUEGA</p><h1>Tu próximo movimiento.<br /><em>Su peor sorpresa.</em></h1><a className="button button-primary" href="#catalogo">Explorar comandos ↓</a></div></div>
       {/* ── Selector de Modo Principal: TIENDA vs CHAT ── */}
       <nav id="catalogo" className="cmd-mode-tabs" aria-label="Navegación de Comandos">
         <button

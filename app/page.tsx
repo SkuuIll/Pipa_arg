@@ -280,11 +280,12 @@ export default function Home() {
         <section className="argentina" id="argentina" data-reveal>
           <div className="argentina-photo-3d-container">
             <TiltCard3D maxTilt={12} glare={true} className="argentina-photo-3d-card argentina-official-portrait">
-              <div className="argentina-portrait-type" aria-hidden="true">PIPAA<span>ARGENTINA</span></div>
               <img
-                src="./pipaa-argentina-pnc-2026.png"
-                alt="Foto oficial de PIPAA con la camiseta celeste y blanca de Argentina en la PUBG Nations Cup 2026"
-                width="896"
+                src="./pipaa-argentina-studio.webp"
+                srcSet="./pipaa-argentina-studio-small.webp 480w, ./pipaa-argentina-studio.webp 900w"
+                sizes="(max-width: 768px) calc(100vw - 48px), 480px"
+                alt="Retrato recreado de PIPAA con la camiseta de Argentina, basado en la foto de PUBG Esports"
+                width="900"
                 height="1200"
                 loading="lazy"
                 decoding="async"
@@ -294,7 +295,7 @@ export default function Home() {
                 <strong>#5</strong>
               </div>
             </TiltCard3D>
-            <a className="argentina-photo-source" href="https://pubgesports.com/en/teams/762" target="_blank" rel="noreferrer">Foto oficial · PUBG Esports / PNC 2026 ↗</a>
+            <a className="argentina-photo-source" href="https://pubgesports.com/en/teams/762" target="_blank" rel="noreferrer">Retrato recreado · Referencia: PUBG Esports ↗</a>
           </div>
           <div className="argentina-copy">
             <p className="eyebrow sky">EL PRO PLAYER QUE CONQUISTÓ EL STREAMING · TOP 5 MUNDIAL</p>
@@ -723,13 +724,13 @@ export default function Home() {
           <article className="community-feature" data-reveal>
             <div className="community-feature-media">
               <TiltCard3D maxTilt={7} glare={true} style={{ width: "100%", height: "100%" }}>
-                <img src="./panza-army-3d.png" alt="Panza Army en letras metálicas tridimensionales con iluminación lima" width="1536" height="1024" loading="lazy" decoding="async" />
+                <img src="./panza-army-studio.webp" srcSet="./panza-army-studio-small.webp 768w, ./panza-army-studio.webp 1536w" sizes="(max-width: 768px) calc(100vw - 48px), 900px" alt="Panza Army en letras metálicas violetas con detalles lima" width="1536" height="1024" loading="lazy" decoding="async" />
                 <span className="community-feature-scan" aria-hidden="true" />
               </TiltCard3D>
             </div>
             <div className="community-feature-copy">
               <div className="community-feature-label"><span>07</span> LA COMUNIDAD</div>
-              <img className="community-avatar" src="./pipa-avatar.webp" alt="Logo de PIPAA y Panza Army" width="350" height="349" loading="lazy" decoding="async" />
+              <img className="community-avatar" src="./pipa-avatar-v2.webp" alt="Logo de PIPAA y Panza Army" width="512" height="512" loading="lazy" decoding="async" />
               <div className="community-feature-title">
                 <p className="eyebrow">MÁS QUE UN CHAT</p>
                 <h3>PANZA<br /><em>ARMY.</em></h3>

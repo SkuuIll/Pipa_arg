@@ -50,15 +50,17 @@ export function Hero() {
 
         <div className="hero-orbital" aria-hidden="true"><i /><i /><i /><span>PLAYER 01 / PIPAA</span></div>
 
-        {/* The silhouette mask removes the generator's opaque backdrop. */}
+        {/* Studio background blends into the scene without cutting the silhouette. */}
         <div className="hero-portrait-stage">
           <img
-            src="./pipaa-front-cutout.png"
+            src="./pipaa-studio.webp"
+            srcSet="./pipaa-studio-small.webp 480w, ./pipaa-studio.webp 1024w"
+            sizes="(max-width: 768px) 260px, 520px"
             alt="PIPAA de frente, mirando a cámara, con brazos cruzados y buzo Panza Army"
             width="1024"
             height="1536"
             fetchPriority="high"
-            className="hero-portrait-cutout"
+            className="hero-portrait-studio"
           />
         </div>
         <div className="hero-scene-fade" aria-hidden="true" />
