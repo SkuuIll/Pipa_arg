@@ -18,6 +18,7 @@ import {
 import { YouTubeFeed } from "./YouTubeFeed";
 import { TiltCard3D } from "./TiltCard3D";
 import { Hero } from "./components/Hero";
+import { MateHuntProvider, HiddenMate, MateProgress } from "./components/MateHunt";
 
 import {
   ShoppingCart,
@@ -214,6 +215,7 @@ export default function Home() {
   };
 
   return (
+    <MateHuntProvider>
     <div className="site-shell">
 
       <a className="skip-link" href="#inicio">Saltar al contenido</a>
@@ -512,6 +514,7 @@ export default function Home() {
               </li>
             ))}
           </ol>
+          <div className="mate-hiding-spot mate-hiding-spot-career"><HiddenMate id="trayectoria" /></div>
         </section>
 
         {/* ── 05. Arsenal ── */}
@@ -552,6 +555,7 @@ export default function Home() {
         {/* ── 06. Setup & Config ── */}
         <section className="setup section-grid" id="setup" data-reveal>
           <div className="section-kicker"><span>06</span> SETUP & CONFIG</div>
+          <div className="mate-hiding-spot mate-hiding-spot-setup"><HiddenMate id="setup" /></div>
           <div className="setup-heading">
             <div>
               <p className="eyebrow">HARDWARE COMPETITIVO · DUAL PC</p>
@@ -754,6 +758,7 @@ export default function Home() {
                     Canal Twitch ↗
                   </a>
                 </div>
+                <div className="mate-hiding-spot mate-hiding-spot-community"><HiddenMate id="comunidad" /></div>
               </div>
             </div>
           </article>
@@ -901,6 +906,7 @@ export default function Home() {
             </a>
           </div>
         </section>
+        <MateProgress />
       </main>
 
       <footer>
@@ -941,5 +947,6 @@ export default function Home() {
 
       <MotionController />
     </div>
+    </MateHuntProvider>
   );
 }
