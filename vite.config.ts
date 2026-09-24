@@ -1,21 +1,23 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { rmSync, writeFileSync } from "node:fs";
+import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
-const siteUrl = process.env.SITE_URL?.replace(/\/$/, "");
+const siteUrl = (process.env.SITE_URL || "https://pipaa.store").replace(/\/$/, "");
+const googleVerification = process.env.GOOGLE_SITE_VERIFICATION || "";
+const gaMeasurementId = process.env.GA_MEASUREMENT_ID || process.env.VITE_GA_ID || "";
 
 const identityGraph = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Person",
-      "@id": siteUrl ? `${siteUrl}/#pipa` : "#pipa",
+      "@id": `${siteUrl}/#pipa`,
       name: "Leonardo Rafael Ruppel",
       alternateName: ["PIPAA", "Pipa_ARG"],
       description: "Jugador profesional argentino de PUBG, streamer y creador de la comunidad Panza Army.",
-      image: siteUrl ? `${siteUrl}/pipaa-studio.webp` : undefined,
-      url: siteUrl || undefined,
+      image: `${siteUrl}/pipaa-studio.webp`,
+      url: `${siteUrl}/`,
       nationality: { "@type": "Country", name: "Argentina" },
       jobTitle: ["Jugador profesional de PUBG", "Streamer", "Creador de contenido"],
       knowsAbout: ["PUBG: Battlegrounds", "Esports", "Streaming", "Gaming competitivo"],
@@ -32,12 +34,48 @@ const identityGraph = {
     },
     {
       "@type": "WebSite",
-      "@id": siteUrl ? `${siteUrl}/#website` : "#website",
+      "@id": `${siteUrl}/#website`,
       name: "PIPAA",
       alternateName: "Pipa_ARG",
-      url: siteUrl || undefined,
+      url: `${siteUrl}/`,
       inLanguage: "es-AR",
-      about: { "@id": siteUrl ? `${siteUrl}/#pipa` : "#pipa" },
+      about: { "@id": `${siteUrl}/#pipa` },
+    },
+  ],
+};
+
+const comandosGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/comandos/#webpage`,
+      url: `${siteUrl}/comandos/`,
+      name: "PanzaBot & Comandos Troll — PIPAA (Pipa_ARG)",
+      description: "Catálogo interactivo con simulador de chat y soundboard de la Panza Army de PIPAA.",
+      isPartOf: {
+        "@type": "WebSite",
+        "@id": `${siteUrl}/#website`,
+        name: "PIPAA",
+        url: `${siteUrl}/`,
+      },
+      breadcrumb: {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Inicio",
+            item: `${siteUrl}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Comandos",
+            item: `${siteUrl}/comandos/`,
+          },
+        ],
+      },
     },
   ],
 };
@@ -45,20 +83,30 @@ const identityGraph = {
 function seoFiles() {
   return {
     name: "pipa-seo",
-    transformIndexHtml(html: string) {
-      const canonical = siteUrl
-        ? `<link rel="canonical" href="${siteUrl}/" />\n    <meta property="og:url" content="${siteUrl}/" />`
+    transformIndexHtml(html: string, ctx: { path?: string }) {
+      const isComandos = Boolean(ctx.path && ctx.path.includes("comandos"));
+      const pageUrl = isComandos ? `${siteUrl}/comandos/` : `${siteUrl}/`;
+      const canonicalBlock = `<link rel="canonical" href="${pageUrl}" />\n    <meta property="og:url" content="${pageUrl}" />`;
+      const activeGraph = isComandos ? comandosGraph : identityGraph;
+      const structuredData = `<script type="application/ld+json">${JSON.stringify(activeGraph)}</script>`;
+
+      const googleVerificationTag = googleVerification
+        ? `<meta name="google-site-verification" content="${googleVerification}" />\n    `
         : "";
-      const imageUrl = siteUrl ? `${siteUrl}/og-v3.jpg` : "./og-v3.jpg";
-      const structuredData = `<script type="application/ld+json">${JSON.stringify(identityGraph)}</script>`;
+
+      const googleAnalyticsTag = gaMeasurementId
+        ? `<!-- Google Tag (gtag.js) -->\n    <script async src="https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}"></script>\n    <script>\n      window.dataLayer = window.dataLayer || [];\n      function gtag(){dataLayer.push(arguments);}\n      gtag('js', new Date());\n      gtag('config', '${gaMeasurementId}');\n    </script>\n    `
+        : "";
+
+      const fullSeoRuntime = `${googleVerificationTag}${googleAnalyticsTag}${canonicalBlock}\n    ${structuredData}`;
 
       return html
-        .replace("<!-- SEO_RUNTIME -->", `${canonical}\n    ${structuredData}`)
-        .replaceAll("./og-v3.jpg", imageUrl);
+        .replace("<!-- SEO_RUNTIME -->", fullSeoRuntime)
+        // Normalizar og:image y rutas de imagen absoluta para SEO de Google
+        .replace(/(['"])(?:\.{1,2}\/)?og-v3\.jpg(['"])/g, `$1${siteUrl}/og-v3.jpg$2`);
     },
     closeBundle() {
       const dist = resolve("dist");
-      const url = (siteUrl || "https://skuuill.github.io/Pipa_arg").replace(/\/$/, "");
       const sitemapPath = resolve(dist, "sitemap.xml");
       const today = new Date().toISOString().slice(0, 10);
 
@@ -75,7 +123,7 @@ function seoFiles() {
         "User-agent: Bingbot",
         "Allow: /",
         "",
-        `Sitemap: ${url}/sitemap.xml`,
+        `Sitemap: ${siteUrl}/sitemap.xml`,
         "",
       ].join("\n");
 
@@ -83,7 +131,7 @@ function seoFiles() {
 
       writeFileSync(
         sitemapPath,
-        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${url}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n  <url>\n    <loc>${url}/comandos/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n</urlset>\n`,
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${siteUrl}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n  <url>\n    <loc>${siteUrl}/comandos/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n</urlset>\n`,
         "utf8",
       );
     },
@@ -91,7 +139,6 @@ function seoFiles() {
 }
 
 export default defineConfig({
-  // Rutas relativas: funciona tanto en usuario.github.io/repositorio como con dominio propio.
   base: "./",
   plugins: [react(), seoFiles()],
   server: {

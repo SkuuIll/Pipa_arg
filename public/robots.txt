@@ -10,4 +10,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://skuuill.github.io/Pipa_arg/sitemap.xml
+Sitemap: https://pipaa.store/sitemap.xml
