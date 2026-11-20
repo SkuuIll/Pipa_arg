@@ -1,13 +1,14 @@
 import { diaSubWebhook, queue, type DiaSubEnv } from "./dia-sub-webhooks";
 import type { Platform } from "./dia-sub";
 import { youtubeResponse, youtubeStore, type VideoEnv } from "./youtube-feed";
+import { saturdayFor } from "./argentina-date";
 
 export { DiaSub } from "./dia-sub";
 export { YouTubeFeedStore } from "./youtube-feed";
 
 export default {
-  async scheduled(_event: ScheduledController, env: VideoEnv) {
-    await youtubeStore(env).refresh();
+  async scheduled(_event: ScheduledController, env: VideoEnv & DiaSubEnv) {
+    await Promise.allSettled([youtubeStore(env).refresh(), ...(saturdayFor(Date.now()).isSaturday ? [queue(env).ensurePublicFeed()] : [])]);
   },
 
   async fetch(request: Request, env: DiaSubEnv & VideoEnv & { ASSETS: Fetcher }): Promise<Response> {
@@ -242,6 +243,7 @@ export default {
 
     if (url.pathname === "/api/diasub") {
       if (request.method !== "GET") return new Response(null, { status: 405, headers: { Allow: "GET" } });
+      if (saturdayFor(Date.now()).isSaturday) await queue(env).ensurePublicFeed();
       const configured: Platform[] = [];
       if (env.KICK_BROADCASTER_ID) configured.push("kick");
       if (env.TWITCH_BROADCASTER_ID && env.TWITCH_EVENTSUB_SECRET) configured.push("twitch");

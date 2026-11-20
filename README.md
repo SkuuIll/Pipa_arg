@@ -46,7 +46,9 @@ Con `YOUTUBE_API_KEY` configurada como secreto del Worker, la galería distingue
 
 ## Activación de Día Sub
 
-La sala usa la conexión WebSocket de Unified Chat Lite para leer Kick, Twitch y YouTube en un panel de PIPAA. El navegador conserva hasta 80 mensajes de los últimos 30 minutos. La opción de escritura abre el chat oficial incrustado de Twitch y requiere una sesión de Twitch para enviar. El estado de emisión y la inscripción de Día Sub usan los webhooks firmados de Kick y Twitch.
+La sala usa la conexión WebSocket de Unified Chat Lite para leer Kick, Twitch y YouTube en un panel de PIPAA. El navegador conserva hasta 80 mensajes de los últimos 30 minutos. La opción de escritura abre el chat oficial incrustado de Twitch y requiere una sesión de Twitch para enviar. Día Sub lee el chat público desde el servidor; los webhooks firmados de Kick y Twitch se pueden configurar opcionalmente.
+
+Para activar la integración oficial opcional:
 
 1. Configurá `KICK_BROADCASTER_ID` y `TWITCH_BROADCASTER_ID` con los IDs numéricos de las cuentas de PIPAA en sus respectivas plataformas. Podés cargar cada valor con `npx wrangler secret put NOMBRE`.
 2. Guardá un secreto aleatorio de 32 a 100 caracteres con `npx wrangler secret put TWITCH_EVENTSUB_SECRET`. Usá ese mismo secreto al crear los webhooks de Twitch.
@@ -54,7 +56,7 @@ La sala usa la conexión WebSocket de Unified Chat Lite para leer Kick, Twitch y
 4. En Twitch, autorizá a la aplicación a leer el chat con `user:read:chat` y `user:bot` para la identidad lectora, y `channel:bot` para PIPAA. Con el token de aplicación, creá las suscripciones EventSub `channel.chat.message`, `stream.online` y `stream.offline`, versión 1. Usá `broadcaster_user_id` del canal en las tres condiciones y agregá `user_id` de la identidad lectora para el evento de chat. Configurá `transport.method` como `webhook`, el callback `https://pipaa.store/api/diasub/twitch` y el secreto del paso 2. [Configuración de EventSub](https://dev.twitch.tv/docs/chat/authenticating/)
 5. Verificá las suscripciones de eventos y hacé una prueba de inicio y fin de directo en cada plataforma. El estado de conexión de cada canal aparece en la web al recibir el primer evento de directo. Si el canal ya estaba transmitiendo al conectar, la apertura se detecta con el siguiente inicio.
 
-Día Sub acepta `!diasub NombreEnElJuego` o `diasub NombreEnElJuego` durante el directo del sábado, de 00:00 a 23:59 en Argentina. La cuenta debe tener insignia de suscripción en ese chat. Se guarda la primera inscripción por cuenta y plataforma, con orden de llegada, y se muestra el usuario junto con el nombre indicado. Los canjes de puntos todavía requieren una integración y verificación de suscripción por separado.
+Día Sub también escucha el chat público mediante Unified Chat Lite desde el objeto Durable compartido, sin claves. Acepta `!diasub NombreEnElJuego`, `diasub NombreEnElJuego` o `Día Sub NombreEnElJuego` el sábado argentino; exige la insignia de suscriptor de ese canal y guarda la primera inscripción por nombre de usuario y plataforma. El relay no proporciona el identificador de la recompensa: un canje solo puede reconocerse si llega al chat como texto con ese formato, y no se puede confirmar que sea un canje. La conexión depende de un servicio externo, puede interrumpirse y no garantiza recuperar todos los mensajes. El objeto escucha todo el sábado, usa cómputo mientras mantiene el WebSocket abierto y se reconecta tras fallos; las entradas se guardan de forma persistente. Las conexiones oficiales anteriores siguen siendo opcionales.
 
 ## Aparición en Google
 

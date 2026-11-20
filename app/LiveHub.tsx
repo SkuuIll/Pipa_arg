@@ -230,7 +230,7 @@ function DiaSubList({ snapshot, failed }: { snapshot: DiaSubState | null; failed
       <div className="diasub-intro">
         <div className="diasub-intro-top">
           <span className="live-hub-label">
-            <CalendarDays aria-hidden="true" size={14} /> Sábados · Ventana 12 h
+            <CalendarDays aria-hidden="true" size={14} /> Sábados · Hora argentina
           </span>
           <span role="status" className={`diasub-status-pill ${snapshot?.status === "open" && !failed ? "is-open" : ""}`}>
             {status}
@@ -238,7 +238,7 @@ function DiaSubList({ snapshot, failed }: { snapshot: DiaSubState | null; failed
         </div>
         <h3 id="diasub-title">Día Sub</h3>
         <p>
-          Si sos sub de PIPAA, escribí <code>!diasub TuNombreEnElJuego</code> en el chat de Kick o Twitch mientras está en directo.
+          El sábado, si sos sub de PIPAA, escribí <code>!diasub TuNombreEnElJuego</code> en el chat de Kick o Twitch.
           {closesAt ? ` Ventana activa hasta las ${closesAt} ARG.` : " Tu usuario queda guardado por orden de llegada."}
         </p>
         <div className="diasub-copy-row">
