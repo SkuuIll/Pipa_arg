@@ -1995,3 +1995,35 @@ body:has(.live-hub--cinema) { overflow: hidden; }
   .header-live-dot,
   .preloader-ring { animation: none; }
 }
+
+/* A compact broadcast frame for the standalone chat. Browser chrome stays native. */
+.standalone-chat-page:not(.is-transparent) { padding: 12px; gap: 10px; background: radial-gradient(circle at 90% 0, #422067 0, transparent 38%), #090610; }
+.standalone-chat-brand { display:flex; align-items:center; gap:10px; padding:4px 4px 2px; color:#f7f0ff; }
+.standalone-chat-brand img { border-radius:10px; border:1px solid #a7ff0088; }
+.standalone-chat-brand div { display:grid; gap:2px; }
+.standalone-chat-brand strong { font-size:12px; letter-spacing:.1em; }
+.standalone-chat-brand div span { color:#b8a4ce; font-size:9px; font-weight:700; letter-spacing:.1em; }
+.standalone-chat-signal { margin-left:auto; color:#b7f84a; font-size:9px; font-weight:800; white-space:nowrap; }
+.standalone-chat-page:not(.is-transparent) .multichat.is-standalone { border-color:#9d68df70; box-shadow:0 12px 40px #0008, inset 0 1px #ffffff12; }
+
+/* A quick broadcast ident instead of a long loading screen. */
+.pipaa-preloader { background:radial-gradient(ellipse at 50% 45%,#271044,#0a0711 65%); }
+.pipaa-preloader::before { content:'PANZA ARMY'; position:absolute; font:900 clamp(70px,17vw,240px)/1 var(--font-display); letter-spacing:-.04em; white-space:nowrap; color:transparent; -webkit-text-stroke:1px #b484e82a; transform:rotate(-8deg); }
+.pipaa-preloader-frame { background:linear-gradient(145deg,#251535dd,#100b1bee); border:1px solid #aa77e34d; box-shadow:0 20px 90px #0009; }
+.preloader-ring { border-style:solid; border-color:#a7ff00 transparent #a7ff00 transparent; }
+.preloader-ring-outer { border-style:dashed; border-color:#b57afa88; }
+.preloader-tagline { color:#c9b7dc; }
+@media (prefers-reduced-motion: reduce) { .pipaa-preloader-glow, .preloader-particles span { animation:none; } }
+
+/* The brand mark has a clearer, more deliberate presence in the navigation. */
+.header-brand img { height:32px; width:auto; filter:drop-shadow(0 0 7px #a7ff0055); transition:filter .2s, transform .2s; }
+.header-brand:hover img { filter:drop-shadow(0 0 12px #a7ff00aa); transform:scale(1.05); }
+.pipaa-preloader-frame { width:min(420px,calc(100% - 40px)); padding:38px 42px 32px; gap:14px; background:linear-gradient(145deg,#281940ef,#0d0918f5); border:1px solid #b896ed55; border-radius:4px; box-shadow:0 25px 90px #000b, 8px 8px 0 #a7ff0018; }
+.preloader-emblem { width:100px; height:100px; }
+.preloader-avatar { width:78px; height:78px; }
+.preloader-logo { height:54px; filter:drop-shadow(0 0 12px #a7ff0066); }
+.preloader-status { margin-top:8px; color:#c9ff76; font-size:.65rem; }
+.preloader-bar { height:4px; }
+.header-brand img { animation:brand-signal 5s ease-in-out infinite; }
+@keyframes brand-signal { 0%,80%,100% { filter:drop-shadow(0 0 4px #a7ff0055); } 85%,92% { filter:drop-shadow(0 0 10px #a7ff00bb); } }
+@media(prefers-reduced-motion:reduce) { .header-brand img { animation:none; } }

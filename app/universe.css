@@ -131,3 +131,23 @@
  .ticker .ticker-track { animation:ticker-slide calc(var(--ticker-duration,32s) * 2) linear infinite!important; }
  .stream-lab-card,.setup-grid article,.cmd-store-product-card { translate:none!important; }
 }
+
+/* Neon signs and a slow cinematic light pass over the community artwork. */
+.hero-type-word.hero-type-outline { animation:panza-neon 5.5s ease-in-out infinite; }
+@keyframes panza-neon {
+  0%, 17%, 21%, 58%, 62%, 100% { color:#4a1f66; -webkit-text-stroke-color:#b996d8; text-shadow:0 0 14px #a7ff0044, 4px 4px #2c103c; }
+  19%, 60% { color:#6d242e; -webkit-text-stroke-color:#caff82; text-shadow:0 0 10px #b4ff44, 0 0 35px #a7ff00aa, 5px 5px #a91d3c; }
+  32%, 78% { color:#51252c; -webkit-text-stroke-color:#b8ed72; text-shadow:0 0 20px #a7ff0088, 5px 5px #8e2138; }
+}
+.community-feature-media { overflow:hidden; }
+.community-feature-media img { animation:community-breathe 9s ease-in-out infinite alternate; }
+.community-feature-media::before { content:''; position:absolute; inset:-30%; z-index:2; pointer-events:none; background:linear-gradient(110deg,transparent 38%,#c4ff8730 49%,#e7608a20 52%,transparent 63%); transform:translateX(-70%); animation:community-light 8s ease-in-out infinite; }
+@keyframes community-breathe { from { transform:scale(1.01); filter:brightness(.94); } to { transform:scale(1.055); filter:brightness(1.08); } }
+@keyframes community-light { 0%,15% { transform:translateX(-70%); opacity:0; } 30% { opacity:1; } 60%,100% { transform:translateX(70%); opacity:0; } }
+@media (prefers-reduced-motion: reduce) { .hero-type-word.hero-type-outline, .community-feature-media img, .community-feature-media::before { animation:none; } }
+
+/* Stronger motion is applied to the actual artwork, independently of its tilt wrapper. */
+.community-feature-media img { animation:community-art-pulse 5s ease-in-out infinite; }
+.community-feature-media::before { animation:community-light 4.5s ease-in-out infinite; background:linear-gradient(105deg,transparent 35%,#c3ff6b55 48%,#ed526e36 53%,transparent 65%); }
+@keyframes community-art-pulse { 0%,100% { transform:scale(1.02); filter:brightness(.9) saturate(1); } 50% { transform:scale(1.07); filter:brightness(1.18) saturate(1.2); } }
+@media (prefers-reduced-motion:reduce) { .community-feature-media img,.community-feature-media::before { animation:none; } }

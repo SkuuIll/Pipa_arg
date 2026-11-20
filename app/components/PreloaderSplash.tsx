@@ -33,8 +33,8 @@ export function PreloaderSplash({ route }: { route?: string }) {
     } catch { /* Optional */ }
 
     const bootTimer = window.setTimeout(() => setPhase("sync"), 400);
-    const readyTimer = window.setTimeout(() => setPhase("ready"), 1800);
-    const closeTimer = window.setTimeout(() => setVisible(false), 2800);
+    const readyTimer = window.setTimeout(() => setPhase("ready"), 1100);
+    const closeTimer = window.setTimeout(() => setVisible(false), 1900);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setVisible(false);
     };
@@ -174,7 +174,7 @@ export function PreloaderSplash({ route }: { route?: string }) {
               <motion.span
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                transition={{ duration: 2.4, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
               />
             </div>
           </motion.div>

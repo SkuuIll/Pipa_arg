@@ -699,6 +699,11 @@ export default function Home() {
           <a className="button button-primary discord-invite-button" href="https://discord.gg/rgzZ3Kv" target="_blank" rel="noreferrer">
             <DiscordIcon /> Unirme al Discord <span aria-hidden="true">↗</span>
           </a>
+          <div className="discord-community-art" aria-hidden="true">
+            <div className="discord-art-top"><span>LA COMUNIDAD</span><span>ARG / 01</span></div>
+            <div className="discord-art-center"><img src="/pipa-avatar-v2.webp" alt="" /><span><b>PANZA</b><b>ARMY<span>.</span></b></span></div>
+            <div className="discord-art-bottom"><span>● SIEMPRE EN EQUIPO</span><DiscordIcon /></div>
+          </div>
           <div className="contact-outline" aria-hidden="true">PANZA ARMY</div>
         </section>
 
@@ -780,10 +785,15 @@ export default function Home() {
 
           <article className="community-feature" data-reveal>
             <div className="community-feature-media">
-              <TiltCard3D maxTilt={7} glare={true} style={{ width: "100%", height: "100%" }}>
-                <img src="/panza-army-studio.webp" srcSet="/panza-army-studio-small.webp 768w, /panza-army-studio.webp 1536w" sizes="(max-width: 768px) calc(100vw - 48px), 900px" alt="Panza Army en letras metálicas violetas con detalles lima" width="1536" height="1024" loading="lazy" decoding="async" />
-                <span className="community-feature-scan" aria-hidden="true" />
-              </TiltCard3D>
+              <div className="army-stage" tabIndex={0} role="img" aria-label="Panza Army. Pasá el cursor o tocá para mover las letras.">
+                <span className="army-stage-label" aria-hidden="true">PIPAA · COMUNIDAD ARGENTINA</span>
+                <div className="army-words" aria-hidden="true">
+                  {["PANZA", "ARMY"].map((word, row) => <div className="army-word" key={word}>
+                    {word.split("").map((letter, index) => <span key={index} style={{ "--i": index, "--row": row } as React.CSSProperties}>{letter}</span>)}
+                  </div>)}
+                </div>
+                <span className="army-stage-hint" aria-hidden="true">✦ MOVÉ LA PANZA ARMY ✦</span>
+              </div>
             </div>
             <div className="community-feature-copy">
               <div className="community-feature-label"><span>07</span> LA COMUNIDAD</div>

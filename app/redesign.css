@@ -230,3 +230,31 @@ h2 { letter-spacing:-.015em; text-wrap:balance; }
 .argentina-photo-source { display:block; margin-top:12px; color:var(--muted); font-size:11px; text-align:center; text-underline-offset:4px; }
 .argentina-photo-source:hover { color:#b5dcf4; }
 .argentina-photo-3d-container { width:100%; min-width:0; }
+
+/* Community invitation: a roster card replaces the empty decorative circle. */
+.discord-invite { isolation:isolate; }
+.discord-invite::before { display:none; }
+.discord-invite > p:not(.eyebrow) { max-width:48%; }
+.discord-invite h2 { max-width:65%; }
+.discord-community-art { position:absolute; z-index:1; right:6%; top:50%; transform:translateY(-50%) rotate(3deg); width:min(32%,360px); aspect-ratio:1.05; padding:20px; display:flex; flex-direction:column; justify-content:space-between; border:1px solid #a7ff0055; background:linear-gradient(145deg,#332048,#100c1b 70%); box-shadow:14px 14px 0 #a7ff0012, 0 25px 65px #0008; }
+.discord-art-top,.discord-art-bottom { display:flex; justify-content:space-between; align-items:center; color:#bdaed1; font:800 9px/1.2 var(--font-body); letter-spacing:.14em; }
+.discord-art-bottom { color:#b4ff24; }
+.discord-art-bottom svg { width:27px; height:27px; color:#b9a1ff; }
+.discord-art-center { display:flex; align-items:center; gap:14px; }
+.discord-art-center img { width:35%; border:1px solid #a7ff0077; border-radius:50%; box-shadow:0 0 30px #a7ff002c; }
+.discord-art-center > span { display:grid; font:900 clamp(24px,3vw,46px)/.9 var(--font-display); color:white; }
+.discord-art-center b:last-child { color:#b1ff15; }
+.discord-art-center b span { color:#e55a72; }
+@media(max-width:760px) { .discord-invite h2,.discord-invite > p:not(.eyebrow) { max-width:none; } .discord-community-art { position:relative; width:min(100%,360px); right:auto; top:auto; transform:rotate(2deg); margin:38px auto 10px; } }
+.army-stage { height:100%; min-height:360px; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; cursor:pointer; position:relative; background:radial-gradient(ellipse at 50% 45%,#452166 0,#160d25 42%,#08050e 80%); outline-offset:-4px; }
+.army-stage::before { content:''; position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent 0 59px,#c2a2ed13 60px), repeating-linear-gradient(90deg,transparent 0 79px,#c2a2ed10 80px); mask-image:linear-gradient(transparent,#000); }
+.army-stage-label,.army-stage-hint { position:relative; color:#bbff60; font:800 10px var(--font-body); letter-spacing:.23em; }
+.army-stage-hint { color:#bdabd0; margin-top:30px; }
+.army-words { position:relative; text-align:center; margin-top:24px; filter:drop-shadow(0 16px 12px #0009); }
+.army-word { display:flex; justify-content:center; font:900 clamp(86px,15vw,210px)/.78 var(--font-display); letter-spacing:-.035em; }
+.army-word span { display:inline-block; color:#eee4ff; text-shadow:3px 3px #7f49b5,7px 7px #3b1c55,0 0 28px #a7ff0044; transition:transform .65s cubic-bezier(.2,.8,.2,1),color .4s,text-shadow .4s; }
+.army-word:nth-child(2) span { color:#b4ff16; text-shadow:3px 3px #5b8d0b,7px 7px #2b3e12,0 0 30px #a7ff0055; }
+.army-stage:hover .army-word span,.army-stage:focus .army-word span { transform:translate(calc((var(--i) - 2) * 13px),calc((var(--i) - 2) * (var(--i) - 2) * 10px + var(--row) * 12px)) rotate(calc((var(--i) - 2) * 9deg)); color:#c7ff62; }
+.army-stage:focus-visible { outline:2px solid #b4ff16; }
+@media(max-width:600px) { .army-stage { min-height:280px; } .army-word { font-size:clamp(65px,17vw,100px); } .army-stage-label,.army-stage-hint { font-size:8px; } }
+@media(prefers-reduced-motion:reduce) { .army-word span { transition:none; } .army-stage:hover .army-word span,.army-stage:focus .army-word span { transform:none; } }

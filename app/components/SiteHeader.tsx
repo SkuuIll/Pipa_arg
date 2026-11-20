@@ -25,7 +25,7 @@ export function SiteHeader({ current }: { current: string }) {
     <header className="channel-header">
       <div className="channel-header-inner">
         <a href="/" className="header-brand" aria-label="PIPAA · Inicio">
-          <img src="/pipaa-logo.svg" alt="PIPAA" width="92" height="35" />
+          <img src="/pipaa-mark.svg" alt="PIPAA" width="92" height="35" />
         </a>
 
         <nav className="header-nav-dock" aria-label="Navegación principal">
