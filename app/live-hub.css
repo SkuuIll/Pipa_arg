@@ -2059,3 +2059,27 @@ body:has(.live-hub--cinema) { overflow: hidden; }
 .header-brand img { animation:none; filter:none; }
 .header-brand:hover img { transform:scale(1.05); filter:none; }
 @media(max-width:820px) { .header-brand img { width:38px !important; height:38px !important; } }
+
+/* Community cards belong to one stack; their old section-grid column numbers
+   otherwise create an implicit second column on small screens. */
+.profile-community { grid-template-columns:minmax(0,1fr); }
+.profile-community > .official-pov,
+.profile-community > .creator-code-card,
+.profile-community > .community-feature { grid-column:1; min-width:0; width:100%; box-sizing:border-box; }
+@media (max-width:700px) {
+  .profile-community { gap:16px; padding:16px; }
+  .profile-community > .official-pov,
+  .profile-community > .creator-code-card,
+  .profile-community > .community-feature { margin:0; }
+  .profile-community .community-feature-copy { min-width:0; }
+  .home-socials > div { grid-template-columns:minmax(0,1fr); }
+  .home-socials a { min-width:0; width:100%; box-sizing:border-box; }
+  .home-socials .social-name small { display:none; }
+}
+/* Only the compact first card sticks; the taller cards scroll normally so
+   their content never becomes trapped behind the header. */
+@media (max-width:700px) and (min-height:700px) and (prefers-reduced-motion:no-preference) {
+  .profile-community > .official-pov { position:sticky; top:76px; z-index:1; background:#191126; }
+  .profile-community > .creator-code-card { position:relative; z-index:2; background:#170f23; }
+  .profile-community > .community-feature { position:relative; z-index:3; }
+}
