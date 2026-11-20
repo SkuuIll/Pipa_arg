@@ -10,7 +10,7 @@ const storageKeys = [
   "pipaa:chat-hide-bots:v1",
   "pipaa:recent-chat:v1",
   "pipaa:diasub-cache:v1",
-  "pipaa:mates",
+  "pipaa:mate-hunt:v1",
   "pipaa:preloader-done:v1",
 ];
 
@@ -33,7 +33,7 @@ export default function LegalesPage() {
             <p className="eyebrow">MARCO LEGAL · REPÚBLICA ARGENTINA</p>
             <h1 id="legales-title">Avisos legales y privacidad</h1>
             <p className="legales-lede">
-              Información legal aplicable al sitio web oficial de PIPAA (pipaa.store), conforme a la normativa vigente en la República Argentina.
+              Información sobre el funcionamiento del sitio oficial de PIPAA (pipaa.store) y el tratamiento de datos.
             </p>
             <div className="legales-meta">
               <span><strong>Titular:</strong> Leonardo Rafael Ruppel (PIPAA / Pipa_ARG)</span>
@@ -75,9 +75,10 @@ export default function LegalesPage() {
                 <h2 id="legal-privacidad">2. Protección de datos personales (Ley N° 25.326 · AAIP)</h2>
               </div>
               <p>
-                Este sitio <strong>no posee formularios de registro de cuentas ni bases de datos comerciales de usuarios</strong>, ni vende ni cede datos personales a terceros.
+                Este sitio no ofrece registro de cuentas propio. Al participar en Día Sub, el servidor de Cloudflare puede guardar el identificador y nombre de usuario de Kick o Twitch, la plataforma y la fecha y hora de inscripción para ordenar la lista y evitar duplicados. La lista pública muestra nombre, plataforma y hora; los registros pueden permanecer almacenados después del evento.
                 Las consultas enviadas voluntariamente por correo electrónico se utilizan únicamente para responder la comunicación comercial o legal iniciada por el remitente.
               </p>
+              <p>El multichat muestra mensajes, nombres y otros datos públicos recibidos mediante servicios externos. El navegador conserva una copia limitada de mensajes recientes. Cloudflare y las plataformas integradas pueden tratar datos técnicos de conexión según sus propias políticas.</p>
               <ul>
                 <li>
                   <strong>Derechos ARCO (Acceso, Rectificación, Actualización y Supresión):</strong> el titular de los datos personales tiene la facultad de ejercer el derecho de acceso en forma gratuita a intervalos no inferiores a seis meses, salvo que se acredite un interés legítimo al efecto conforme al Art. 14 inc. 3 de la Ley N° 25.326.
@@ -97,7 +98,7 @@ export default function LegalesPage() {
                 <h2 id="legal-cookies">3. Uso de almacenamiento local y cookies de terceros</h2>
               </div>
               <p>
-                Para mejorar la experiencia técnica dentro de la sala de directo y las preferencias visuales, <strong>pipaa.store</strong> guarda datos puramente funcionales en el almacenamiento local de tu navegador (<code>localStorage</code> / <code>sessionStorage</code>), sin rastreo publicitario propio:
+                Para las funciones de la sala y las preferencias visuales, <strong>pipaa.store</strong> guarda datos en el almacenamiento local de tu navegador (<code>localStorage</code> / <code>sessionStorage</code>), incluidos mensajes recientes y preferencias:
               </p>
               <div className="legal-code-list" aria-label="Claves locales utilizadas">
                 {storageKeys.map((key) => <code key={key}>{key}</code>)}
@@ -117,7 +118,7 @@ export default function LegalesPage() {
                   <strong>Sitio meramente informativo:</strong> <strong>pipaa.store no es una tienda de comercio electrónico</strong> ni procesa pagos, facturas, cobros ni entregas. Los accesos incluidos en <a href="/comandos/">/comandos/</a> son enlaces externos informativos hacia plataformas operadas de forma independiente (<strong>Dixper</strong>, <strong>WeezyX</strong>, <strong>Twitch</strong> y <strong>Krafton</strong>).
                 </li>
                 <li>
-                  <strong>Transparencia comercial y afiliación (Decreto N° 274/2019):</strong> el uso del código de creador <strong>PIPAA</strong> o de enlaces hacia plataformas asociadas puede otorgar un beneficio o participación al streamer sobre las operaciones que realices en dichos sitios externos, sin costo adicional para vos.
+                  <strong>Transparencia comercial:</strong> el uso del código de creador <strong>PIPAA</strong> o de enlaces hacia plataformas asociadas puede otorgar un beneficio o participación al streamer. Consultá las condiciones y el precio final en la plataforma correspondiente.
                 </li>
                 <li>
                   <strong>Botón de Arrepentimiento (Art. 34, Ley N° 24.240):</strong> cualquier compra, suscripción o adquisición de artículos digitales contratados en plataformas de terceros se rige por los términos de servicio de la plataforma vendedora, siendo esta última la responsable directa frente a reclamos, facturación o ejercicio del derecho de revocación dentro de los 10 días corridos cuando corresponda.
@@ -135,10 +136,10 @@ export default function LegalesPage() {
               </p>
               <ul>
                 <li>
-                  <strong>Mensajes de terceros en Multichat:</strong> el chat en vivo muestra en tiempo real mensajes publicados por usuarios externos en Kick, Twitch y YouTube. Cada participante es único responsable por sus expresiones, sin que el titular del sitio ejerza control editorial previo sobre dichas plataformas terceras.
+                  <strong>Mensajes de terceros en Multichat:</strong> el chat en vivo muestra mensajes publicados por usuarios externos en Kick, Twitch y YouTube. El titular no revisa previamente todos los mensajes; podés comunicar contenidos problemáticos al correo de contacto.
                 </li>
                 <li>
-                  <strong>Enlace y aviso fehaciente:</strong> siguiendo la doctrina de la Corte Suprema de Justicia de la Nación Argentina (<em>“Rodríguez, María Belén c/ Google Inc.”</em>), los enlaces hacia sitios externos no implican responsabilidad editorial sobre páginas de destino ajenas. Ante cualquier reporte fundado sobre un contenido manifiestamente ilícito, escribí a <a href="mailto:raffitas_ruppel@hotmail.com">raffitas_ruppel@hotmail.com</a> para su revisión inmediata.
+                  <strong>Enlaces y reportes:</strong> los sitios de destino son operados por terceros. Podés informar contenido presuntamente ilícito o problemático escribiendo a <a href="mailto:raffitas_ruppel@hotmail.com">raffitas_ruppel@hotmail.com</a> para su evaluación.
                 </li>
               </ul>
             </section>
@@ -149,7 +150,7 @@ export default function LegalesPage() {
                 <h2 id="legal-propiedad">6. Propiedad intelectual y deslinde de marcas (Ley N° 11.723)</h2>
               </div>
               <p>
-                El diseño original, textos, código y elementos visuales propios de <strong>PIPAA</strong> y <strong>Panza Army</strong> están protegidos por la <strong>Ley N° 11.723</strong> de Propiedad Intelectual. Queda prohibida su reproducción comercial sin autorización previa.
+                Los textos, el diseño, el código y los elementos visuales del sitio pueden estar protegidos por la <strong>Ley N° 11.723</strong>. Los derechos corresponden a sus respectivos autores y titulares, de acuerdo con los permisos y acuerdos aplicables.
               </p>
               <p>
                 <strong>Deslinde de marcas (Ley N° 22.362):</strong> PUBG: BATTLEGROUNDS y KRAFTON son marcas registradas de KRAFTON, Inc.; Twitch, Kick, YouTube, Discord, Dixper, WeezyX y las marcas de hardware exhibidas en el setup pertenecen a sus respectivos propietarios y se mencionan únicamente con fines informativos. Este sitio no es una página oficial de KRAFTON ni de dichas plataformas.
@@ -163,7 +164,7 @@ export default function LegalesPage() {
               </div>
               <ul>
                 <li>
-                  <strong>Menores de edad:</strong> la navegación es apta para público general gamer, aunque las operaciones económicas o altas de cuentas en plataformas de terceros (Twitch, Kick, YouTube, Dixper, WeezyX, Krafton) requieren mayoría de edad o supervisión y consentimiento de padres o tutores conforme al Código Civil y Comercial de la Nación.
+                  <strong>Menores de edad:</strong> las plataformas externas establecen sus propias edades mínimas y condiciones de uso. Se recomienda la supervisión de una persona adulta, especialmente para compras y chats en vivo.
                 </li>
                 <li>
                   <strong>Disponibilidad técnica:</strong> la transmisión en vivo y el chat dependen de la conectividad y APIs públicas de terceros; el titular no garantiza disponibilidad ininterrumpida ante caídas ajenas al sitio.

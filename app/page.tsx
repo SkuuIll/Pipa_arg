@@ -851,6 +851,7 @@ export default function Home() {
         </a>
         <p>PIPAA · Streamer n°1 de PUBG · Líder Panza Army<br />Argentina</p>
         <p className="footer-note"><a href="/comandos/">Tienda</a> · <a href="/legales/">Avisos legales</a> · <a href="https://dixper.gg/pipa_arg">Dixper ↗</a> · <a href="https://weezyx.com/t/pipa_arg">WeezyX ↗</a></p>
+        <p className="developer-credit">Diseño y desarrollo por <a href="https://github.com/SkuuIll" target="_blank" rel="noreferrer">SkuuIll ↗</a></p>
       </footer>}
 
       <MotionController />
