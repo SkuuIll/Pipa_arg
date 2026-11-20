@@ -1,13 +1,12 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import ComandosPage from "../app/comandos/page";
+import TiendaPage from "../app/comandos/page";
 import "../app/globals.css";
 import "../app/redesign.css";
-
-import "../app/universe.css";
+import "../app/live-hub.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ComandosPage />
+    <TiendaPage />
   </StrictMode>,
 );

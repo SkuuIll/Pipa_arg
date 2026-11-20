@@ -19,6 +19,8 @@ npm run dev
 
 Abre [http://localhost:3000](http://localhost:3000) en el navegador.
 
+Para probar la portada con la API y la base local de Día Sub, usá `npm run dev:worker` en el mismo puerto.
+
 ## Compilar versión estática
 
 ```bash
@@ -35,6 +37,24 @@ El proyecto se despliega como un Cloudflare Worker con Static Assets y enrutamie
 npm run build
 npx wrangler deploy
 ```
+
+## Actualización de YouTube
+
+El Worker sincroniza el canal cada 10 minutos y guarda la última respuesta válida. La galería consulta `/api/youtube`. Para probar la integración en local, usá `npm run dev:worker`.
+
+Con `YOUTUBE_API_KEY` configurada como secreto del Worker, la galería distingue videos subidos de directos anteriores. Mientras falta la clave, muestra las publicaciones recientes del feed oficial. Para usar la clave en local, agregala a `.dev.vars`.
+
+## Activación de Día Sub
+
+La sala usa la conexión WebSocket de Unified Chat Lite para leer Kick, Twitch y YouTube en un panel de PIPAA. El navegador conserva hasta 80 mensajes de los últimos 30 minutos. La opción de escritura abre el chat oficial incrustado de Twitch y requiere una sesión de Twitch para enviar. El estado de emisión y la inscripción de Día Sub usan los webhooks firmados de Kick y Twitch.
+
+1. Configurá `KICK_BROADCASTER_ID` y `TWITCH_BROADCASTER_ID` con los IDs numéricos de las cuentas de PIPAA en sus respectivas plataformas. Podés cargar cada valor con `npx wrangler secret put NOMBRE`.
+2. Guardá un secreto aleatorio de 32 a 100 caracteres con `npx wrangler secret put TWITCH_EVENTSUB_SECRET`. Usá ese mismo secreto al crear los webhooks de Twitch.
+3. En la app de Kick, habilitá webhooks con la URL `https://pipaa.store/api/diasub/kick`. Registrá los eventos `chat.message.sent` y `livestream.status.updated` versión 1 en `POST /public/v1/events/subscriptions` para el canal, con método `webhook` y un token autorizado con `events:subscribe`. [Suscripción a eventos de Kick](https://github.com/KickEngineering/KickDevDocs/blob/main/events/subscribe-to-events.md)
+4. En Twitch, autorizá a la aplicación a leer el chat con `user:read:chat` y `user:bot` para la identidad lectora, y `channel:bot` para PIPAA. Con el token de aplicación, creá las suscripciones EventSub `channel.chat.message`, `stream.online` y `stream.offline`, versión 1. Usá `broadcaster_user_id` del canal en las tres condiciones y agregá `user_id` de la identidad lectora para el evento de chat. Configurá `transport.method` como `webhook`, el callback `https://pipaa.store/api/diasub/twitch` y el secreto del paso 2. [Configuración de EventSub](https://dev.twitch.tv/docs/chat/authenticating/)
+5. Verificá las suscripciones de eventos y hacé una prueba de inicio y fin de directo en cada plataforma. El estado de conexión de cada canal aparece en la web al recibir el primer evento de directo. Si el canal ya estaba transmitiendo al conectar, la apertura se detecta con el siguiente inicio.
+
+Día Sub acepta `!diasub` o `diasub` como mensaje completo durante el directo del sábado, de 00:00 a 23:59 en Argentina. La cuenta debe tener insignia de suscripción en ese chat. Se guarda la primera inscripción por cuenta y plataforma, con orden de llegada. Desde el domingo se sigue viendo la lista cerrada hasta el próximo sábado.
 
 ## Aparición en Google
 

@@ -29,6 +29,18 @@ export function MotionController() {
     const revealItems = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
     revealItems.forEach(handleElement);
 
+    const revealPassed = () => {
+      for (const el of document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-visible)")) {
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.98) {
+          el.classList.add("is-visible");
+          el.setAttribute("data-revealed", "true");
+          observer.unobserve(el);
+        }
+      }
+    };
+    window.addEventListener("scroll", revealPassed, { passive: true });
+    window.addEventListener("hashchange", revealPassed);
+
     root.classList.add("motion-ready");
 
     const mutationObserver = new MutationObserver((mutations) => {
@@ -59,6 +71,8 @@ export function MotionController() {
     return () => {
       observer.disconnect();
       mutationObserver.disconnect();
+      window.removeEventListener("scroll", revealPassed);
+      window.removeEventListener("hashchange", revealPassed);
       heroVisual?.removeEventListener("pointermove", handlePointer);
       root.classList.remove("motion-ready");
     };

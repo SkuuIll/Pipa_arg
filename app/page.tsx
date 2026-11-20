@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { MotionController } from "./MotionController";
-import { ExperienceLayer, ChapterPortal } from "./ExperienceLayer";
-import { LivePlayers } from "./LivePlayers";
-import { LocalTime } from "./LocalTime";
+import { ChapterPortal, ExperienceLayer } from "./ExperienceLayer";
+import { LiveHub } from "./LiveHub";
 import { StatsCounter } from "./StatsCounter";
 import {
   getSetupIcon,
@@ -19,6 +18,8 @@ import { YouTubeFeed } from "./YouTubeFeed";
 import { TiltCard3D } from "./TiltCard3D";
 import { Hero } from "./components/Hero";
 import { MateHuntProvider, HiddenMate, MateProgress } from "./components/MateHunt";
+import { PreloaderSplash } from "./components/PreloaderSplash";
+import { SiteHeader } from "./components/SiteHeader";
 
 import {
   ShoppingCart,
@@ -31,18 +32,16 @@ import {
   Clock,
   Gamepad2,
   Sparkles,
-  Play,
-  User,
 } from "lucide-react";
 
 const socials = [
-  { name: "Twitch", handle: "pipa_arg", href: "https://www.twitch.tv/pipa_arg", tag: "EN VIVO" },
-  { name: "Kick", handle: "pipa_arg", href: "https://kick.com/pipa_arg", tag: "EN VIVO" },
-  { name: "Discord", handle: "discord.gg/rgzZ3Kv", href: "https://discord.gg/rgzZ3Kv", tag: "COMUNIDAD" },
-  { name: "YouTube", handle: "@PIPAArg", href: "https://www.youtube.com/@PIPAArg", tag: "VIDEOS" },
-  { name: "TikTok", handle: "@pipa_arg", href: "https://www.tiktok.com/@pipa_arg", tag: "CLIPS" },
-  { name: "X", handle: "@Pipa_arg", href: "https://x.com/Pipa_arg", tag: "UPDATES" },
-  { name: "Instagram", handle: "@rafa.ruppel", href: "https://www.instagram.com/rafa.ruppel", tag: "COMUNIDAD" },
+  { name: "Twitch", href: "https://www.twitch.tv/pipa_arg" },
+  { name: "Kick", href: "https://kick.com/pipa_arg" },
+  { name: "Discord", href: "https://discord.gg/rgzZ3Kv" },
+  { name: "YouTube", href: "https://www.youtube.com/@PIPAArg" },
+  { name: "TikTok", href: "https://www.tiktok.com/@pipa_arg" },
+  { name: "X", href: "https://x.com/Pipa_arg" },
+  { name: "Instagram", href: "https://www.instagram.com/rafa.ruppel" },
 ];
 
 const career = [
@@ -53,12 +52,12 @@ const career = [
   { year: "2024", team: "BESTIA", text: "Parte del primer roster de PUBG de la organización argentina antes de iniciar una nueva etapa regional.", tag: "ORGANIZACIÓN ARGENTINA" },
   { year: "2024—25", team: "TOYO ESPORTS", text: "PUBG Americas Series 4 y 5, junto con una de sus campañas más fuertes dentro del archivo estadístico oficial.", tag: "PUBG AMERICAS SERIES" },
   { year: "2025—26", team: "+55 ESPORTS", text: "Competencia en PUBG Americas Series 6 y Masters West con una formación sudamericana de experiencia internacional.", tag: "CIRCUITO DE AMÉRICAS" },
-  { year: "2026", team: "BESTIA · SELECCIÓN ARGENTINA", text: "Quinto lugar mundial con Argentina en la Nations Cup de Seúl y consolidación total como el streamer referente de PUBG.", tag: "TOP 5 MUNDIAL & STREAM" },
+  { year: "2026", team: "SELECCIÓN ARGENTINA", text: "Quinto puesto histórico en la PUBG Nations Cup de Seúl representando al país y consolidación total como el streamer referente de PUBG.", tag: "TOP 5 MUNDIAL & STREAM" },
 ];
 
 const pncHistory = [
   { year: "2022", edition: "PNC BANGKOK", desc: "Debut de PIPAA representando a Argentina en el certamen de naciones más prestigioso de PUBG Esports.", tag: "DEBUT SELECCIÓN" },
-  { year: "2024", edition: "PNC SEÚL", desc: "Segunda convocatoria internacional para medirse contra las 16 mejores selecciones del planeta en Corea del Sur.", tag: "COREA DEL SUR" },
+  { year: "2024", edition: "PNC SEÚL · #6", desc: "Segunda convocatoria internacional en Corea del Sur, alcanzando el 6.° puesto mundial ante las 16 mejores selecciones del planeta.", tag: "TOP 6 MUNDIAL" },
   { year: "2026", edition: "PNC SEÚL · #5", desc: "Campaña histórica: 101 puntos, 71 eliminaciones, 1 victoria WWCD y consagración en el Top 5 Mundial.", tag: "TOP 5 MUNDIAL" },
 ];
 
@@ -100,11 +99,11 @@ const inGameSettings = [
 const faqs = [
   {
     q: "¿Quién es PIPAA y de qué se trata la Panza Army?",
-    a: "PIPAA (Pipa_ARG) es el streamer número 1 de PUBG en Argentina y ex jugador profesional Top 5 del mundo en PNC Seúl. La Panza Army es su comunidad oficial: un espacio sin filtro donde se transmiten más de 9 horas diarias de rankeds, partidas con la gente, risas, comandos troll y el mejor shooter táctico.",
+    a: "PIPAA (Pipa_ARG) es el streamer número 1 de PUBG en Argentina y jugador profesional internacional, Top 5 del mundo en PNC Seúl representando a la Selección Argentina. La Panza Army es su comunidad oficial: un espacio sin filtro donde se transmiten más de 9 horas diarias de rankeds, partidas con la gente, risas, comandos troll y el mejor shooter táctico.",
   },
   {
-    q: "¿Qué son los Comandos Troll y cómo sabotearlo en vivo?",
-    a: "En sus transmisiones podés comprar comandos y cartas de Dixper desde $150 ARS para afectarle el juego en tiempo real: invertirle las teclas WASD, obligarlo a tirar granadas a sus pies, bloquearle la mira o hacerle spawn de ruidos y jumpscares. Podés ver la lista completa con precios y links en la sección Tienda Troll.",
+    q: "¿Dónde compro lo que se activa en el directo?",
+    a: "En Dixper (habilidades que le afectan la partida), WeezyX (audios y mensajes con voz) y con los puntos del canal de Twitch. Tenés todos los links en la Tienda: pipaa.store/comandos/.",
   },
   {
     q: "¿Cuál es su horario de streaming diario?",
@@ -116,7 +115,7 @@ const faqs = [
   },
   {
     q: "¿Qué hardware y periféricos utiliza para transmitir y jugar?",
-    a: "Utiliza una configuración Dual PC: PC Gaming con AMD Ryzen 7 7800X3D, Mother B650M Aorus Elite AX WiFi, PNY XLR8 RTX 3070 y 32GB RAM DDR5 a 6000MHz. Para emisión utiliza una PC Streaming dedicada con Intel Core i7 8700 y GTX 1070 Ti. Juega a 400 DPI con Logitech G Pro X y auriculares in-ear Shure SE215.",
+    a: "Utiliza una configuración Dual PC: PC Gaming con AMD Ryzen 7 7800X3D, Mother B650M Aorus Elite AX WiFi, PNY XLR8 RTX 3070 y 32GB RAM DDR5 a 6000MHz. Para emisión utiliza una PC Streaming dedicada con Intel Core i7 8700 y GTX 1070 Ti. Juega a 400 DPI con Logitech G Pro X Super Strike y auriculares in-ear Shure SE215.",
   },
   {
     q: "¿Cómo apoyar a PIPAA con su código de creador PUBG Partner?",
@@ -129,7 +128,7 @@ const sourceLinks = [
   { index: "02", title: "CÓDIGO DE CREADOR", meta: "KRAFTON PARTNER · CÓDIGO PIPAA", href: "https://accounts.krafton.com/creator-code" },
   { index: "03", title: "POV PNC 2026", meta: "PUBG ESPORTS · KICK OFICIAL", href: "https://pubgesports.com/pt-br/news/10178" },
   { index: "04", title: "HISTORIAL DE EQUIPOS", meta: "ESPORTS CHARTS · PIPAA", href: "https://escharts.com/players/pipaa" },
-  { index: "05", title: "PAS 1 · 2026", meta: "PUBG AMERICAS · #8 BESTIA", href: "https://liquipedia.net/pubg/PUBG_Americas_Series/2026/1" },
+  { index: "05", title: "FICHA LIQUIPEDIA", meta: "PERFIL & TORNEOS OFICIALES", href: "https://liquipedia.net/pubg/PIPAA" },
 ];
 
 const setupGaming = [
@@ -155,31 +154,14 @@ const setupGear = [
   { label: "MOUSE", value: "Logitech G Pro X Super Strike", sub: "Hero 25K · Wireless 1000Hz" },
   { label: "AURICULARES", value: "Shure SE215", sub: "Sound Isolating In-Ear Monitores" },
   { label: "SENSIBILIDAD", value: "400 DPI · Vert 1.10", sub: "General 50 · ADS 39" },
-  { label: "MONITOR", value: "Fast IPS 240Hz / 1ms", sub: "Tasa de refresco competitiva" },
+  { label: "MONITOR", value: "Ozone DSP24 24.5\"", sub: "144Hz · 1ms · G-Sync Compatible" },
   { label: "TECLADO", value: "Mecánico Esports RGB", sub: "Switches ultrarrápidos" },
   { label: "MICRÓFONO", value: "Micrófono Profesional Broadcast", sub: "Filtro antipop & brazo articulado" },
 ];
 
-const tickerPhrases = [
-  "PANZA ARMY",
-  "STREAM EN VIVO",
-  "KICK & TWITCH",
-  "COMANDOS TROLL",
-  "TIENDA TROLL",
-  "PUBG PARTNER",
-  "CÓDIGO: PIPAA",
-  "TOP 5 MUNDIAL",
-  "SELECCIÓN ARGENTINA",
-  "DIXPER & PANZABOT",
-  "DUAL PC 240HZ",
-  "RANKEDS & SCRIMS",
-  "DISCORD COMUNIDAD",
-];
 
 export default function Home() {
-  const [activeNav, setActiveNav] = useState("inicio");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const page = window.location.pathname.replace(/\/?$/, "/");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [activeSetupTab, setActiveSetupTab] = useState<"gaming" | "streaming" | "gear">("gaming");
   const [copiedCode, setCopiedCode] = useState(false);
@@ -191,66 +173,57 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
-
-      const sections = ["inicio", "historia", "argentina", "stats", "trayectoria", "arsenal", "setup", "comunidad", "videos", "redes", "faq", "archivo", "contacto"];
-      const scrollPos = window.scrollY + 200;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el && el.offsetTop <= scrollPos) {
-          setActiveNav(sections[i]);
-          break;
-        }
+    const revealLinkedSection = () => {
+      const hash = window.location.hash.slice(1);
+      if (page === "/" && (hash === "comunidad" || hash === "diasub")) {
+        location.replace(`/directo/${hash === "diasub" ? "#diasub" : ""}`);
+        return;
       }
+      if (hash) document.getElementById(hash)?.scrollIntoView();
     };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    revealLinkedSection();
+    window.addEventListener("hashchange", revealLinkedSection);
+    return () => window.removeEventListener("hashchange", revealLinkedSection);
+  }, [page]);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
+  const videoSection = (
+    <section className="yt-feed-section" id="videos" data-reveal>
+          <div className="yt-feed-heading">
+            {page === "/" ? <><h2>Últimos videos</h2><a href="/videos/">Ver archivo ↗</a></> : <h1>Videos de PIPAA</h1>}
+          </div>
+          <YouTubeFeed compact={page === "/"} />
+        </section>
+  );
+
   return (
     <MateHuntProvider>
+    <PreloaderSplash route={page} />
     <div className="site-shell">
 
-      <a className="skip-link" href="#inicio">Saltar al contenido</a>
-      <ExperienceLayer />
+      <a className="skip-link" href="#contenido">Saltar al contenido</a>
+      {page !== "/directo/" && <ExperienceLayer />}
 
-      <header className={`topbar ${isScrolled ? "is-scrolled" : ""}`}>
-        <a className="brand" href="#inicio" aria-label="PIPAA — volver al inicio">
-          <img src="./pipaa-logo.svg" alt="PIPAA" className="brand-logo" width="120" height="48" />
-        </a>
-        <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? "Cerrar ✕" : "Menú ☰"}</button>
-        <nav id="main-navigation" className={menuOpen ? "menu-open" : ""} aria-label="Navegación principal" onClick={() => setMenuOpen(false)} onKeyDown={(event) => { if (event.key === "Escape") setMenuOpen(false); }}>
-          <a href="#historia" className={activeNav === "historia" ? "is-active" : ""}>El Fenómeno</a>
-          <a href="#argentina" className={activeNav === "argentina" ? "is-active" : ""}>Argentina</a>
-          <a href="#stats" className={activeNav === "stats" ? "is-active" : ""}>Stream Lab</a>
-          <a href="#trayectoria" className={activeNav === "trayectoria" ? "is-active" : ""}>Trayectoria</a>
-          <a href="#arsenal" className={activeNav === "arsenal" ? "is-active" : ""}>Arsenal</a>
-          <a href="#setup" className={activeNav === "setup" ? "is-active" : ""}>Setup</a>
-          <a href="#comunidad" className={activeNav === "comunidad" ? "is-active" : ""}>En Vivo</a>
-          <a href="#videos" className={activeNav === "videos" ? "is-active" : ""}>Videos</a>
-          <a href="./comandos/" style={{ display: "inline-flex", alignItems: "center", gap: "6px" }}>
-            <ShoppingCart style={{ width: "13px", height: "13px" }} />
-            <span>Tienda Troll</span>
-          </a>
-          <a href="#faq" className={activeNav === "faq" ? "is-active" : ""}>FAQ</a>
-        </nav>
-        <a className="nav-live" href="#comunidad">
-          <span className="live-indicator-dot" aria-hidden="true" />
-          <span className="nav-live-text">Ver stream</span>
-        </a>
-      </header>
+      {page !== "/directo/" && <SiteHeader current={page} />}
+      <main id="contenido">
+        {page === "/" && <Hero />}
+        {page === "/" && <ChapterPortal word="PANZA ARMY" label="01 / ENTRASTE AL UNIVERSO" scene="violet" />}
+        {page === "/directo/" && <LiveHub />}
+        {page === "/videos/" && videoSection}
 
-      <main>
-        {/* ── Hero ── */}
-        <Hero />
-        <ChapterPortal word="PANZA ARMY" label="01 / ENTRASTE AL UNIVERSO" />
+        {(page === "/" || page === "/perfil/") && <div className="home-profile" id="perfil">
+          {page === "/perfil/" && <h1>Perfil de PIPAA</h1>}
+          <nav className="profile-nav" aria-label="Sobre PIPAA">
+            <a href="#historia">Sobre PIPAA</a>
+            <a href="#argentina">Selección Argentina</a>
+            <a href="#trayectoria">Trayectoria</a>
+            <a href="#setup">Setup</a>
+            <a href="#contacto">Contacto</a>
+          </nav>
+
 
         {/* ── 01. Perfil / El Fenómeno Panza Army ── */}
         <section className="intro section-grid" id="historia" data-reveal>
@@ -278,13 +251,16 @@ export default function Home() {
           </div>
         </section>
 
+        {page === "/" && videoSection}
+        <ChapterPortal word="ARGENTINA" label="PUBG NATIONS CUP" scene="lime" />
+
         {/* ── 02. Selección Argentina & Hazaña Mundial ── */}
         <section className="argentina" id="argentina" data-reveal>
           <div className="argentina-photo-3d-container">
             <TiltCard3D maxTilt={12} glare={true} className="argentina-photo-3d-card argentina-official-portrait">
               <img
-                src="./pipaa-argentina-studio.webp"
-                srcSet="./pipaa-argentina-studio-small.webp 480w, ./pipaa-argentina-studio.webp 900w"
+                src="/pipaa-argentina-studio.webp"
+                srcSet="/pipaa-argentina-studio-small.webp 480w, /pipaa-argentina-studio.webp 900w"
                 sizes="(max-width: 768px) calc(100vw - 48px), 480px"
                 alt="Retrato recreado de PIPAA con la camiseta de Argentina, basado en la foto de PUBG Esports"
                 width="900"
@@ -433,11 +409,11 @@ export default function Home() {
                 </div>
                 <div style={{ marginTop: "24px" }}>
                   <a
-                    href="./comandos/"
+                    href="/comandos/"
                     className="button button-primary"
                     style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}
                   >
-                    <span>Ver Tienda de Comandos Troll</span>
+                    <span>Ver dónde comprar</span>
                     <ShoppingCart style={{ width: "15px", height: "15px" }} />
                   </a>
                 </div>
@@ -486,7 +462,7 @@ export default function Home() {
           <div className="data-note" style={{ marginTop: "20px" }}>
             <span>CONEXIÓN CON LA COMUNIDAD</span>
             <p>Transmisiones en simultáneo con chat unificado, recompensas de canal por puntos y sorteos mensuales para suscriptores en Kick y Twitch.</p>
-            <a href="#comunidad">
+            <a href="/directo/">
               Ir al reproductor en vivo ↓
             </a>
           </div>
@@ -518,7 +494,6 @@ export default function Home() {
         </section>
 
         {/* ── 05. Arsenal ── */}
-        <ChapterPortal word="LOCK & LOAD" label="02 / PRECISIÓN BAJO PRESIÓN" scene="lime" />
         <section className="arsenal-section section-grid" id="arsenal" data-reveal>
           <div className="section-kicker"><span>05</span> ARSENAL</div>
           <div className="arsenal-head">
@@ -553,6 +528,10 @@ export default function Home() {
         </section>
 
         {/* ── 06. Setup & Config ── */}
+
+
+
+        <ChapterPortal word="PRECISIÓN" label="SETUP DE PIPAA" />
         <section className="setup section-grid" id="setup" data-reveal>
           <div className="section-kicker"><span>06</span> SETUP & CONFIG</div>
           <div className="mate-hiding-spot mate-hiding-spot-setup"><HiddenMate id="setup" /></div>
@@ -651,179 +630,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── 07. En Vivo & Comunidad Panza Army ── */}
-        <ChapterPortal word="ESTÁS DENTRO" label="03 / EL CHAT TOMA EL CONTROL" />
-        <section className="stream-section section-grid" id="comunidad" data-reveal>
-          <div className="section-kicker"><span>07</span> EN VIVO</div>
-          <div className="live-heading" data-reveal>
-            <div>
-              <p className="eyebrow">TRANSMISIÓN EN DIRECTO</p>
-              <h2>MIRALO DONDE<br /><em>VOS ELIJAS.</em></h2>
-            </div>
-            <p>El directo completo de PIPAA integrado en la web. Elegí Kick o Twitch, activá el sonido y entrá a la partida con la comunidad de la Panza Army.</p>
-          </div>
 
-          <article className="official-pov" data-reveal>
-            <div className="pov-index">POV<br /><strong>ARG</strong></div>
-            <div>
-              <p className="eyebrow">CANAL ELEGIDO POR PUBG ESPORTS</p>
-              <h3>LA PNC 2026,<br />DESDE SUS OJOS.</h3>
-            </div>
-            <p>Para la Nations Cup 2026, PUBG publicó el canal de Kick de PIPAA como su transmisión POV oficial: la partida, las comunicaciones y la presión desde el lugar del jugador.</p>
-            <a href="https://pubgesports.com/pt-br/news/10178" target="_blank" rel="noreferrer">
-              Ver anuncio oficial <span aria-hidden="true">↗</span>
-            </a>
-          </article>
 
-          <LivePlayers />
-
-          {/* ── PUBG Partner & Creator Code Banner ── */}
-          <article className="creator-code-card" data-reveal>
-            <div className="creator-code-badge">
-              <SparklesIcon className="creator-sparkle-icon" />
-              <span>PUBG PARTNER · KRAFTON CREATOR CODE</span>
-            </div>
-            <div className="creator-code-content">
-              <div className="creator-code-info">
-                <h3>APOYÁ A PIPAA CON SU<br /><em>CÓDIGO DE CREADOR.</em></h3>
-                <p>
-                  Al comprar G-Coins o cualquier artículo en la tienda oficial de PUBG: BATTLEGROUNDS o en Krafton, usá el código <strong>PIPAA</strong>. Un porcentaje de tu compra apoya directamente sus directos diarios.
-                </p>
-              </div>
-              <div className="creator-code-action-box">
-                <div className="creator-code-display">
-                  <small>CÓDIGO OFICIAL</small>
-                  <strong className="code-text">PIPAA</strong>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleCopyCode}
-                  className={`button creator-copy-btn ${copiedCode ? "is-copied" : ""}`}
-                  aria-label="Copiar código de creador PIPAA"
-                >
-                  {copiedCode ? (
-                    <>
-                      <CheckIcon className="btn-icon" />
-                      <span>¡Copiado!</span>
-                    </>
-                  ) : (
-                    <>
-                      <CopyIcon className="btn-icon" />
-                      <span>Copiar código</span>
-                    </>
-                  )}
-                </button>
-                <a
-                  href="https://accounts.krafton.com/creator-code"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="button button-primary creator-redeem-btn"
-                >
-                  Activar en Krafton ↗
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article className="community-feature" data-reveal>
-            <div className="community-feature-media">
-              <TiltCard3D maxTilt={7} glare={true} style={{ width: "100%", height: "100%" }}>
-                <img src="./panza-army-studio.webp" srcSet="./panza-army-studio-small.webp 768w, ./panza-army-studio.webp 1536w" sizes="(max-width: 768px) calc(100vw - 48px), 900px" alt="Panza Army en letras metálicas violetas con detalles lima" width="1536" height="1024" loading="lazy" decoding="async" />
-                <span className="community-feature-scan" aria-hidden="true" />
-              </TiltCard3D>
-            </div>
-            <div className="community-feature-copy">
-              <div className="community-feature-label"><span>07</span> LA COMUNIDAD</div>
-              <img className="community-avatar" src="./pipa-avatar-v2.webp" alt="Logo de PIPAA y Panza Army" width="512" height="512" loading="lazy" decoding="async" />
-              <div className="community-feature-title">
-                <p className="eyebrow">MÁS QUE UN CHAT</p>
-                <h3>PANZA<br /><em>ARMY.</em></h3>
-              </div>
-              <div className="community-feature-body">
-                <p>Rankeds, scrims, torneos y ese caos que solamente entiende la comunidad. El punto de encuentro alrededor de PIPAA, dentro y fuera de cada partida.</p>
-                <div className="community-feature-tags" aria-label="Contenido de la comunidad">
-                  <span>DIRECTOS</span>
-                  <span>COMPETENCIA</span>
-                  <span>CLIPS</span>
-                  <span>DISCORD</span>
-                </div>
-                <div className="community-actions">
-                  <a className="community-action-discord" href="https://discord.gg/rgzZ3Kv" target="_blank" rel="noreferrer">
-                    <DiscordIcon className="discord-svg" /> Unirse al Discord <span aria-hidden="true">↗</span>
-                  </a>
-                  <a className="text-link" href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer">
-                    Entrar al directo <span aria-hidden="true">↗</span>
-                  </a>
-                  <a className="community-tag-link" href="https://www.twitch.tv/pipa_arg" target="_blank" rel="noreferrer">
-                    Canal Twitch ↗
-                  </a>
-                </div>
-                <div className="mate-hiding-spot mate-hiding-spot-community"><HiddenMate id="comunidad" /></div>
-              </div>
-            </div>
-          </article>
-
-          {/* ── Card Destacada Tienda de Comandos Troll ── */}
-          <TiltCard3D maxTilt={6} scale={1.01} glare={true}>
-            <article className="creator-code-card" data-reveal style={{ borderColor: "rgba(167, 255, 0, 0.4)", background: "linear-gradient(135deg, rgba(21, 16, 34, 0.95), rgba(7, 5, 13, 0.95))" }}>
-              <div className="creator-code-badge" style={{ borderColor: "rgba(167, 255, 0, 0.5)", color: "#a7ff00", background: "rgba(167, 255, 0, 0.12)" }}>
-                <SparklesIcon className="creator-sparkle-icon" />
-                <span>TIENDA OFICIAL · COMANDOS TROLL & DIXPER</span>
-              </div>
-              <div className="creator-code-content">
-                <div className="creator-code-info">
-                  <h3>TIENDA DE<br /><em>COMANDOS TROLL.</em></h3>
-                  <p>
-                    Saboteá a PIPAA en vivo en PUBG desde <strong>$150 ARS</strong> o con <strong>Cajas Dixper</strong>: invertile el teclado WASD, forzale disparos involuntarios, mandale audios sin censura o ejecutá al squad con fuego amigo. Precios transparentes y links directos.
-                  </p>
-                </div>
-                <div className="creator-code-action-box">
-                  <a
-                    href="./comandos/"
-                    className="button button-primary creator-redeem-btn"
-                    style={{ width: "100%", textAlign: "center", justifyContent: "center", gap: "8px", display: "inline-flex", alignItems: "center" }}
-                  >
-                    <span>Ver Tienda de Comandos</span>
-                    <ShoppingCart style={{ width: "16px", height: "16px" }} />
-                  </a>
-                </div>
-              </div>
-            </article>
-          </TiltCard3D>
-        </section>
-
-        {/* ── 08. Videos de YouTube ── */}
-        <section className="yt-feed-section" id="videos" data-reveal>
-          <div className="yt-feed-heading">
-            <div>
-              <p className="eyebrow red">CANAL OFICIAL DE YOUTUBE · @PIPAArg</p>
-              <h2>ÚLTIMOS VIDEOS<br /><em>SUBIDOS A YOUTUBE.</em></h2>
-            </div>
-            <p>
-              Los últimos videos editados y partidas destacadas subidos al canal oficial de YouTube @PIPAArg. Kills insanas, desafíos de escopeta, momentos con el chico Azzul y lo mejor de la Panza Army.
-            </p>
-          </div>
-          <YouTubeFeed />
-        </section>
-
-        {/* ── 09. Redes Oficiales ── */}
-        <section className="social-section" id="redes" data-reveal>
-          <div className="social-intro" data-reveal>
-            <p className="eyebrow">SEGUÍ LA JUGADA</p>
-            <h2>TODO PIPAA.<br /><em>EN UN SOLO LUGAR.</em></h2>
-          </div>
-          <div className="social-list">
-            {socials.map((social, index) => (
-              <a key={social.name} href={social.href} target="_blank" rel="me noreferrer" aria-label={`Perfil de PIPAA en ${social.name}`} data-reveal>
-                <small>{String(index + 1).padStart(2, "0")}</small>
-                <span>{social.name}</span>
-                <b>{social.handle}</b>
-                <i>{social.tag}</i>
-                <strong aria-hidden="true">↗</strong>
-              </a>
-            ))}
-          </div>
-        </section>
+        {page === "/" && <ChapterPortal word="ESTÁS DENTRO" label="02 / COMUNIDAD & SETUP" scene="lime" />}
 
         {/* ── 10. Preguntas Frecuentes / FAQ ── */}
         <section className="faq-section section-grid" id="faq" data-reveal>
@@ -906,44 +715,133 @@ export default function Home() {
             </a>
           </div>
         </section>
-        <MateProgress />
+          <div className="profile-community">
+          <article className="official-pov" data-reveal>
+            <div className="pov-index">POV<br /><strong>ARG</strong></div>
+            <div>
+              <p className="eyebrow">CANAL ELEGIDO POR PUBG ESPORTS</p>
+              <h3>LA PNC 2026,<br />DESDE SUS OJOS.</h3>
+            </div>
+            <p>Para la Nations Cup 2026, PUBG publicó el canal de Kick de PIPAA como su transmisión POV oficial: la partida, las comunicaciones y la presión desde el lugar del jugador.</p>
+            <a href="https://pubgesports.com/pt-br/news/10178" target="_blank" rel="noreferrer">
+              Ver anuncio oficial <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+
+
+
+          {/* ── PUBG Partner & Creator Code Banner ── */}
+          <article className="creator-code-card" data-reveal>
+            <div className="creator-code-badge">
+              <SparklesIcon className="creator-sparkle-icon" />
+              <span>PUBG PARTNER · KRAFTON CREATOR CODE</span>
+            </div>
+            <div className="creator-code-content">
+              <div className="creator-code-info">
+                <h3>APOYÁ A PIPAA CON SU<br /><em>CÓDIGO DE CREADOR.</em></h3>
+                <p>
+                  Al comprar G-Coins o cualquier artículo en la tienda oficial de PUBG: BATTLEGROUNDS o en Krafton, usá el código <strong>PIPAA</strong>. Un porcentaje de tu compra apoya directamente sus directos diarios.
+                </p>
+              </div>
+              <div className="creator-code-action-box">
+                <div className="creator-code-display">
+                  <small>CÓDIGO OFICIAL</small>
+                  <strong className="code-text">PIPAA</strong>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleCopyCode}
+                  className={`button creator-copy-btn ${copiedCode ? "is-copied" : ""}`}
+                  aria-label="Copiar código de creador PIPAA"
+                >
+                  {copiedCode ? (
+                    <>
+                      <CheckIcon className="btn-icon" />
+                      <span>¡Copiado!</span>
+                    </>
+                  ) : (
+                    <>
+                      <CopyIcon className="btn-icon" />
+                      <span>Copiar código</span>
+                    </>
+                  )}
+                </button>
+                <a
+                  href="https://accounts.krafton.com/creator-code"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="button button-primary creator-redeem-btn"
+                >
+                  Activar en Krafton ↗
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article className="community-feature" data-reveal>
+            <div className="community-feature-media">
+              <TiltCard3D maxTilt={7} glare={true} style={{ width: "100%", height: "100%" }}>
+                <img src="/panza-army-studio.webp" srcSet="/panza-army-studio-small.webp 768w, /panza-army-studio.webp 1536w" sizes="(max-width: 768px) calc(100vw - 48px), 900px" alt="Panza Army en letras metálicas violetas con detalles lima" width="1536" height="1024" loading="lazy" decoding="async" />
+                <span className="community-feature-scan" aria-hidden="true" />
+              </TiltCard3D>
+            </div>
+            <div className="community-feature-copy">
+              <div className="community-feature-label"><span>07</span> LA COMUNIDAD</div>
+              <img className="community-avatar" src="/pipa-avatar-v2.webp" alt="Logo de PIPAA y Panza Army" width="512" height="512" loading="lazy" decoding="async" />
+              <div className="community-feature-title">
+                <p className="eyebrow">MÁS QUE UN CHAT</p>
+                <h3>PANZA<br /><em>ARMY.</em></h3>
+              </div>
+              <div className="community-feature-body">
+                <p>Rankeds, scrims, torneos y ese caos que solamente entiende la comunidad. El punto de encuentro alrededor de PIPAA, dentro y fuera de cada partida.</p>
+                <div className="community-feature-tags" aria-label="Contenido de la comunidad">
+                  <span>DIRECTOS</span>
+                  <span>COMPETENCIA</span>
+                  <span>CLIPS</span>
+                  <span>DISCORD</span>
+                </div>
+                <div className="community-actions">
+                  <a className="community-action-discord" href="https://discord.gg/rgzZ3Kv" target="_blank" rel="noreferrer">
+                    <DiscordIcon className="discord-svg" /> Unirse al Discord <span aria-hidden="true">↗</span>
+                  </a>
+                  <a className="text-link" href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer">
+                    Entrar al directo <span aria-hidden="true">↗</span>
+                  </a>
+                  <a className="community-tag-link" href="https://www.twitch.tv/pipa_arg" target="_blank" rel="noreferrer">
+                    Canal Twitch ↗
+                  </a>
+                </div>
+                <div className="mate-hiding-spot mate-hiding-spot-community"><HiddenMate id="comunidad" /></div>
+              </div>
+            </div>
+          </article>
+
+          </div>
+
+        </div>
+        }
+        {/* ── 09. Redes Oficiales ── */}
+        {page === "/" && <section className="home-socials" id="redes" aria-labelledby="socials-title">
+          <h2 id="socials-title">Redes y comunidad</h2>
+          <div>
+            {socials.map((social) => (
+              <a key={social.name} href={social.href} target="_blank" rel="me noreferrer">
+                {social.name} <span aria-hidden="true">↗</span>
+              </a>
+            ))}
+          </div>
+        </section>}
+
+        {(page === "/" || page === "/perfil/") && <MateProgress />}
       </main>
 
-      <footer>
-        <a className="brand" href="#inicio" aria-label="PIPAA — volver al inicio">
-          <img src="./pipaa-logo.svg" alt="PIPAA" className="brand-logo" width="120" height="48" />
+      {page !== "/directo/" && <footer>
+        <a className="brand" href="/" aria-label="PIPAA — volver al inicio">
+          <img src="/pipaa-logo.svg" alt="PIPAA" className="brand-logo" width="120" height="48" />
         </a>
         <p>PIPAA · Streamer n°1 de PUBG · Líder Panza Army<br />Argentina</p>
-        <p className="footer-note">© 2026 PIPAA<br />Diseñado para la Panza Army.</p>
-      </footer>
-
-      <nav className="mobile-dock" aria-label="Navegación móvil">
-        <a href="#historia" className={`dock-item ${activeNav === "historia" || activeNav === "inicio" ? "is-active" : ""}`}>
-          <User className="dock-icon" />
-          <span className="dock-label">Perfil</span>
-        </a>
-        <a href="#argentina" className={`dock-item ${activeNav === "argentina" ? "is-active" : ""}`}>
-          <Trophy className="dock-icon" />
-          <span className="dock-label">Arg</span>
-        </a>
-        <a href="#comunidad" className={`dock-item ${activeNav === "comunidad" || activeNav === "stats" ? "is-active" : ""}`}>
-          <Tv className="dock-icon" />
-          <span className="dock-label">Stream</span>
-        </a>
-        <a href="#setup" className={`dock-item ${activeNav === "setup" ? "is-active" : ""}`}>
-          <Gamepad2 className="dock-icon" />
-          <span className="dock-label">Setup</span>
-        </a>
-        <a href="./comandos/" className="dock-item dock-item-troll">
-          <ShoppingCart className="dock-icon" />
-          <span className="dock-label">Troll</span>
-        </a>
-        <a href="https://kick.com/pipa_arg" target="_blank" rel="noreferrer" className="dock-item dock-item-live" aria-label="Ver directo en Kick">
-          <span className="dock-live-ping" aria-hidden="true" />
-          <Radio className="dock-icon" />
-          <span className="dock-label">Live</span>
-        </a>
-      </nav>
+        <p className="footer-note"><a href="/comandos/">Tienda</a> · <a href="/legales/">Avisos legales</a> · <a href="https://dixper.gg/pipa_arg">Dixper ↗</a> · <a href="https://weezyx.com/t/pipa_arg">WeezyX ↗</a></p>
+      </footer>}
 
       <MotionController />
     </div>

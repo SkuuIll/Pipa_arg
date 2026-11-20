@@ -6,7 +6,17 @@ a, button { cursor:pointer!important; }
 button, input, select { font:inherit; }
 :focus-visible { outline:2px solid var(--acid); outline-offset:5px; }
 .site-shell,.cmd-shell { background:var(--ink); }
-.ambient-orb,.cursor-aura,.hero-bg-glow,.hero-giant-text { display:none; }
+.ambient-orb,.cursor-aura,.hero-giant-text { display:none; }
+.hero-arg-tag {
+  display: inline-block;
+  padding: 2px 7px;
+  margin-right: 8px;
+  border-radius: 3px;
+  background: var(--acid);
+  color: var(--ink);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
 .topbar,.topbar.is-scrolled,.cmd-topbar { background:rgba(7,5,13,.93); box-shadow:none; border-color:var(--line); }
 .topbar { grid-template-columns:auto 1fr auto; gap:32px; height:80px; }
 .topbar nav { justify-content:center; gap:clamp(10px,1.4vw,24px); font-size:10px; letter-spacing:.06em; }

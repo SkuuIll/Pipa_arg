@@ -673,6 +673,7 @@ h3 em {
   box-shadow: 0 6px 25px rgba(255, 255, 255, 0.35);
 }
 .button-ghost {
+  color: var(--white);
   background: rgba(255, 255, 255, 0.02);
 }
 .button-ghost:hover,
@@ -3673,6 +3674,11 @@ footer p {
 }
 
 .yt-thumb-wrapper {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  text-align: left;
   position: relative;
   aspect-ratio: 16 / 9;
   background: #000;
@@ -3731,7 +3737,8 @@ footer p {
   transition: opacity 0.2s ease;
 }
 
-.yt-thumb-wrapper:hover .yt-play-overlay {
+.yt-thumb-wrapper:hover .yt-play-overlay,
+.yt-thumb-wrapper:focus-visible .yt-play-overlay {
   opacity: 1;
 }
 
@@ -3884,6 +3891,19 @@ footer p {
   font-size: 0.9rem;
 }
 
+.yt-feed-empty {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(21, 16, 34, 0.65);
+  color: var(--muted);
+}
+.yt-feed-empty p { margin: 0; font-size: 0.92rem; }
+
 /* Modal Reproductor */
 .yt-player-modal-backdrop {
   position: fixed;
@@ -3909,23 +3929,39 @@ footer p {
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
 }
 
+.yt-player-modal-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #120d1c;
+  border-bottom: 1px solid var(--line);
+}
+
+.yt-player-modal-title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .yt-player-modal-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   color: #fff;
-  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 10;
-  transition: background 0.18s;
+  transition: background 0.18s, border-color 0.18s;
 }
 
 .yt-player-modal-close:hover {

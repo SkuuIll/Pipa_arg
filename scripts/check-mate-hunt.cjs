@@ -9,7 +9,8 @@ const key = 'pipaa:mate-hunt:v1';
 
 (async () => {
  for (const name of selected) {
-  const browser = await engines[name].launch({headless:true});
+  const channel = name === 'chromium' ? process.env.PLAYWRIGHT_CHROMIUM_CHANNEL : undefined;
+  const browser = await engines[name].launch({headless:true, channel});
   try {
    for (const width of [360,390,768,1440]) {
     const context = await browser.newContext({ viewport:{width,height:900}, reducedMotion:'reduce' });
@@ -19,6 +20,7 @@ const key = 'pipaa:mate-hunt:v1';
     await page.locator('.hidden-mate').first().waitFor({state:'attached'});
     assert.equal(await page.locator('.hidden-mate').count(),3);
     assert.equal(await page.locator('.mate-progress').count(),0);
+    await page.locator('.site-details > summary').evaluateAll(summaries => summaries.forEach(summary => summary.click()));
     for (let i=0;i<3;i++) {
      const button=page.locator('.hidden-mate').nth(i);
      await button.scrollIntoViewIfNeeded();
@@ -29,7 +31,7 @@ const key = 'pipaa:mate-hunt:v1';
      assert.equal(await page.locator('.hidden-mate.is-found').count(),i+1);
      assert.equal(await button.getAttribute('aria-disabled'),'true');
      const size=await button.boundingBox(); assert(size.width>=44&&size.height>=44);
-     assert.match(await page.locator('[role=status]').textContent(), i===2 ? /Cebador oficial/ : new RegExp(`${i+1}/3`));
+     assert.match(await page.locator('.mate-announcement').textContent(), i===2 ? /Cebador oficial/ : new RegExp(`${i+1}/3`));
      if(i===2) assert.equal(await page.locator('.mate-sparks').isVisible(),false);
      if(width<=768) {
       const toast=await page.locator('.mate-notice').boundingBox();
@@ -61,6 +63,7 @@ const key = 'pipaa:mate-hunt:v1';
     },{key,mode});
     const page=await context.newPage(); await page.goto(baseURL);
     await page.locator('.hidden-mate').first().waitFor({state:'attached'});
+    await page.locator('.site-details > summary').evaluateAll(summaries => summaries.forEach(summary => summary.click()));
     assert.equal(await page.locator('.hidden-mate.is-found').count(),mode==='invalid-ids'?1:0);
     while(await page.locator('.hidden-mate:not(.is-found)').count()) {
      const button=page.locator('.hidden-mate:not(.is-found)').first();

@@ -1,112 +1,161 @@
-import { motion } from "motion/react";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
+import { ArrowUpRight, Film, Radio, X } from "lucide-react";
+import { PlatformBrandIcon } from "./MultiChat";
+import { platformLabels, type LiveStatus } from "./useLiveStatus";
+import type { Platform } from "../src/dia-sub";
 
-type Platform = "kick" | "twitch";
+const channelUrls: Record<Platform, string> = {
+  kick: "https://kick.com/pipa_arg",
+  twitch: "https://www.twitch.tv/pipa_arg",
+};
 
-export function LivePlayers() {
-  const [active, setActive] = useState<Platform>("kick");
-  const [twitchSrc, setTwitchSrc] = useState("");
-  const [inView, setInView] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+const argHourFormat = new Intl.DateTimeFormat("es-AR", {
+  hour: "numeric",
+  hour12: false,
+  timeZone: "America/Argentina/Buenos_Aires",
+});
+
+function getPlayerSrc(platform: Platform, hostname: string) {
+  if (platform === "kick") {
+    return "https://player.kick.com/pipa_arg?autoplay=true&muted=false";
+  }
+  return `https://player.twitch.tv/?channel=pipa_arg&parent=${encodeURIComponent(hostname)}&autoplay=true&muted=false`;
+}
+
+function getTimeUntilStream(): string | null {
+  const h = parseInt(argHourFormat.format(Date.now()), 10);
+  if (h >= 15 && h < 24) return null; // Already in stream window
+  const remaining = h < 15 ? 15 - h : 24 - h + 15;
+  if (remaining === 1) return "~1 hora";
+  return `~${remaining} horas`;
+}
+
+export function LivePlayers({
+  status,
+  active,
+  onSelect,
+  livePlatforms,
+}: {
+  status?: LiveStatus;
+  active: Platform;
+  onSelect: (platform: Platform) => void;
+  livePlatforms: Platform[];
+}) {
+  const [frameReady, setFrameReady] = useState(false);
+  const [dismissedOffline, setDismissedOffline] = useState(false);
+
+  const other: Platform = active === "kick" ? "twitch" : "kick";
+  const otherIsLive = livePlatforms.includes(other);
+  const activeIsLive = livePlatforms.includes(active);
+  const activeConfirmedOffline = Boolean(!activeIsLive && (status?.offline?.includes(active) || (status?.known && !livePlatforms.includes(active))));
+  const showOfflineStrip = Boolean(activeConfirmedOffline && !dismissedOffline);
+  const timeUntil = !activeIsLive ? getTimeUntilStream() : null;
 
   useEffect(() => {
-    const parent = window.location.hostname || "localhost";
-    setTwitchSrc(`https://player.twitch.tv/?channel=pipa_arg&parent=${encodeURIComponent(parent)}&autoplay=false&muted=true`);
+    setFrameReady(false);
+    setDismissedOffline(false);
+  }, [active]);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1, rootMargin: "200px 0px" }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const hostname = typeof window !== "undefined" ? window.location.hostname : "pipaa.store";
+  const name = platformLabels[active];
+  const player = getPlayerSrc(active, hostname);
 
   return (
-    <div className="live-stage" ref={containerRef}>
-      <div className="live-stage-top">
-        <div className="live-stage-meta">
-          <span className="live-pill"><i aria-hidden="true" /> PLAYER OFICIAL</span>
-          <span className="broadcast-quality-tag">1080p60 · DIRECTO</span>
-          <p>Cambiá de plataforma sin salir de la web.</p>
+    <div className="live-player" data-platform={active}>
+      <div className="live-player-controls">
+        <div className="platform-switch" role="group" aria-label="Plataforma de video">
+          {(["kick", "twitch"] as const).map((platform) => {
+            const isLive = livePlatforms.includes(platform);
+            return (
+              <button
+                key={platform}
+                type="button"
+                aria-pressed={active === platform}
+                onClick={() => onSelect(platform)}
+                className={active === platform ? "is-active" : ""}
+              >
+                <PlatformBrandIcon platform={platform} size={13} />
+                <span>{platformLabels[platform]}</span>
+                {isLive && <span className="platform-live-badge"><i aria-hidden="true" />En vivo</span>}
+              </button>
+            );
+          })}
         </div>
-        <div className="platform-switch" role="tablist" aria-label="Elegir plataforma de stream">
-          {(["kick", "twitch"] as Platform[]).map((platform) => (
-            <button
-              key={platform}
-              type="button"
-              role="tab"
-              aria-selected={active === platform}
-              onClick={() => setActive(platform)}
-              className={active === platform ? "is-active" : ""}
-            >
-              {active === platform && (
-                <motion.span
-                  layoutId="platform-active"
-                  className="platform-active-pill"
-                  transition={{ type: "spring", stiffness: 430, damping: 34 }}
-                />
-              )}
-              <i aria-hidden="true" /> {platform}
-            </button>
-          ))}
+
+        <div className="live-player-meta">
+          {(status?.known || activeIsLive) && (
+            <span className={`player-signal-pill ${activeIsLive ? "is-live" : ""}`}>
+              <Radio size={13} aria-hidden="true" />
+              {activeIsLive ? "Transmitiendo" : "Offline"}
+            </span>
+          )}
+          <a
+            className="live-player-link"
+            href={channelUrls[active]}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Abrir en {name}</span>
+            <ArrowUpRight size={14} aria-hidden="true" />
+          </a>
         </div>
       </div>
 
-      <div className="player-shell">
-        <motion.div
-          className="player-glow"
-          animate={{ x: active === "kick" ? "-18%" : "58%" }}
-          transition={{ type: "spring", stiffness: 100, damping: 22 }}
-          aria-hidden="true"
+      <div className={`live-player-screen ${frameReady ? "is-ready" : ""}`}>
+        {!frameReady && (
+          <div className="live-player-skeleton" aria-hidden="true">
+            <span className="live-skeleton-badge">Cargando señal de {name}…</span>
+          </div>
+        )}
+        <iframe
+          key={active}
+          src={player}
+          title={`Directo de PIPAA en ${name}`}
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
+          onLoad={() => setFrameReady(true)}
         />
-        <div className={`player-frame ${active === "kick" ? "is-visible" : ""}`} aria-hidden={active !== "kick"}>
-          {inView ? (
-            <iframe
-              src="https://player.kick.com/pipa_arg?autoplay=true&muted=true"
-              title="Stream de PIPAA en Kick"
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowFullScreen
-              loading="lazy"
-            />
-          ) : <div className="player-loading"><span className="pulse-spinner" /> Preparando Kick…</div>}
-        </div>
-        <div className={`player-frame ${active === "twitch" ? "is-visible" : ""}`} aria-hidden={active !== "twitch"}>
-          {inView && twitchSrc ? (
-            <iframe
-              src={twitchSrc}
-              title="Stream de PIPAA en Twitch"
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowFullScreen
-              loading="lazy"
-            />
-          ) : <div className="player-loading"><span className="pulse-spinner" /> Preparando Twitch…</div>}
-        </div>
-        <div className="player-corners" aria-hidden="true">
-          <i /><i /><i /><i />
-        </div>
       </div>
 
-      <div className="live-stage-bottom">
-        <div><small>HORARIO ARGENTINA</small><strong>15:00 — 00:00</strong></div>
-        <div><small>CANAL ACTIVO</small><strong>{active.toUpperCase()} · PIPA_ARG</strong></div>
-        <a
-          href={active === "kick" ? "https://kick.com/pipa_arg" : "https://www.twitch.tv/pipa_arg"}
-          target="_blank"
-          rel="noreferrer"
-          className="live-open-link"
-        >
-          Abrir en {active} <span aria-hidden="true">↗</span>
-        </a>
-      </div>
+      {showOfflineStrip && (
+        <div className="live-offline-strip" role="status">
+          {otherIsLive ? (
+            <>
+              <p>
+                No está transmitiendo en {name}, pero <strong>está en vivo en {platformLabels[other]}</strong>.
+              </p>
+              <button
+                type="button"
+                className="room-button is-accent"
+                onClick={() => onSelect(other)}
+              >
+                Cambiar a {platformLabels[other]}
+              </button>
+            </>
+          ) : (
+            <>
+              <p>
+                Fuera de vivo · Horario habitual: <strong>15:00 a 00:00 ARG</strong>.
+                {timeUntil && (
+                  <> Falta {timeUntil} aprox.</>
+                )}
+              </p>
+              <a className="room-button" href="/videos/">
+                <Film size={14} aria-hidden="true" />
+                <span>Ver últimos videos</span>
+              </a>
+            </>
+          )}
+          <button
+            type="button"
+            className="offline-dismiss"
+            onClick={() => setDismissedOffline(true)}
+            aria-label="Ocultar aviso"
+          >
+            <X size={14} aria-hidden="true" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

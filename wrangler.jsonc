@@ -3,6 +3,17 @@
   "name": "pipaa",
   "main": "src/worker.ts",
   "compatibility_date": "2026-09-24",
+  "durable_objects": {
+    "bindings": [
+      { "name": "DIA_SUB", "class_name": "DiaSub" },
+      { "name": "YOUTUBE_FEED", "class_name": "YouTubeFeedStore" }
+    ]
+  },
+  "migrations": [
+    { "tag": "dia-sub-v1", "new_sqlite_classes": ["DiaSub"] },
+    { "tag": "youtube-feed-v1", "new_sqlite_classes": ["YouTubeFeedStore"] }
+  ],
+  "triggers": { "crons": ["0 * * * *"] },
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS"

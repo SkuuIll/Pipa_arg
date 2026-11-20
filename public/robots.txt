@@ -1,13 +1,19 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /chat/
 
 User-agent: Googlebot
 Allow: /
+Disallow: /api/
+Disallow: /chat/
 
 User-agent: Googlebot-Image
 Allow: /
 
 User-agent: Bingbot
 Allow: /
+Disallow: /api/
+Disallow: /chat/
 
 Sitemap: https://pipaa.store/sitemap.xml

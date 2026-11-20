@@ -44,50 +44,84 @@ const identityGraph = {
   ],
 };
 
-const comandosGraph = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": `${siteUrl}/comandos/#webpage`,
-      url: `${siteUrl}/comandos/`,
-      name: "PanzaBot & Comandos Troll — PIPAA (Pipa_ARG)",
-      description: "Catálogo interactivo con simulador de chat y soundboard de la Panza Army de PIPAA.",
-      isPartOf: {
-        "@type": "WebSite",
-        "@id": `${siteUrl}/#website`,
-        name: "PIPAA",
-        url: `${siteUrl}/`,
-      },
-      breadcrumb: {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Inicio",
-            item: `${siteUrl}/`,
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Comandos",
-            item: `${siteUrl}/comandos/`,
-          },
-        ],
-      },
-    },
-  ],
+const routePages: Record<string, { label: string; title: string; description: string; priority: string; changefreq: string }> = {
+  comandos: {
+    label: "Tienda",
+    title: "Tienda · PIPAA (Pipa_ARG)",
+    description: "Dónde comprar para participar en el directo de PIPAA: Dixper, WeezyX, puntos del canal de Twitch y código de creador PIPAA.",
+    priority: "0.8",
+    changefreq: "weekly",
+  },
+  directo: {
+    label: "Directo",
+    title: "Sala de directo en vivo · PIPAA (Pipa_ARG)",
+    description: "Transmisión en vivo de PIPAA en Kick y Twitch con multichat integrado, modo ambiente y Día Sub.",
+    priority: "0.9",
+    changefreq: "daily",
+  },
+  videos: {
+    label: "Videos",
+    title: "Últimos videos · PIPAA (@PIPAArg)",
+    description: "Últimos videos subidos, highlights de PUBG y clips del canal de YouTube de PIPAA.",
+    priority: "0.8",
+    changefreq: "daily",
+  },
+  perfil: {
+    label: "Perfil",
+    title: "Perfil, Trayectoria y Setup · PIPAA (Pipa_ARG)",
+    description: "Trayectoria en esports de PUBG, Selección Argentina PNC y setup Dual PC completo de PIPAA.",
+    priority: "0.8",
+    changefreq: "monthly",
+  },
+  legales: {
+    label: "Avisos legales",
+    title: "Avisos Legales y Privacidad · PIPAA",
+    description: "Aviso legal, Política de Privacidad (Ley 25.326 · AAIP), Cookies y Defensa del Consumidor (Ley 24.240) en Argentina.",
+    priority: "0.4",
+    changefreq: "yearly",
+  },
 };
+
+function graphForRoute(route?: string) {
+  if (!route || !routePages[route]) return identityGraph;
+  const meta = routePages[route];
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${siteUrl}/${route}/#webpage`,
+        url: `${siteUrl}/${route}/`,
+        name: meta.title,
+        description: meta.description,
+        inLanguage: "es-AR",
+        isPartOf: {
+          "@type": "WebSite",
+          "@id": `${siteUrl}/#website`,
+          name: "PIPAA",
+          url: `${siteUrl}/`,
+        },
+        about: { "@id": `${siteUrl}/#pipa` },
+        breadcrumb: {
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Inicio", item: `${siteUrl}/` },
+            { "@type": "ListItem", position: 2, name: meta.label, item: `${siteUrl}/${route}/` },
+          ],
+        },
+      },
+    ],
+  };
+}
 
 function seoFiles() {
   return {
     name: "pipa-seo",
     transformIndexHtml(html: string, ctx: { path?: string }) {
-      const isComandos = Boolean(ctx.path && ctx.path.includes("comandos"));
-      const pageUrl = isComandos ? `${siteUrl}/comandos/` : `${siteUrl}/`;
-      const canonicalBlock = `<link rel="canonical" href="${pageUrl}" />\n    <meta property="og:url" content="${pageUrl}" />`;
-      const activeGraph = isComandos ? comandosGraph : identityGraph;
+      const route = ctx.path?.match(/\/(comandos|directo|videos|perfil|legales)(?:\/|$)/)?.[1];
+      const pageUrl = route ? `${siteUrl}/${route}/` : `${siteUrl}/`;
+      const canonicalBlock = `<link rel="canonical" href="${pageUrl}" />\n    <meta property="og:url" content="${pageUrl}" />\n    <link rel="alternate" hreflang="es-AR" href="${pageUrl}" />`;
+      const activeGraph = graphForRoute(route);
       const structuredData = `<script type="application/ld+json">${JSON.stringify(activeGraph)}</script>`;
 
       const googleVerificationTag = googleVerification
@@ -102,7 +136,6 @@ function seoFiles() {
 
       return html
         .replace("<!-- SEO_RUNTIME -->", fullSeoRuntime)
-        // Normalizar og:image y rutas de imagen absoluta para SEO de Google
         .replace(/(['"])(?:\.{1,2}\/)?og-v3\.jpg(['"])/g, `$1${siteUrl}/og-v3.jpg$2`);
     },
     closeBundle() {
@@ -113,15 +146,21 @@ function seoFiles() {
       const robotsContent = [
         "User-agent: *",
         "Allow: /",
+        "Disallow: /api/",
+        "Disallow: /chat/",
         "",
         "User-agent: Googlebot",
         "Allow: /",
+        "Disallow: /api/",
+        "Disallow: /chat/",
         "",
         "User-agent: Googlebot-Image",
         "Allow: /",
         "",
         "User-agent: Bingbot",
         "Allow: /",
+        "Disallow: /api/",
+        "Disallow: /chat/",
         "",
         `Sitemap: ${siteUrl}/sitemap.xml`,
         "",
@@ -129,9 +168,16 @@ function seoFiles() {
 
       writeFileSync(resolve(dist, "robots.txt"), robotsContent, "utf8");
 
+      const subRoutes = Object.entries(routePages)
+        .map(
+          ([route, meta]) =>
+            `  <url>\n    <loc>${siteUrl}/${route}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${meta.changefreq}</changefreq>\n    <priority>${meta.priority}</priority>\n  </url>\n`,
+        )
+        .join("");
+
       writeFileSync(
         sitemapPath,
-        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${siteUrl}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n  <url>\n    <loc>${siteUrl}/comandos/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n</urlset>\n`,
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${siteUrl}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n${subRoutes}</urlset>\n`,
         "utf8",
       );
     },
@@ -157,6 +203,11 @@ export default defineConfig({
       input: {
         main: resolve("index.html"),
         comandos: resolve("comandos/index.html"),
+        directo: resolve("directo/index.html"),
+        videos: resolve("videos/index.html"),
+        perfil: resolve("perfil/index.html"),
+        legales: resolve("legales/index.html"),
+        chat: resolve("chat/index.html"),
       },
     },
   },
