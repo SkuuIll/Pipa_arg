@@ -87,7 +87,7 @@ export function Hero() {
             <span>PURO SHOW.</span>
           </h1>
           <p className="hero-lede">
-            Rankeds intensas. Risas sin filtro. Un chat que nunca perdona. Entrá al universo de PIPAA y viví cada partida con la Panza Army.
+            PIPAA (Pipa_ARG) trae PUBG, rankeds y partidas competitivas, además de contenido variado de vez en cuando. Sumate al directo y a la Panza Army.
           </p>
           {live && (
             <p className="hero-live-status">

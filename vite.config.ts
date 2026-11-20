@@ -14,8 +14,8 @@ const identityGraph = {
       "@type": "Person",
       "@id": `${siteUrl}/#pipa`,
       name: "Leonardo Rafael Ruppel",
-      alternateName: ["PIPAA", "Pipa_ARG"],
-      description: "Jugador profesional argentino de PUBG, streamer y creador de la comunidad Panza Army.",
+      alternateName: ["PIPAA", "Pipa", "Pipa_ARG"],
+      description: "Streamer argentino, jugador profesional de PUBG y creador de la comunidad Panza Army; también comparte contenido variado.",
       image: `${siteUrl}/pipaa-studio.webp`,
       url: `${siteUrl}/`,
       nationality: { "@type": "Country", name: "Argentina" },
@@ -44,41 +44,31 @@ const identityGraph = {
   ],
 };
 
-const routePages: Record<string, { label: string; title: string; description: string; priority: string; changefreq: string }> = {
+const routePages: Record<string, { label: string; title: string; description: string }> = {
   comandos: {
     label: "Tienda",
-    title: "Tienda · PIPAA (Pipa_ARG)",
+    title: "Tienda y comandos del stream | PIPAA (Pipa_ARG)",
     description: "Dónde comprar para participar en el directo de PIPAA: Dixper, WeezyX, puntos del canal de Twitch y código de creador PIPAA.",
-    priority: "0.8",
-    changefreq: "weekly",
   },
   directo: {
     label: "Directo",
-    title: "Sala de directo en vivo · PIPAA (Pipa_ARG)",
-    description: "Transmisión en vivo de PIPAA en Kick y Twitch con multichat integrado, modo ambiente y Día Sub.",
-    priority: "0.9",
-    changefreq: "daily",
+    title: "PIPAA en vivo: directo de PUBG y variedad | Pipa_ARG",
+    description: "Mirá los directos de PIPAA en Kick y Twitch: PUBG, contenido variado, multichat y la comunidad Panza Army.",
   },
   videos: {
     label: "Videos",
-    title: "Últimos videos · PIPAA (@PIPAArg)",
-    description: "Últimos videos subidos, highlights de PUBG y clips del canal de YouTube de PIPAA.",
-    priority: "0.8",
-    changefreq: "daily",
+    title: "Videos de PIPAA: PUBG, partidas y momentos | Pipa_ARG",
+    description: "Mirá los videos recientes de PIPAA en YouTube: partidas de PUBG, retos y momentos de sus directos.",
   },
   perfil: {
     label: "Perfil",
-    title: "Perfil, Trayectoria y Setup · PIPAA (Pipa_ARG)",
+    title: "PIPAA: trayectoria en PUBG, Argentina y setup | Pipa_ARG",
     description: "Trayectoria en esports de PUBG, Selección Argentina PNC y setup Dual PC completo de PIPAA.",
-    priority: "0.8",
-    changefreq: "monthly",
   },
   legales: {
     label: "Avisos legales",
     title: "Avisos Legales y Privacidad · PIPAA",
     description: "Aviso legal, Política de Privacidad (Ley 25.326 · AAIP), Cookies y Defensa del Consumidor (Ley 24.240) en Argentina.",
-    priority: "0.4",
-    changefreq: "yearly",
   },
 };
 
@@ -141,7 +131,6 @@ function seoFiles() {
     closeBundle() {
       const dist = resolve("dist");
       const sitemapPath = resolve(dist, "sitemap.xml");
-      const today = new Date().toISOString().slice(0, 10);
 
       const robotsContent = [
         "User-agent: *",
@@ -170,14 +159,14 @@ function seoFiles() {
 
       const subRoutes = Object.entries(routePages)
         .map(
-          ([route, meta]) =>
-            `  <url>\n    <loc>${siteUrl}/${route}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${meta.changefreq}</changefreq>\n    <priority>${meta.priority}</priority>\n  </url>\n`,
+          ([route]) =>
+            `  <url>\n    <loc>${siteUrl}/${route}/</loc>\n  </url>\n`,
         )
         .join("");
 
       writeFileSync(
         sitemapPath,
-        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${siteUrl}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n${subRoutes}</urlset>\n`,
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${siteUrl}/</loc>\n  </url>\n${subRoutes}</urlset>\n`,
         "utf8",
       );
     },

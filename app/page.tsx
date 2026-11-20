@@ -99,7 +99,7 @@ const inGameSettings = [
 const faqs = [
   {
     q: "¿Quién es PIPAA y de qué se trata la Panza Army?",
-    a: "PIPAA (Pipa_ARG) es el streamer número 1 de PUBG en Argentina y jugador profesional internacional, Top 5 del mundo en PNC Seúl representando a la Selección Argentina. La Panza Army es su comunidad oficial: un espacio sin filtro donde se transmiten más de 9 horas diarias de rankeds, partidas con la gente, risas, comandos troll y el mejor shooter táctico.",
+    a: "PIPAA (Pipa_ARG) es un streamer argentino y jugador profesional de PUBG que representó a la Selección Argentina. La Panza Army es su comunidad: un espacio de partidas, directos, risas, comandos y, de vez en cuando, contenido variado.",
   },
   {
     q: "¿Dónde compro lo que se activa en el directo?",
