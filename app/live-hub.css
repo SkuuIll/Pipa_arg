@@ -2083,3 +2083,6 @@ body:has(.live-hub--cinema) { overflow: hidden; }
   .profile-community > .creator-code-card { position:relative; z-index:2; background:#170f23; }
   .profile-community > .community-feature { position:relative; z-index:3; }
 }
+.diasub-name { display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 12px; min-width:0; }
+.diasub-name strong { font-weight:700; overflow-wrap:anywhere; }
+.diasub-name small { color:#c2b4d5; font-size:.75rem; overflow-wrap:anywhere; }

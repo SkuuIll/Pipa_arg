@@ -3,7 +3,7 @@ import { saturdayFor } from "./argentina-date";
 import type { DiaSubEnv } from "./dia-sub-webhooks";
 
 export type Platform = "kick" | "twitch";
-type Entry = { name: string; platform: Platform; joinedAt: number };
+type Entry = { name: string; gameName: string | null; platform: Platform; joinedAt: number };
 type StreamState = { platform: Platform; live: number; changedAt: number };
 
 const sessionWindowMs = 12 * 3_600_000;
@@ -32,6 +32,10 @@ export class DiaSub extends DurableObject<DiaSubEnv> {
         PRIMARY KEY (date, platform, userId)
       );
     `);
+    const columns = this.sql.exec<{ name: string }>("PRAGMA table_info(signups)").toArray();
+    if (!columns.some((column) => column.name === "gameName")) {
+      this.sql.exec("ALTER TABLE signups ADD COLUMN gameName TEXT");
+    }
   }
 
   streamState() {
@@ -46,7 +50,7 @@ export class DiaSub extends DurableObject<DiaSubEnv> {
     `, platform, Number(live), changedAt);
   }
 
-  join(platform: Platform, userId: string, name: string, joinedAt: number) {
+  join(platform: Platform, userId: string, name: string, gameName: string, joinedAt: number) {
     const stream = this.sql.exec<StreamState>(
       "SELECT * FROM streams WHERE platform = ? AND live = 1",
       platform,
@@ -54,16 +58,15 @@ export class DiaSub extends DurableObject<DiaSubEnv> {
     if (!stream || joinedAt < stream.changedAt || joinedAt - stream.changedAt >= sessionWindowMs) return;
 
     const currentDay = saturdayFor(joinedAt);
-    const startDay = saturdayFor(stream.changedAt);
-    if (!currentDay.isSaturday && !startDay.isSaturday) return;
+    if (!currentDay.isSaturday) return;
 
-    const sessionDate = startDay.isSaturday ? startDay.date : currentDay.date;
+    const sessionDate = currentDay.date;
     this.sql.exec(`
-      INSERT INTO signups (date, platform, userId, name, joinedAt)
-      VALUES (?, ?, ?, ?, ?)
-      ON CONFLICT(date, platform, userId) DO UPDATE SET name = excluded.name, joinedAt = excluded.joinedAt
+      INSERT INTO signups (date, platform, userId, name, gameName, joinedAt)
+      VALUES (?, ?, ?, ?, ?, ?)
+      ON CONFLICT(date, platform, userId) DO UPDATE SET name = excluded.name, gameName = excluded.gameName, joinedAt = excluded.joinedAt
       WHERE excluded.joinedAt < signups.joinedAt
-    `, sessionDate, platform, userId, name, joinedAt);
+    `, sessionDate, platform, userId, name, gameName, joinedAt);
   }
 
   snapshot(now: number, configured: Platform[]): DiaSubState {
@@ -74,14 +77,14 @@ export class DiaSub extends DurableObject<DiaSubEnv> {
       connected.includes(stream.platform) &&
       stream.live === 1 &&
       now - stream.changedAt < sessionWindowMs &&
-      (isSaturday || saturdayFor(stream.changedAt).isSaturday),
+      isSaturday,
     );
     const open = openStreams.map((stream) => stream.platform);
     const expiresAt = openStreams.length
-      ? Math.max(...openStreams.map((stream) => stream.changedAt + sessionWindowMs))
+      ? Math.min(Date.parse(`${date}T03:00:00Z`) + 86_400_000, Math.max(...openStreams.map((stream) => stream.changedAt + sessionWindowMs)))
       : undefined;
     const entries = this.sql.exec<Entry>(`
-      SELECT name, platform, joinedAt FROM signups WHERE date = ? ORDER BY joinedAt, rowid
+      SELECT name, gameName, platform, joinedAt FROM signups WHERE date = ? ORDER BY joinedAt, rowid
     `, date).toArray();
 
     let status: DiaSubState["status"] = "closed";

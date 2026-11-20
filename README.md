@@ -54,7 +54,7 @@ La sala usa la conexión WebSocket de Unified Chat Lite para leer Kick, Twitch y
 4. En Twitch, autorizá a la aplicación a leer el chat con `user:read:chat` y `user:bot` para la identidad lectora, y `channel:bot` para PIPAA. Con el token de aplicación, creá las suscripciones EventSub `channel.chat.message`, `stream.online` y `stream.offline`, versión 1. Usá `broadcaster_user_id` del canal en las tres condiciones y agregá `user_id` de la identidad lectora para el evento de chat. Configurá `transport.method` como `webhook`, el callback `https://pipaa.store/api/diasub/twitch` y el secreto del paso 2. [Configuración de EventSub](https://dev.twitch.tv/docs/chat/authenticating/)
 5. Verificá las suscripciones de eventos y hacé una prueba de inicio y fin de directo en cada plataforma. El estado de conexión de cada canal aparece en la web al recibir el primer evento de directo. Si el canal ya estaba transmitiendo al conectar, la apertura se detecta con el siguiente inicio.
 
-Día Sub acepta `!diasub` o `diasub` como mensaje completo durante el directo del sábado, de 00:00 a 23:59 en Argentina. La cuenta debe tener insignia de suscripción en ese chat. Se guarda la primera inscripción por cuenta y plataforma, con orden de llegada. Desde el domingo se sigue viendo la lista cerrada hasta el próximo sábado.
+Día Sub acepta `!diasub NombreEnElJuego` o `diasub NombreEnElJuego` durante el directo del sábado, de 00:00 a 23:59 en Argentina. La cuenta debe tener insignia de suscripción en ese chat. Se guarda la primera inscripción por cuenta y plataforma, con orden de llegada, y se muestra el usuario junto con el nombre indicado. Los canjes de puntos todavía requieren una integración y verificación de suscripción por separado.
 
 ## Aparición en Google
 

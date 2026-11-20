@@ -75,7 +75,7 @@ export default function LegalesPage() {
                 <h2 id="legal-privacidad">2. Protección de datos personales (Ley N° 25.326 · AAIP)</h2>
               </div>
               <p>
-                Este sitio no ofrece registro de cuentas propio. Al participar en Día Sub, el servidor de Cloudflare puede guardar el identificador y nombre de usuario de Kick o Twitch, la plataforma y la fecha y hora de inscripción para ordenar la lista y evitar duplicados. La lista pública muestra nombre, plataforma y hora; los registros pueden permanecer almacenados después del evento.
+                Este sitio no ofrece registro de cuentas propio. Al participar en Día Sub, el servidor de Cloudflare puede guardar el identificador y nombre de usuario de Kick o Twitch, el nombre en el juego proporcionado, la plataforma y la fecha y hora de inscripción para ordenar la lista y evitar duplicados. La lista pública muestra el usuario, el nombre en el juego y la plataforma; los registros pueden permanecer almacenados después del evento.
                 Las consultas enviadas voluntariamente por correo electrónico se utilizan únicamente para responder la comunicación comercial o legal iniciada por el remitente.
               </p>
               <p>El multichat muestra mensajes, nombres y otros datos públicos recibidos mediante servicios externos. El navegador conserva una copia limitada de mensajes recientes. Cloudflare y las plataformas integradas pueden tratar datos técnicos de conexión según sus propias políticas.</p>

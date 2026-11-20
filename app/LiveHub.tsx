@@ -211,7 +211,7 @@ function DiaSubList({ snapshot, failed }: { snapshot: DiaSubState | null; failed
   const entries = snapshot?.entries ?? [];
   const term = search.trim().replace(/^@/, "").toLowerCase();
   const results = entries.map((entry, index) => ({ ...entry, position: index + 1 }))
-    .filter((entry) => !term || entry.name.toLowerCase().includes(term));
+    .filter((entry) => !term || entry.name.toLowerCase().includes(term) || entry.gameName?.toLowerCase().includes(term));
   const activePlatforms = snapshot?.open.map((platform) => platformNames[platform]).join(" y ");
   const missingPlatforms = snapshot && (["kick", "twitch"] as const)
     .filter((platform) => !snapshot.connected.includes(platform))
@@ -238,21 +238,21 @@ function DiaSubList({ snapshot, failed }: { snapshot: DiaSubState | null; failed
         </div>
         <h3 id="diasub-title">Día Sub</h3>
         <p>
-          Si sos sub de PIPAA, mandá <code>!diasub</code> en el chat de Kick o Twitch mientras está en directo.
+          Si sos sub de PIPAA, escribí <code>!diasub TuNombreEnElJuego</code> en el chat de Kick o Twitch mientras está en directo.
           {closesAt ? ` Ventana activa hasta las ${closesAt} ARG.` : " Tu usuario queda guardado por orden de llegada."}
         </p>
         <div className="diasub-copy-row">
           <button className="room-button" type="button" onClick={async () => {
             try {
-              await navigator.clipboard.writeText("!diasub");
-              setCopyStatus("¡Comando copiado!");
+              await navigator.clipboard.writeText("!diasub ");
+              setCopyStatus("Comando copiado. Agregá tu nombre en el juego.");
             } catch {
               setCopyStatus("Copiá !diasub desde el texto.");
             }
             setTimeout(() => setCopyStatus(""), 2400);
           }}>
             <Copy size={13} aria-hidden="true" />
-            <span>Copiar !diasub</span>
+            <span>Copiar comando</span>
           </button>
           {copyStatus && <span className="diasub-copy-feedback" role="status">{copyStatus}</span>}
         </div>
@@ -276,7 +276,7 @@ function DiaSubList({ snapshot, failed }: { snapshot: DiaSubState | null; failed
                   type="search"
                   value={search}
                   onChange={(event) => setSearch(event.target.value)}
-                  placeholder="Buscá tu usuario en Kick o Twitch…"
+                  placeholder="Buscá tu usuario o nombre en el juego…"
                 />
                 {search && (
                   <button
@@ -297,7 +297,7 @@ function DiaSubList({ snapshot, failed }: { snapshot: DiaSubState | null; failed
                 {results.map((entry) => (
                   <li key={`${entry.platform}-${entry.name}-${entry.position}`} className={entry.position <= 3 ? "is-top" : undefined}>
                     <span className="diasub-position" aria-label={`Puesto ${entry.position}`}>{entry.position}</span>
-                    <span className="diasub-name">{entry.name}</span>
+                    <span className="diasub-name"><strong>{entry.name}</strong><small>{entry.gameName ? `Juego: ${entry.gameName}` : "Nombre en el juego no informado"}</small></span>
                     <span className={`diasub-platform is-${entry.platform}`}>{platformNames[entry.platform]}</span>
                   </li>
                 ))}

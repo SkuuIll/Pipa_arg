@@ -38,8 +38,11 @@ function empty(status = 204) {
   return new Response(null, { status });
 }
 
-function isCommand(text: unknown): boolean {
-  return typeof text === "string" && /^!?diasub$/i.test(text.trim());
+function commandName(text: unknown): string | null {
+  if (typeof text !== "string") return null;
+  const match = text.trim().match(/^!?diasub\s+(.+)$/iu);
+  const name = match?.[1]?.trim();
+  return name && name.length <= 50 && !/[\u0000-\u001f\u007f]/u.test(name) ? name : null;
 }
 
 function fromBase64(value: string) {
@@ -131,8 +134,9 @@ async function twitchWebhook(
     (!event.source_broadcaster_user_id || event.source_broadcaster_user_id === env.TWITCH_BROADCASTER_ID)
   ) {
     const store = queue(env);
-    if (isCommand(event.message?.text) && event.badges?.some((badge) => badge.set_id === "subscriber" || badge.set_id === "founder")) {
-      await store.join("twitch", event.chatter_user_id, event.chatter_user_login, deliveredAt);
+    const gameName = commandName(event.message?.text);
+    if (gameName && event.badges?.some((badge) => badge.set_id === "subscriber" || badge.set_id === "founder")) {
+      await store.join("twitch", event.chatter_user_id, event.chatter_user_login, gameName, deliveredAt);
     }
   }
   return empty();
@@ -151,14 +155,15 @@ async function kickWebhook(
     const changedAt = eventTime(event.is_live ? event.started_at : event.ended_at, deliveredAt);
     await queue(env).setStream("kick", event.is_live, changedAt);
   } else if (
-    type === "chat.message.sent" && isCommand(event.content) &&
+    type === "chat.message.sent" && commandName(event.content) &&
     event.sender?.user_id && event.sender.username && !event.sender.is_anonymous
   ) {
     if (!await verifyKick(signed, signature)) return empty(403);
     const store = queue(env);
     const at = eventTime(event.created_at, deliveredAt);
-    if (isCommand(event.content) && event.sender.identity?.badges?.some((badge) => badge.type === "subscriber")) {
-      await store.join("kick", String(event.sender.user_id), event.sender.username, at);
+    const gameName = commandName(event.content);
+    if (gameName && event.sender.identity?.badges?.some((badge) => badge.type === "subscriber")) {
+      await store.join("kick", String(event.sender.user_id), event.sender.username, gameName, at);
     }
   }
   return empty();
