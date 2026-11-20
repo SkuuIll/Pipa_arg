@@ -80,7 +80,7 @@ export function TiltCard3D({
         transform,
         transition: isHovered ? "transform 0.08s ease-out" : "transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)",
         transformStyle: "preserve-3d",
-        willChange: "transform",
+        willChange: isHovered ? "transform" : "auto",
         position: "relative",
         ...style,
       }}

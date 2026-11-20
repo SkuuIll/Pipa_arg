@@ -38,7 +38,6 @@ export function MotionController() {
         }
       }
     };
-    window.addEventListener("scroll", revealPassed, { passive: true });
     window.addEventListener("hashchange", revealPassed);
 
     root.classList.add("motion-ready");
@@ -71,7 +70,6 @@ export function MotionController() {
     return () => {
       observer.disconnect();
       mutationObserver.disconnect();
-      window.removeEventListener("scroll", revealPassed);
       window.removeEventListener("hashchange", revealPassed);
       heroVisual?.removeEventListener("pointermove", handlePointer);
       root.classList.remove("motion-ready");

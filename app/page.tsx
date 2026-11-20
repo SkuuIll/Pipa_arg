@@ -847,7 +847,7 @@ export default function Home() {
 
       {page !== "/directo/" && <footer>
         <a className="brand" href="/" aria-label="PIPAA — volver al inicio">
-          <img src="/pipaa-logo.svg" alt="PIPAA" className="brand-logo" width="120" height="48" />
+          <img src="/pipa-avatar-v2.webp" alt="PIPAA" className="brand-logo" width="48" height="48" />
         </a>
         <p>PIPAA · Streamer n°1 de PUBG · Líder Panza Army<br />Argentina</p>
         <p className="footer-note"><a href="/comandos/">Tienda</a> · <a href="/legales/">Avisos legales</a> · <a href="https://dixper.gg/pipa_arg">Dixper ↗</a> · <a href="https://weezyx.com/t/pipa_arg">WeezyX ↗</a></p>

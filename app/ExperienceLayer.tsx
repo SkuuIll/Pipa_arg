@@ -5,6 +5,7 @@ export function ExperienceLayer() {
     const root = document.documentElement;
     const hero = document.querySelector<HTMLElement>(".hero-layered");
     const portals = Array.from(document.querySelectorAll<HTMLElement>(".chapter-portal"));
+    const lighterMotion = window.matchMedia("(max-width: 768px), (prefers-reduced-motion: reduce)");
     let frame = 0;
     let pointerX = 0;
     let pointerY = 0;
@@ -12,6 +13,7 @@ export function ExperienceLayer() {
       frame = 0;
       const progress = window.scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight);
       root.style.setProperty("--journey", String(progress));
+      if (lighterMotion.matches) return;
       hero?.style.setProperty("--hero-x", String(pointerX));
       hero?.style.setProperty("--hero-y", String(pointerY));
       const rect = hero?.getBoundingClientRect();
@@ -25,7 +27,7 @@ export function ExperienceLayer() {
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     const move = (event: PointerEvent) => {
-      if (event.pointerType !== "mouse" || !hero) return;
+      if (event.pointerType !== "mouse" || !hero || lighterMotion.matches) return;
       const r = hero.getBoundingClientRect();
       pointerX = Math.max(-1, Math.min(1, (event.clientX - r.left) / r.width * 2 - 1));
       pointerY = Math.max(-1, Math.min(1, (event.clientY - r.top) / r.height * 2 - 1));

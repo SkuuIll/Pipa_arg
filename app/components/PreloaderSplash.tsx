@@ -137,19 +137,6 @@ export function PreloaderSplash({ route }: { route?: string }) {
               <img src="/pipa-avatar-v2.webp" alt="" width="74" height="74" loading="eager" decoding="sync" className="preloader-avatar" />
             </motion.div>
 
-            <motion.img
-              src="/pipaa-logo.svg"
-              alt="PIPAA"
-              width="148"
-              height="56"
-              loading="eager"
-              decoding="sync"
-              className="preloader-logo"
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-            />
-
             <motion.p
               className="preloader-tagline"
               initial={{ opacity: 0, y: 4 }}

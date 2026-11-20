@@ -582,7 +582,7 @@ export function LiveHub() {
       <header className="room-heading">
         <div className="room-head-left">
           <a href="/" className="header-brand" aria-label="PIPAA · Inicio">
-            <img src="/pipaa-logo.svg" alt="PIPAA" width="84" height="32" />
+            <img src="/pipa-avatar-v2.webp" alt="PIPAA" width="48" height="48" />
           </a>
           <h1 id="live-hub-title" className="sr-only">Sala de directo</h1>
           <span className="header-brand-divider" aria-hidden="true" />

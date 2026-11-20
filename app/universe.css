@@ -151,3 +151,14 @@
 .community-feature-media::before { animation:community-light 4.5s ease-in-out infinite; background:linear-gradient(105deg,transparent 35%,#c3ff6b55 48%,#ed526e36 53%,transparent 65%); }
 @keyframes community-art-pulse { 0%,100% { transform:scale(1.02); filter:brightness(.9) saturate(1); } 50% { transform:scale(1.07); filter:brightness(1.18) saturate(1.2); } }
 @media (prefers-reduced-motion:reduce) { .community-feature-media img,.community-feature-media::before { animation:none; } }
+
+/* Preserve the look while avoiding continuous full-screen repaints on smaller devices. */
+@media(max-width:768px) {
+ .universe-atmosphere > i,.universe-grid,.universe-signal,.universe-signal i,.hero-layered .hero-bg-grid,.hero-layered .hero-bg-glow,.hero-layered .hero-type-perspective,.hero-orbital i { animation:none !important; }
+ .universe-atmosphere { opacity:.25; }
+ .universe-signal { box-shadow:none; }
+ .portal-word { transform:none; will-change:auto; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .universe-atmosphere > i,.universe-grid,.universe-signal,.universe-signal i,.hero-layered .hero-bg-grid,.hero-layered .hero-bg-glow,.hero-layered .hero-type-track,.hero-layered .hero-type-perspective,.hero-orbital i { animation:none !important; }
+}
