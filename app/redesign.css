@@ -265,3 +265,12 @@ h2 { letter-spacing:-.015em; text-wrap:balance; }
 .army-stage:hover .army-word span,.army-stage:focus .army-word span { animation:army-gravity 1.4s cubic-bezier(.2,.7,.25,1) both; animation-delay:calc(var(--i) * 45ms + var(--row) * 70ms); }
 @keyframes army-gravity { 0% { transform:translate(0,0) rotate(0); } 35% { transform:translate(calc((var(--i) - 2) * 21px),-36px) rotate(calc((var(--i) - 2) * 14deg)); } 72% { transform:translate(calc((var(--i) - 2) * 25px),calc(35px + var(--i) * 6px)) rotate(calc((var(--i) - 2) * 19deg)); } 85% { transform:translate(calc((var(--i) - 2) * 25px),calc(20px + var(--i) * 6px)) rotate(calc((var(--i) - 2) * 16deg)); } 100% { transform:translate(calc((var(--i) - 2) * 25px),calc(30px + var(--i) * 6px)) rotate(calc((var(--i) - 2) * 19deg)); } }
 @media (prefers-reduced-motion:reduce) { .army-stage:hover .army-word span,.army-stage:focus .army-word span { animation:none; transform:none; } }
+@media(max-width:600px) {
+ .official-pov { grid-template-columns:minmax(0,1fr); gap:16px; padding:24px 20px; }
+ .official-pov > p,.official-pov > a { grid-column:1; }
+ .official-pov h3 { font-size:clamp(29px,9vw,40px); line-height:1; overflow-wrap:anywhere; }
+ .pov-index { display:flex; align-items:baseline; gap:10px; }
+ .pov-index strong { font-size:36px; }
+ .official-pov > p { font-size:14px; line-height:1.6; }
+ .official-pov > a { width:100%; min-width:0; justify-content:space-between; }
+}

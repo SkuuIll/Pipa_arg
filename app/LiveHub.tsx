@@ -19,7 +19,7 @@ import {
   X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { NAV_ITEMS } from "./components/SiteHeader";
+import { MobileNav, NAV_ITEMS } from "./components/SiteHeader";
 import { LivePlayers } from "./LivePlayers";
 import { MultiChat, PlatformBrandIcon, type CelebrationEvent } from "./MultiChat";
 import { platformLabels, useLiveStatus } from "./useLiveStatus";
@@ -631,6 +631,8 @@ export function LiveHub() {
             })}
           </nav>
         )}
+
+        {!theater && <MobileNav current="/directo/" />}
 
         <div className="room-actions">
           <span className="room-clock-readout" title="Horario habitual de directo: todos los días de 15:00 a 00:00 hora Argentina">

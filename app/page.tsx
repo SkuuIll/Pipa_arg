@@ -836,7 +836,7 @@ export default function Home() {
           <div>
             {socials.map((social) => (
               <a key={social.name} href={social.href} target="_blank" rel="me noreferrer">
-                {social.name} <span aria-hidden="true">↗</span>
+                <span className="social-initial" aria-hidden="true">{social.name.slice(0, 1)}</span><span className="social-name">{social.name}<small>SEGUÍ A PIPAA</small></span><span className="social-arrow" aria-hidden="true">↗</span>
               </a>
             ))}
           </div>

@@ -10,6 +10,16 @@ export const NAV_ITEMS = [
   ["/comandos/", "Tienda"],
 ] as const;
 
+export function MobileNav({ current }: { current: string }) {
+  return <details className="mobile-nav" onKeyDown={(event) => { if (event.key === "Escape") { event.currentTarget.open = false; event.currentTarget.querySelector("summary")?.focus(); } }}>
+    <summary aria-label="Abrir menú de navegación"><span aria-hidden="true">☰</span> Menú</summary>
+    <nav aria-label="Navegación móvil">
+      <span className="mobile-nav-label">EXPLORAR PIPAA</span>
+      {NAV_ITEMS.map(([url, label]) => <a key={url} href={url} aria-current={current === url ? "page" : undefined}>{label}<span aria-hidden="true">↗</span></a>)}
+    </nav>
+  </details>;
+}
+
 const argClockFormat = new Intl.DateTimeFormat("es-AR", {
   hour: "2-digit",
   minute: "2-digit",
@@ -45,6 +55,7 @@ export function SiteHeader({ current }: { current: string }) {
             );
           })}
         </nav>
+        <MobileNav current={current} />
 
         <div className="header-utility-zone">
           <span className="header-clock" title="Hora actual en Argentina">
