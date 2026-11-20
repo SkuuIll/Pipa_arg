@@ -845,12 +845,12 @@ export default function Home() {
         {(page === "/" || page === "/perfil/") && <MateProgress />}
       </main>
 
-      {page !== "/directo/" && <footer>
+      {page !== "/directo/" && <footer className="site-footer">
         <a className="brand" href="/" aria-label="PIPAA — volver al inicio">
           <img src="/pipa-avatar-v2.webp" alt="PIPAA" className="brand-logo" width="48" height="48" />
         </a>
-        <p>PIPAA · Streamer n°1 de PUBG · Líder Panza Army<br />Argentina</p>
-        <p className="footer-note"><a href="/comandos/">Tienda</a> · <a href="/legales/">Avisos legales</a> · <a href="https://dixper.gg/pipa_arg">Dixper ↗</a> · <a href="https://weezyx.com/t/pipa_arg">WeezyX ↗</a></p>
+        <p className="footer-description">PIPAA · Streamer argentino de PUBG<br />Panza Army · Argentina</p>
+        <nav className="footer-note" aria-label="Enlaces del pie"><a href="/comandos/">Tienda</a><a href="/legales/">Avisos legales</a><a href="https://dixper.gg/pipa_arg">Dixper ↗</a><a href="https://weezyx.com/t/pipa_arg">WeezyX ↗</a></nav>
         <p className="developer-credit">Diseño y desarrollo por <a href="https://github.com/SkuuIll" target="_blank" rel="noreferrer">SkuuIll ↗</a></p>
       </footer>}
 

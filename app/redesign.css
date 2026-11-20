@@ -274,3 +274,13 @@ h2 { letter-spacing:-.015em; text-wrap:balance; }
  .official-pov > p { font-size:14px; line-height:1.6; }
  .official-pov > a { width:100%; min-width:0; justify-content:space-between; }
 }
+
+/* A clear identity, navigation and credit on every standard footer. */
+.site-footer { min-height:0; display:grid; grid-template-columns:48px minmax(180px,1fr) minmax(0,auto); gap:18px 20px; align-items:center; padding:32px clamp(24px,5.2vw,90px) !important; }
+.site-footer > p { margin:0; }
+.site-footer .brand { display:inline-flex; align-items:center; }
+.site-footer .footer-note { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:10px 20px; text-align:right; }
+.site-footer .footer-note a { color:#c9beda; font-size:12px; line-height:1.5; text-decoration:none; }
+.site-footer .footer-note a:hover,.site-footer .footer-note a:focus-visible { color:#b9ff46; text-decoration:underline; }
+.site-footer .developer-credit { grid-column:2 / -1; justify-self:start; margin:0; font-size:10px; }
+@media(max-width:700px) { .site-footer { grid-template-columns:48px minmax(0,1fr); gap:16px; } .site-footer .footer-note { grid-column:1 / -1; justify-self:start; justify-content:flex-start; text-align:left; } .site-footer .footer-note a { min-height:36px; display:inline-flex; align-items:center; } .site-footer .developer-credit { grid-column:1 / -1; } }

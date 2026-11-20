@@ -136,12 +136,12 @@ export default function TiendaPage() {
         </p>
       </main>
 
-      <footer>
+      <footer className="site-footer">
         <a className="brand" href="/" aria-label="PIPAA — volver al inicio">
           <img src="/pipa-avatar-v2.webp" alt="PIPAA" className="brand-logo" width="48" height="48" />
         </a>
         <p>PIPAA · Panza Army · Argentina</p>
-        <p className="footer-note"><a href="/legales/">Avisos legales</a> · <a href="/">Inicio</a></p>
+        <nav className="footer-note" aria-label="Enlaces del pie"><a href="/legales/">Avisos legales</a><a href="/">Inicio</a></nav>
       </footer>
     </div>
     </>
